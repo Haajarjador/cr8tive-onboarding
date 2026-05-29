@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CR8TIVE Financial Group — Client Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@200;300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══════════════════════════════
+   TOKENS
+═══════════════════════════════ */
+:root {
+  --navy:   #080d14;
+  --navy2:  #0d1520;
+  --navy3:  #111d2a;
+  --card:   #0f1a24;
+  --orange: #f07020;
+  --or2:    #ff8533;
+  --og:     rgba(240,112,32,.15);
+  --og2:    rgba(240,112,32,.07);
+  --gold:   #d4a030;
+  --gold2:  #f0c040;
+  --gd:     rgba(212,160,48,.12);
+  --white:  #ffffff;
+  --off:    #cdd6e0;
+  --muted:  rgba(205,214,224,.45);
+  --border: rgba(255,255,255,.07);
+  --bor-o:  rgba(240,112,32,.3);
+  --bor-g:  rgba(212,160,48,.25);
+  --fh:     'Rajdhani', sans-serif;
+  --fb:     'Exo 2', sans-serif;
+}
+
+/* ═══════════════════════════════
+   BASE
+═══════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fb);
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ═══════════════════════════════
+   GRID / TEXTURE BACKGROUND
+═══════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(240,112,32,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,112,32,.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════
+   PAGE WRAPPER
+═══════════════════════════════ */
+.site {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════
+   HEADER
+═══════════════════════════════ */
+.hdr {
+  padding: 28px 28px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.hdr::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--orange), var(--gold2) 55%, transparent);
+}
+
+.hdr-left { display: flex; align-items: center; gap: 12px; }
+
+.logo {
+  width: 44px; height: 44px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh);
+  font-size: 17px; font-weight: 700;
+  color: #fff; letter-spacing: -1px;
+  box-shadow: 0 0 20px rgba(240,112,32,.4);
+  flex-shrink: 0;
+}
+.brand-name {
+  font-family: var(--fh);
+  font-size: clamp(13px, 2.5vw, 16px);
+  font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--navy); line-height: 1;
+}
+.brand-sub {
+  font-size: clamp(8px, 1.5vw, 10px); font-weight: 300;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(8,13,20,.55); margin-top: 3px;
+}
+
+.hdr-right { text-align: right; }
+.doc-eyebrow {
+  font-size: clamp(7px, 1.2vw, 9px); font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--or2); margin-bottom: 4px;
+}
+.doc-title {
+  font-family: var(--fh);
+  font-size: clamp(22px, 4vw, 30px); font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--white); line-height: 1;
+}
+.doc-title span {
+  display: block;
+  font-size: clamp(10px, 1.8vw, 13px); font-weight: 400;
+  letter-spacing: 5px; color: var(--gold2); margin-top: 3px;
+}
+
+/* ═══════════════════════════════
+   WELCOME BAND
+═══════════════════════════════ */
+.welcome {
+  margin: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--bor-o);
+  border-radius: 14px;
+  padding: 18px 22px;
+  box-shadow: 0 0 28px var(--og);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.welcome-msg {
+  font-size: clamp(13px, 2vw, 15px); font-weight: 300;
+  color: var(--off); line-height: 1.65;
+}
+.welcome-msg strong { font-weight: 700; color: var(--white); }
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.c-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 8px 14px 8px 8px;
+  text-decoration: none;
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+.c-ico {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--og2); border: 1px solid var(--bor-o);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  color: var(--or2); flex-shrink: 0;
+}
+.c-val { font-size: clamp(10px, 1.8vw, 12px); font-weight: 500; color: var(--off); }
+
+/* ═══════════════════════════════
+   PROCESS TRACK
+═══════════════════════════════ */
+.track {
+  margin: 0 20px 18px;
+  background: var(--navy3);
+  border: 1px solid var(--bor-g);
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: 0 0 20px var(--gd);
+  overflow-x: auto;
+}
+.trk-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 12px;
+}
+.trk-nodes {
+  display: flex; align-items: center;
+  min-width: 420px;
+}
+.trk-node {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+.trk-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid var(--orange);
+  background: rgba(240,112,32,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh);
+  font-size: 13px; font-weight: 700; color: var(--or2);
+}
+.trk-dot.lit {
+  border-color: var(--gold2);
+  background: rgba(240,192,64,.1);
+  color: var(--gold2);
+  box-shadow: 0 0 12px rgba(240,192,64,.3);
+}
+.trk-txt {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .5px; text-transform: uppercase;
+  color: var(--muted); text-align: center; line-height: 1.3;
+}
+.trk-line {
+  flex: 0 0 16px; height: 1px;
+  background: linear-gradient(90deg, var(--orange), rgba(240,112,32,.15));
+  position: relative; top: -14px;
+}
+
+/* ═══════════════════════════════
+   STEP CARDS
+═══════════════════════════════ */
+.steps {
+  margin: 0 20px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+.sc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.sc::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--orange), var(--gold));
+}
+
+/* step number header bar (mobile-first: full-width top bar) */
+.sc-num {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,.2);
+}
+.sc-n {
+  font-family: var(--fh);
+  font-size: 32px; font-weight: 700;
+  color: var(--orange);
+  text-shadow: 0 0 18px rgba(240,112,32,.45);
+  line-height: 1;
+}
+.sc-num-text {}
+.sc-title {
+  font-family: var(--fh);
+  font-size: clamp(16px, 3vw, 20px); font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  color: var(--white);
+}
+.sc-sub {
+  font-size: clamp(9px, 1.5vw, 11px); font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--or2); margin-top: 2px;
+}
+
+.sc-body { padding: 18px 20px; }
+
+/* ── Step 1: monitor cards ── */
+.mon-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.mon {
+  display: block; text-decoration: none;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  background: var(--navy2);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.mon.A { border-color: var(--orange); background: rgba(240,112,32,.06); }
+.mon.B { border-color: var(--gold2); background: rgba(212,160,48,.07); }
+.mon-badge {
+  position: absolute; top: -9px; left: 14px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 11px; border-radius: 20px;
+}
+.mon.A .mon-badge { background: var(--orange); color: #fff; }
+.mon.B .mon-badge { background: var(--gold2); color: #0d1117; }
+.mon-name {
+  font-family: var(--fh);
+  font-size: clamp(14px, 2.5vw, 17px); font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 2px;
+}
+.mon-price {
+  font-size: clamp(10px, 1.5vw, 11px); font-weight: 300;
+  color: rgba(205,214,224,.75); margin-bottom: 10px;
+}
+.mon-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 12px;
+}
+.mon-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 400;
+  color: var(--white); line-height: 1.35;
+}
+.mon-list li::before { content: '→'; font-weight: 700; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+.mon.A .mon-list li::before { color: var(--or2); }
+.mon.B .mon-list li::before { color: var(--gold2); }
+.mon-btn {
+  display: block; text-align: center;
+  padding: 10px; border-radius: 8px;
+  font-family: var(--fh);
+  font-size: clamp(10px, 1.8vw, 12px); font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; color: #fff;
+}
+.mon.A .mon-btn { background: linear-gradient(135deg, var(--orange), #c05010); box-shadow: 0 3px 14px rgba(240,112,32,.3); }
+.mon.B .mon-btn { background: linear-gradient(135deg, var(--gold), #b07018); color: #fff; }
+
+.warn {
+  background: rgba(240,112,32,.06);
+  border: 1px solid var(--bor-o);
+  border-left: 3px solid var(--orange);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 400;
+  color: var(--off); line-height: 1.55;
+}
+.warn strong { color: var(--or2); font-weight: 700; }
+
+/* ── Step 2: clean ID cards ── */
+.s2-clean { display: flex; flex-direction: column; gap: 14px; }
+.s2-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.s2-item {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+}
+.s2-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; border-radius: 12px 12px 0 0;
+  background: linear-gradient(90deg, var(--orange), var(--gold));
+}
+.s2-icon {
+  font-size: 26px; line-height: 1;
+  margin-bottom: 10px;
+  color: var(--or2);
+  font-family: var(--fh);
+  font-weight: 700;
+}
+.s2-label {
+  font-family: var(--fh);
+  font-size: clamp(12px, 2vw, 15px); font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  color: var(--white); line-height: 1.3;
+}
+.s2-label span {
+  display: block;
+  font-size: clamp(9px, 1.4vw, 10px); font-weight: 400;
+  letter-spacing: 2px; color: var(--or2);
+  text-transform: uppercase; margin-top: 3px;
+}
+
+.cta-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--orange), #c05010);
+  border-radius: 10px;
+  font-family: var(--fh);
+  font-size: clamp(12px, 2vw, 14px); font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; color: #fff;
+  box-shadow: 0 4px 20px rgba(240,112,32,.35);
+  width: 100%;
+}
+
+/* ── Step 3 ── */
+.s3-intro {
+  font-size: clamp(12px, 1.8vw, 14px); font-weight: 300;
+  line-height: 1.7; color: var(--off); margin-bottom: 16px;
+}
+.s3-intro strong { color: var(--or2); font-weight: 700; }
+
+.s3-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.portal-box {
+  background: var(--navy2);
+  border: 1px solid var(--bor-g);
+  border-radius: 12px; padding: 16px;
+}
+.pb-head {
+  font-family: var(--fh);
+  font-size: clamp(12px, 2vw, 14px); font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.pb-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px rgba(240,112,32,.5);
+  flex-shrink: 0;
+}
+.portal-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.portal-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 400;
+  color: var(--off); line-height: 1.4;
+}
+.pl-arr { color: var(--or2); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+
+.next-box { display: flex; flex-direction: column; gap: 10px; }
+.nxt {
+  background: rgba(212,160,48,.06);
+  border: 1px solid var(--bor-g);
+  border-radius: 10px; padding: 14px; flex: 1;
+}
+.nxt-head {
+  font-family: var(--fh);
+  font-size: clamp(10px, 1.6vw, 12px); font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 7px;
+}
+.nxt-head::after { content: ''; flex: 1; height: 1px; background: var(--bor-g); }
+.nxt-item {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 300;
+  color: var(--off); margin-bottom: 8px; line-height: 1.4;
+}
+.nxt-n {
+  width: 18px; height: 18px; border-radius: 5px;
+  background: linear-gradient(135deg, var(--gold), var(--orange));
+  font-family: var(--fh); font-size: 9px; font-weight: 900;
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.portal-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--orange), #c05010);
+  border-radius: 10px;
+  font-family: var(--fh);
+  font-size: clamp(12px, 2vw, 14px); font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; color: #fff;
+  box-shadow: 0 4px 20px rgba(240,112,32,.35);
+}
+
+/* ═══════════════════════════════
+   FYI BOX
+═══════════════════════════════ */
+.fyi {
+  margin: 14px 20px 0;
+  background: var(--navy3);
+  border: 1px solid var(--bor-g);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.fyi-head {
+  font-family: var(--fh);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold2);
+}
+.fyi p {
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 300;
+  color: var(--off); line-height: 1.65;
+}
+.fyi p + p { margin-top: 4px; }
+.fyi strong { font-weight: 600; color: var(--white); }
+
+/* ═══════════════════════════════
+   PAGE DIVIDER
+═══════════════════════════════ */
+.pg-footer {
+  margin: 16px 20px 0;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; flex-wrap: nowrap;
+}
+.pgf-brand {
+  font-family: var(--fh); font-size: 12px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
+  white-space: nowrap;
+}
+.pgf-brand span { color: var(--or2); }
+.pgf-pg { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: 1px; white-space: nowrap; }
+
+/* ═══════════════════════════════
+   PAGE 2 HEADER
+═══════════════════════════════ */
+.p2hdr {
+  padding: 20px 28px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  position: relative; margin-top: 24px;
+  flex-wrap: nowrap;
+}
+.p2hdr::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--gold2) 55%, transparent);
+}
+.p2hdr::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold2) 35%, var(--orange) 65%, transparent);
+}
+.p2h-brand {
+  font-family: var(--fh); font-size: 13px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.p2h-brand span { color: var(--or2); }
+.p2h-pg { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: 1px; white-space: nowrap; }
+
+.p2-body {
+  padding: 0 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  margin-top: 18px;
+}
+
+/* ═══════════════════════════════
+   THANK YOU
+═══════════════════════════════ */
+.ty {
+  background: var(--navy3);
+  border: 1px solid var(--bor-o);
+  border-radius: 16px;
+  padding: 24px 26px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 36px var(--og);
+}
+.ty::before {
+  content: '';
+  position: absolute; top: -70px; right: -70px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,112,32,.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ty-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 16px;
+  flex-wrap: wrap; gap: 12px;
+}
+.ty-h {
+  font-family: var(--fh);
+  font-size: clamp(26px, 5vw, 34px); font-weight: 700;
+  line-height: .95; letter-spacing: -.5px;
+  text-transform: uppercase; color: var(--white);
+}
+.ty-h em { font-style: italic; color: var(--or2); }
+.ty-line {
+  width: 48px; height: 3px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--gold2));
+  margin: 10px 0;
+}
+.ty-tag {
+  font-size: clamp(8px, 1.4vw, 10px); font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+}
+.ty-sig { text-align: right; }
+.ty-sig-name {
+  font-family: var(--fh); font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 700; font-style: italic; color: var(--white);
+}
+.ty-sig-role {
+  font-size: 9px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--or2); margin-top: 3px;
+}
+.ty-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.ty-col p {
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 300;
+  line-height: 1.75; color: var(--off);
+}
+.ty-col p + p { margin-top: 8px; }
+.ty-col p strong { font-weight: 600; color: var(--white); }
+.ty-col p em { font-style: normal; color: var(--or2); }
+
+.mon-reminder {
+  background: rgba(240,112,32,.07);
+  border: 1px solid var(--bor-o);
+  border-left: 3px solid var(--orange);
+  border-radius: 8px;
+  padding: 11px 13px; margin-top: 10px;
+  font-size: clamp(11px, 1.8vw, 13px); font-weight: 300;
+  color: var(--off); line-height: 1.6;
+}
+.mon-reminder strong { font-weight: 700; color: var(--or2); }
+
+/* ═══════════════════════════════
+   CONTACT BAR
+═══════════════════════════════ */
+.cbar {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.cb { display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+.cb-lbl {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+}
+.cb-v { font-size: clamp(11px, 1.8vw, 13px); font-weight: 500; color: var(--or2); }
+.cb.neu .cb-v { color: var(--off); font-size: clamp(10px, 1.6vw, 12px); }
+
+/* ═══════════════════════════════
+   PAGE 2 FOOTER
+═══════════════════════════════ */
+.p2f {
+  padding: 12px 0;
+  margin: 4px 20px 0;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px;
+  flex-wrap: wrap;
+}
+.p2f-brand {
+  font-family: var(--fh); font-size: 12px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
+  flex-shrink: 0; white-space: nowrap;
+}
+.p2f-brand span { color: var(--or2); }
+.p2f-disc {
+  font-size: clamp(8px, 1.2vw, 9px); font-weight: 300;
+  color: rgba(255,255,255,.2); line-height: 1.5; text-align: right;
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+   All layouts stable, no jumping
+═══════════════════════════════ */
+
+/* ── Small phones: up to 480px ── */
+@media (max-width: 480px) {
+
+  /* LAYOUT: consistent horizontal padding everywhere */
+  .hdr          { padding: 20px 16px 18px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .hdr-right    { text-align: left; width: 100%; }
+  .welcome      { margin: 12px 16px; padding: 16px; }
+  .track        { margin: 0 16px 12px; padding: 14px 16px; }
+  .steps        { margin: 0 16px; gap: 12px; }
+  .fyi          { margin: 12px 16px 0; padding: 14px 16px; }
+  .pg-footer    { margin: 12px 16px 0; padding: 12px 0; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .pgf-brand    { font-size: 16px; letter-spacing: .5px; }
+  .pgf-pg       { font-size: 11px; }
+  .p2hdr        { padding: 16px 16px 14px; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 24px; }
+  .p2h-brand    { font-size: 15px; letter-spacing: .5px; white-space: normal; }
+  .p2h-pg       { font-size: 11px; }
+  .p2-body      { padding: 0 16px; margin-top: 14px; }
+  .p2f          { margin: 4px 16px 0; padding: 12px 0; flex-direction: column; gap: 8px; }
+
+  /* TYPOGRAPHY: large, readable, dark on light */
+  .brand-name       { font-size: 22px; color: var(--navy); letter-spacing: 1.5px; }
+  .brand-sub        { font-size: 11px; letter-spacing: 2px; color: rgba(8,13,20,.55); }
+  .doc-eyebrow      { font-size: 10px; letter-spacing: 3px; color: var(--orange); }
+  .doc-title        { font-size: 28px; color: var(--navy); letter-spacing: .5px; }
+  .doc-title span   { font-size: 12px; letter-spacing: 4px; color: var(--orange); }
+
+  .welcome-msg      { font-size: 15px; line-height: 1.65; }
+  .welcome-msg strong { color: var(--white); }
+
+  .trk-label        { font-size: 11px; }
+  .trk-txt          { font-size: 10px; }
+  .trk-dot          { width: 32px; height: 32px; font-size: 12px; }
+
+  .sc-n             { font-size: 30px; }
+  .sc-title         { font-size: 18px; }
+  .sc-sub           { font-size: 11px; letter-spacing: 2px; }
+  .sc-num           { padding: 12px 16px; }
+  .sc-body          { padding: 16px; }
+
+  .mon-name         { font-size: 18px; }
+  .mon-price        { font-size: 12px; }
+  .mon-list li      { font-size: 14px; }
+  .mon-btn          { font-size: 13px; padding: 12px; }
+  .warn             { font-size: 13px; }
+
+  .s2-label         { font-size: 15px; }
+  .s2-label span    { font-size: 11px; }
+  .s2-icon          { font-size: 20px; }
+  .cta-btn          { font-size: 15px; padding: 15px; }
+
+  .s3-intro         { font-size: 14px; }
+  .pb-head          { font-size: 16px; }
+  .portal-list li   { font-size: 14px; }
+  .nxt-head         { font-size: 12px; }
+  .nxt-item         { font-size: 13px; }
+  .portal-cta       { font-size: 15px; padding: 14px; }
+
+  .fyi-head         { font-size: 12px; }
+  .fyi p            { font-size: 13px; }
+
+  .ty               { padding: 20px 16px; }
+  .ty-h             { font-size: 28px; }
+  .ty-tag           { font-size: 10px; }
+  .ty-sig-name      { font-size: 20px; }
+  .ty-sig-role      { font-size: 10px; }
+  .ty-col p         { font-size: 13px; }
+  .mon-reminder     { font-size: 13px; }
+
+  .cb-lbl           { font-size: 10px; }
+  .cb-v             { font-size: 14px; }
+  .cb.neu .cb-v     { font-size: 13px; }
+
+  .pgf-brand        { font-size: 12px; color: var(--white); }
+  .pgf-brand span   { color: var(--orange); }
+  .pgf-pg           { font-size: 11px; }
+  .p2h-brand        { font-size: 13px; color: var(--white); }
+  .p2h-brand span   { color: var(--orange); }
+  .p2h-pg           { font-size: 11px; }
+  .p2f-brand        { font-size: 11px; color: var(--white); }
+  .p2f-brand span   { color: var(--orange); }
+  .p2f-disc         { font-size: 10px; color: rgba(255,255,255,.35); text-align: left; }
+
+  /* GRID: single column everything */
+  .mon-row          { grid-template-columns: 1fr; gap: 20px; }
+  .s2-items         { grid-template-columns: 1fr; gap: 10px; }
+  .s3-cols          { grid-template-columns: 1fr; gap: 12px; }
+  .ty-top           { flex-direction: column; gap: 10px; }
+  .ty-sig           { text-align: left; }
+  .ty-cols          { grid-template-columns: 1fr; gap: 14px; }
+  .cbar             { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .c-pill           { flex: 1 1 100%; min-width: unset; }
+
+  /* Fix process track: scrollable, no overflow break */
+  .trk-nodes        { min-width: 340px; }
+}
+
+/* ── Standard phones: 481px–640px ── */
+@media (min-width: 481px) and (max-width: 640px) {
+
+  .hdr          { padding: 22px 20px 18px; flex-direction: row; align-items: center; flex-wrap: nowrap; gap: 12px; }
+  .hdr-right    { text-align: right; }
+  .welcome      { margin: 14px 20px; padding: 18px 20px; }
+  .track        { margin: 0 20px 14px; }
+  .steps        { margin: 0 20px; gap: 14px; }
+  .fyi          { margin: 14px 20px 0; }
+  .pg-footer    { margin: 14px 20px 0; }
+  .p2hdr        { padding: 18px 20px 16px; margin-top: 28px; }
+  .p2-body      { padding: 0 20px; margin-top: 16px; }
+  .p2f          { margin: 4px 20px 0; flex-direction: column; gap: 8px; }
+
+  .brand-name       { font-size: 18px; color: var(--navy); }
+  .brand-sub        { font-size: 10px; color: rgba(8,13,20,.55); }
+  .doc-eyebrow      { font-size: 10px; color: var(--orange); }
+  .doc-title        { font-size: 26px; color: var(--navy); }
+  .doc-title span   { font-size: 11px; color: var(--orange); }
+
+  .pgf-brand        { font-size: 14px; letter-spacing: .5px; color: var(--white); }
+  .pgf-brand span   { color: var(--orange); }
+  .pgf-pg           { font-size: 11px; }
+  .p2h-brand        { font-size: 14px; letter-spacing: .5px; color: var(--white); white-space: normal; }
+  .p2h-brand span   { color: var(--orange); }
+  .p2h-pg           { font-size: 11px; }
+  .p2f-brand        { font-size: 13px; letter-spacing: .5px; color: var(--white); }
+  .p2f-brand span   { color: var(--orange); }
+  .p2f-disc         { text-align: left; }
+
+  .sc-title         { font-size: 17px; }
+  .sc-sub           { font-size: 11px; }
+  .sc-body          { padding: 16px 18px; }
+
+  .mon-name         { font-size: 16px; }
+  .mon-list li      { font-size: 13px; }
+  .mon-btn          { font-size: 12px; }
+
+  .s2-label         { font-size: 14px; }
+  .cta-btn          { font-size: 14px; }
+
+  /* GRID */
+  .mon-row          { grid-template-columns: 1fr 1fr; }
+  .s2-items         { grid-template-columns: 1fr; gap: 10px; }
+  .s3-cols          { grid-template-columns: 1fr; gap: 12px; }
+  .ty-top           { flex-direction: row; flex-wrap: wrap; }
+  .ty-cols          { grid-template-columns: 1fr; gap: 14px; }
+  .cbar             { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .c-pill           { flex: 1 1 100%; min-width: unset; }
+}
+
+/* ── Tablet: 641px–860px ── */
+@media (min-width: 641px) and (max-width: 860px) {
+  .hdr          { padding: 24px 24px 20px; }
+  .welcome      { margin: 16px 24px; }
+  .track        { margin: 0 24px 16px; }
+  .steps        { margin: 0 24px; }
+  .fyi          { margin: 16px 24px 0; }
+  .pg-footer    { margin: 14px 24px 0; }
+  .p2hdr        { padding: 20px 24px 16px; }
+  .p2-body      { padding: 0 24px; }
+  .p2f          { margin: 4px 24px 0; }
+
+  .brand-name   { color: var(--navy); }
+  .brand-sub    { color: rgba(8,13,20,.55); }
+  .doc-title    { color: var(--navy); }
+  .doc-title span { color: var(--orange); }
+
+  .s2-items     { grid-template-columns: repeat(3, 1fr); }
+  .cbar         { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ═══════════════════════════════
+   PRINT
+═══════════════════════════════ */
+@media print {
+  @page { size: letter; margin: 0; }
+
+  body { width: 8.5in; }
+  body::before { position: fixed; }
+
+  .site { max-width: 8.5in; padding: 0; }
+
+  .hdr  { padding: .32in .5in .24in; flex-wrap: nowrap; }
+  .hdr-right { text-align: right; }
+
+  .welcome { margin: .2in .5in .16in; flex-direction: row; align-items: center; }
+  .contacts { flex-wrap: nowrap; }
+  .c-pill { min-width: unset; flex: 0 0 auto; }
+
+  .track { margin: 0 .5in .18in; }
+
+  .steps { margin: 0 .5in; }
+  .sc-num { display: grid; grid-template-columns: 60px 1fr; padding: 0; border-bottom: none; background: rgba(0,0,0,.18); border-right: 1px solid var(--border); }
+  .sc { display: grid; grid-template-columns: 60px 1fr; }
+  .sc-num { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 16px; border-right: 1px solid var(--border); border-bottom: none; gap: 3px; }
+  .sc-num-text { display: none; }
+  .sc-n { font-size: 30px; }
+
+  .mon-row { grid-template-columns: 1fr 1fr; }
+  .s2-items { grid-template-columns: repeat(3, 1fr); }
+  .s3-cols { grid-template-columns: 1fr 1fr; }
+
+  .fyi { margin: .12in .5in 0; }
+  .pg-footer { margin: .12in .5in 0; }
+
+  .p2hdr { padding: .26in .5in .2in; margin-top: .3in; }
+  .p2-body { padding: 0 .5in; margin-top: .18in; }
+
+  .ty-cols { grid-template-columns: 1fr 1fr; }
+  .ty-top { flex-wrap: nowrap; }
+
+  .cbar { grid-template-columns: repeat(3, 1fr); }
+  .p2f { margin: 4px .5in 0; flex-wrap: nowrap; }
+  .p2f-disc { text-align: right; }
+
+  /* page break between sections */
+  .p2hdr { page-break-before: always; }
+}
+
+</style>
+</head>
+<body>
+<div class="site">
+
+<!-- ████  HEADER  ████ -->
+<header class="hdr">
+  <div class="hdr-left">
+    <div class="logo">C8</div>
+    <div class="brand-block">
+      <div class="brand-name">CR8TIVE Financial Group</div>
+      <div class="brand-sub">Credit Restoration &amp; Financial Advisory</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <div class="doc-eyebrow">Your Credit Journey Starts Here</div>
+    <div class="doc-title">Client<span>Onboarding Guide</span></div>
+  </div>
+</header>
+
+<!-- ████  PROCESS TRACK  ████ -->
+<div class="track">
+  <div class="trk-label">Program Overview</div>
+  <div class="trk-nodes">
+    <div class="trk-node"><div class="trk-dot lit">01</div><div class="trk-txt">Monitor<br>Credit</div></div>
+    <div class="trk-line"></div>
+    <div class="trk-node"><div class="trk-dot">02</div><div class="trk-txt">Book<br>Consult</div></div>
+    <div class="trk-line"></div>
+    <div class="trk-node"><div class="trk-dot">03</div><div class="trk-txt">Credit<br>Analysis</div></div>
+    <div class="trk-line"></div>
+    <div class="trk-node"><div class="trk-dot">04</div><div class="trk-txt">Dispute<br>Process</div></div>
+    <div class="trk-line"></div>
+    <div class="trk-node"><div class="trk-dot">05</div><div class="trk-txt">Report<br>Update</div></div>
+    <div class="trk-line"></div>
+    <div class="trk-node"><div class="trk-dot">06</div><div class="trk-txt">Repeat<br>Process</div></div>
+  </div>
+</div>
+
+<!-- ████  WELCOME  ████ -->
+<div class="welcome">
+  <div class="welcome-msg">
+    Welcome to CR8TIVE Financial Group. <strong>Complete all 3 steps below to activate your account.</strong>
+    Questions? Contact us anytime — our info is at the bottom.
+  </div>
+</div>
+
+<!-- ████  STEPS  ████ -->
+<div class="steps">
+
+  <!-- STEP 1 -->
+  <div class="sc">
+    <div class="sc-num">
+      <div class="sc-n">01</div>
+      <div class="sc-num-text">
+        <div class="sc-title">Sign Up for Credit Monitoring</div>
+        <div class="sc-sub">Click a card below to register</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-title" style="display:none" aria-hidden="true">Sign Up for Credit Monitoring</div>
+      <div class="mon-row">
+        <a href="https://www.smartcredit.com/?PID=24800" class="mon A" target="_blank">
+          <div class="mon-badge">Recommended</div>
+          <div class="mon-name">Smart Credit</div>
+          <div class="mon-price">$29.00 / month &nbsp;·&nbsp; Full 3-Bureau</div>
+          <ul class="mon-list">
+            <li>3-bureau reports &amp; scores</li>
+            <li>Daily monitoring alerts</li>
+            <li>Score tracker &amp; tools</li>
+            <li>Required for all services</li>
+          </ul>
+          <span class="mon-btn">Sign Up for Smart Credit</span>
+        </a>
+        <a href="https://www.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" class="mon B" target="_blank">
+          <div class="mon-badge">Backup Option</div>
+          <div class="mon-name">Identity IQ</div>
+          <div class="mon-price">$29.86 / month &nbsp;·&nbsp; 3-Bureau + Identity</div>
+          <ul class="mon-list">
+            <li>3-bureau reports &amp; scores</li>
+            <li>Identity theft protection</li>
+            <li>Use only if Smart Credit unavailable</li>
+          </ul>
+          <span class="mon-btn">Sign Up for Identity IQ</span>
+        </a>
+      </div>
+      <div class="warn"><strong>Do not use</strong> Credit Karma, Experian, or any free monitoring service. Already have an account? Skip to Step 2.</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="sc">
+    <div class="sc-num">
+      <div class="sc-n">02</div>
+      <div class="sc-num-text">
+        <div class="sc-title">Fill Out the Client Credentials Form</div>
+        <div class="sc-sub">2 Forms of ID Required by the Bureaus</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <div class="s2-clean">
+        <div class="s2-items">
+          <div class="s2-item">
+            <div class="s2-icon">ID</div>
+            <div class="s2-label">Driver's License</div>
+          </div>
+          <div class="s2-item">
+            <div class="s2-icon">SSN</div>
+            <div class="s2-label">Social Security Card <span>or Passport</span></div>
+          </div>
+          <div class="s2-item">
+            <div class="s2-icon">LOGIN</div>
+            <div class="s2-label">Credit Monitoring Login</div>
+          </div>
+        </div>
+        <a href="https://api.leadconnectorhq.com/widget/form/yRCQRUWgoA2BjXyyXpcd" class="cta-btn" target="_blank">
+          Submit Credentials — Click Here
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /steps -->
+
+<!-- ████  FYI  ████ -->
+<div class="fyi">
+  <div class="fyi-head">Document Requirements</div>
+  <p>Address doesn't match your ID? Bring <strong>proof of address</strong> — utility bill, bank statement, or pay stub.</p>
+  <p>No Social Security card? A <strong>W-2 or 1099</strong> is accepted. Submit early to avoid delays.</p>
+</div>
+
+<div class="pg-footer">
+  <div class="pgf-brand">CR8TIVE <span>Financial</span> Group</div>
+  <div class="pgf-pg">01 / 02</div>
+</div>
+
+<!-- ████  PAGE 2 HEADER  ████ -->
+<header class="p2hdr">
+  <div class="p2h-brand">CR8TIVE <span>Financial</span> Group &nbsp;·&nbsp; Client Onboarding</div>
+  <div class="p2h-pg">02 / 02</div>
+</header>
+
+<div class="p2-body">
+
+  <!-- STEP 3 -->
+  <div class="sc">
+    <div class="sc-num">
+      <div class="sc-n">03</div>
+      <div class="sc-num-text">
+        <div class="sc-title">Save Our Number &amp; Access Your Portal</div>
+        <div class="sc-sub">Sign agreement · Log in · Track progress</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="s3-intro">
+        <strong>Save 786-746-7414</strong> — this is how we communicate about your disputes.
+        Sign your service agreement to unlock your personalized client portal.
+      </p>
+      <div class="s3-cols">
+        <div class="portal-box">
+          <div class="pb-head"><div class="pb-dot"></div>Your Portal</div>
+          <ul class="portal-list">
+            <li><span class="pl-arr">→</span>View monthly dispute updates</li>
+            <li><span class="pl-arr">→</span>Submit documents securely</li>
+            <li><span class="pl-arr">→</span>Message our team directly</li>
+            <li><span class="pl-arr">→</span>Upload bureau correspondence</li>
+            <li><span class="pl-arr">→</span>Track your credit score</li>
+            <li><span class="pl-arr">→</span>Review status anytime</li>
+          </ul>
+        </div>
+        <div class="next-box">
+          <div class="nxt">
+            <div class="nxt-head">What Happens Next</div>
+            <div class="nxt-item"><div class="nxt-n">1</div>Report review within 24–48 hrs</div>
+            <div class="nxt-item"><div class="nxt-n">2</div>Personalized dispute strategy</div>
+            <div class="nxt-item"><div class="nxt-n">3</div>First disputes submitted</div>
+            <div class="nxt-item"><div class="nxt-n">4</div>Updates via portal &amp; email</div>
+          </div>
+          <a href="https://clientportal.scorexer.com" class="portal-cta" target="_blank">
+            Access Client Portal
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="ty">
+    <div class="ty-top">
+      <div>
+        <div class="ty-h">Thank You<br>for <em>Joining Us.</em></div>
+        <div class="ty-line"></div>
+        <div class="ty-tag">Credit Restoration · Financial Empowerment</div>
+      </div>
+      <div class="ty-sig">
+        <div class="ty-sig-name">Jador &amp; Terrence</div>
+        <div class="ty-sig-role">CR8TIVE Team</div>
+      </div>
+    </div>
+    <div class="ty-cols">
+      <div class="ty-col">
+        <p>Over the coming weeks we'll review your credit, identify opportunities, and build a <strong>clear action plan</strong> designed around your goals.</p>
+        <div class="mon-reminder">
+          <strong>Keep monitoring active</strong> every month — it allows us to dispute inaccuracies and track your progress in real time.
+        </div>
+      </div>
+      <div class="ty-col">
+        <p>We're honored to support you — whether for <em>personal or business funding</em>, buying a home, or unlocking other major life milestones.</p>
+        <p>We can't wait to see what we <strong>accomplish together.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="cbar">
+    <a href="mailto:Jador@cr8tivebusiness.com" class="cb">
+      <span class="cb-lbl">Jador</span>
+      <span class="cb-v">Jador@cr8tivebusiness.com</span>
+    </a>
+    <a href="mailto:Terrence@cr8tivebusiness.com" class="cb">
+      <span class="cb-lbl">Terrence</span>
+      <span class="cb-v">Terrence@cr8tivebusiness.com</span>
+    </a>
+    <a href="tel:7867467414" class="cb">
+      <span class="cb-lbl">Phone</span>
+      <span class="cb-v">786 · 746 · 7414</span>
+    </a>
+    <div class="cb neu">
+      <span class="cb-lbl">Hours</span>
+      <span class="cb-v">Mon – Fri · 9AM–7PM EST</span>
+    </div>
+  </div>
+
+</div><!-- /p2-body -->
+
+<div class="p2f">
+  <div class="p2f-brand">CR8TIVE <span>Financial</span> Group &copy; 2026</div>
+  <div class="p2f-disc">Not a law firm. Credit repair results vary. No specific outcome is guaranteed. By proceeding you agree to our Terms of Service and Privacy Policy.</div>
+</div>
+
+</div><!-- /site -->
+</body>
+</html>
