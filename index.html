@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>CR8TIVE Financial Group — Client Onboarding</title>
+<title data-i18n="docTitleTag">CR8TIVE Financial Group — Client Onboarding</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@200;300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
 
@@ -46,8 +46,6 @@ body {
   min-height: 100vh;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 /* ═══════════════════════════════
@@ -73,7 +71,32 @@ body::before {
   max-width: 860px;
   margin: 0 auto;
   padding: 0 0 40px;
-  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════
+   LANGUAGE SWITCH
+═══════════════════════════════ */
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--bor-o);
+  border-radius: 50px;
+  overflow: hidden;
+  background: var(--navy2);
+}
+.lang-switch button {
+  font-family: var(--fh);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 16px;
+  border: none; cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all .18s ease;
+}
+.lang-switch button.active {
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  color: #fff;
+  box-shadow: 0 0 14px rgba(240,112,32,.4);
 }
 
 /* ═══════════════════════════════
@@ -88,7 +111,6 @@ body::before {
   border-bottom: 1px solid var(--border);
   position: relative;
   flex-wrap: wrap;
-  width: 100%;
 }
 .hdr::after {
   content: '';
@@ -114,15 +136,15 @@ body::before {
   font-family: var(--fh);
   font-size: clamp(13px, 2.5vw, 16px);
   font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--navy); line-height: 1;
+  text-transform: uppercase; color: var(--white); line-height: 1;
 }
 .brand-sub {
   font-size: clamp(8px, 1.5vw, 10px); font-weight: 300;
   letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(8,13,20,.55); margin-top: 3px;
+  color: var(--muted); margin-top: 3px;
 }
 
-.hdr-right { text-align: right; }
+.hdr-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .doc-eyebrow {
   font-size: clamp(7px, 1.2vw, 9px); font-weight: 600;
   letter-spacing: 4px; text-transform: uppercase;
@@ -144,7 +166,7 @@ body::before {
    WELCOME BAND
 ═══════════════════════════════ */
 .welcome {
-  margin: 16px 20px;
+  margin: 20px 20px 16px;
   background: var(--card);
   border: 1px solid var(--bor-o);
   border-radius: 14px;
@@ -299,7 +321,6 @@ body::before {
   border: 1px solid var(--border);
   background: var(--navy2);
   position: relative;
-  -webkit-tap-highlight-color: transparent;
 }
 .mon.A { border-color: var(--orange); background: rgba(240,112,32,.06); }
 .mon.B { border-color: var(--gold2); background: rgba(212,160,48,.07); }
@@ -358,7 +379,7 @@ body::before {
 .s2-clean { display: flex; flex-direction: column; gap: 14px; }
 .s2-items {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 .s2-item {
@@ -516,15 +537,13 @@ body::before {
   padding: 12px 0;
   border-top: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  gap: 8px; flex-wrap: nowrap;
 }
 .pgf-brand {
-  font-family: var(--fh); font-size: 12px; font-weight: 700;
-  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
-  white-space: nowrap;
+  font-family: var(--fh); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--white);
 }
 .pgf-brand span { color: var(--or2); }
-.pgf-pg { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: 1px; white-space: nowrap; }
+.pgf-pg { font-size: 10px; color: var(--muted); letter-spacing: 3px; }
 
 /* ═══════════════════════════════
    PAGE 2 HEADER
@@ -532,10 +551,8 @@ body::before {
 .p2hdr {
   padding: 20px 28px 16px;
   display: flex; align-items: center; justify-content: space-between;
-  gap: 8px;
   border-bottom: 1px solid var(--border);
-  position: relative; margin-top: 24px;
-  flex-wrap: nowrap;
+  position: relative; margin-top: 32px;
 }
 .p2hdr::before {
   content: '';
@@ -549,12 +566,11 @@ body::before {
   background: linear-gradient(90deg, transparent, var(--gold2) 35%, var(--orange) 65%, transparent);
 }
 .p2h-brand {
-  font-family: var(--fh); font-size: 13px; font-weight: 700;
-  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--fh); font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--white);
 }
 .p2h-brand span { color: var(--or2); }
-.p2h-pg { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: 1px; white-space: nowrap; }
+.p2h-pg { font-size: 10px; color: var(--muted); letter-spacing: 3px; }
 
 .p2-body {
   padding: 0 20px;
@@ -664,9 +680,9 @@ body::before {
   flex-wrap: wrap;
 }
 .p2f-brand {
-  font-family: var(--fh); font-size: 12px; font-weight: 700;
-  letter-spacing: .5px; text-transform: uppercase; color: var(--white);
-  flex-shrink: 0; white-space: nowrap;
+  font-family: var(--fh); font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--white);
+  flex-shrink: 0;
 }
 .p2f-brand span { color: var(--or2); }
 .p2f-disc {
@@ -675,176 +691,113 @@ body::before {
 }
 
 /* ═══════════════════════════════
-   RESPONSIVE — MOBILE FIRST
-   All layouts stable, no jumping
+   MOBILE BREAKPOINTS
 ═══════════════════════════════ */
+@media (max-width: 640px) {
 
-/* ── Small phones: up to 480px ── */
-@media (max-width: 480px) {
+  .hdr { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .hdr-right { text-align: left; align-items: flex-start; }
 
-  /* LAYOUT: consistent horizontal padding everywhere */
-  .hdr          { padding: 20px 16px 18px; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .hdr-right    { text-align: left; width: 100%; }
-  .welcome      { margin: 12px 16px; padding: 16px; }
-  .track        { margin: 0 16px 12px; padding: 14px 16px; }
-  .steps        { margin: 0 16px; gap: 12px; }
-  .fyi          { margin: 12px 16px 0; padding: 14px 16px; }
-  .pg-footer    { margin: 12px 16px 0; padding: 12px 0; flex-direction: column; align-items: flex-start; gap: 4px; }
-  .pgf-brand    { font-size: 16px; letter-spacing: .5px; }
-  .pgf-pg       { font-size: 11px; }
-  .p2hdr        { padding: 16px 16px 14px; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 24px; }
-  .p2h-brand    { font-size: 15px; letter-spacing: .5px; white-space: normal; }
-  .p2h-pg       { font-size: 11px; }
-  .p2-body      { padding: 0 16px; margin-top: 14px; }
-  .p2f          { margin: 4px 16px 0; padding: 12px 0; flex-direction: column; gap: 8px; }
+  /* ── Boost all mobile font sizes ── */
+  .brand-name       { font-size: 20px; }
+  .brand-sub        { font-size: 12px; letter-spacing: 2px; }
+  .doc-eyebrow      { font-size: 11px; }
+  .doc-title        { font-size: 30px; }
+  .doc-title span   { font-size: 14px; }
 
-  /* TYPOGRAPHY: large, readable, dark on light */
-  .brand-name       { font-size: 22px; color: var(--navy); letter-spacing: 1.5px; }
-  .brand-sub        { font-size: 11px; letter-spacing: 2px; color: rgba(8,13,20,.55); }
-  .doc-eyebrow      { font-size: 10px; letter-spacing: 3px; color: var(--orange); }
-  .doc-title        { font-size: 28px; color: var(--navy); letter-spacing: .5px; }
-  .doc-title span   { font-size: 12px; letter-spacing: 4px; color: var(--orange); }
+  .welcome-msg      { font-size: 16px; }
+  .c-val            { font-size: 15px; }
 
-  .welcome-msg      { font-size: 15px; line-height: 1.65; }
-  .welcome-msg strong { color: var(--white); }
+  .trk-label        { font-size: 12px; }
+  .trk-txt          { font-size: 11px; }
 
-  .trk-label        { font-size: 11px; }
-  .trk-txt          { font-size: 10px; }
-  .trk-dot          { width: 32px; height: 32px; font-size: 12px; }
+  .sc-title         { font-size: 20px; }
+  .sc-sub           { font-size: 13px; }
 
-  .sc-n             { font-size: 30px; }
-  .sc-title         { font-size: 18px; }
-  .sc-sub           { font-size: 11px; letter-spacing: 2px; }
-  .sc-num           { padding: 12px 16px; }
-  .sc-body          { padding: 16px; }
+  .mon-name         { font-size: 19px; }
+  .mon-price        { font-size: 13px; }
+  .mon-list li      { font-size: 15px; }
+  .mon-btn          { font-size: 14px; padding: 12px; }
 
-  .mon-name         { font-size: 18px; }
-  .mon-price        { font-size: 12px; }
-  .mon-list li      { font-size: 14px; }
-  .mon-btn          { font-size: 13px; padding: 12px; }
-  .warn             { font-size: 13px; }
+  .warn             { font-size: 14px; }
 
-  .s2-label         { font-size: 15px; }
-  .s2-label span    { font-size: 11px; }
-  .s2-icon          { font-size: 20px; }
-  .cta-btn          { font-size: 15px; padding: 15px; }
+  .s2-label         { font-size: 17px; }
+  .s2-label span    { font-size: 12px; }
+  .s2-icon          { font-size: 22px; margin-bottom: 8px; }
+  .cta-btn          { font-size: 16px; padding: 16px; }
 
-  .s3-intro         { font-size: 14px; }
-  .pb-head          { font-size: 16px; }
-  .portal-list li   { font-size: 14px; }
-  .nxt-head         { font-size: 12px; }
-  .nxt-item         { font-size: 13px; }
-  .portal-cta       { font-size: 15px; padding: 14px; }
+  .s3-intro         { font-size: 15px; }
+  .pb-head          { font-size: 17px; }
+  .portal-list li   { font-size: 15px; }
+  .nxt-head         { font-size: 13px; }
+  .nxt-item         { font-size: 14px; }
+  .portal-cta       { font-size: 16px; padding: 16px; }
 
-  .fyi-head         { font-size: 12px; }
-  .fyi p            { font-size: 13px; }
+  .fyi-head         { font-size: 13px; }
+  .fyi p            { font-size: 14px; }
 
-  .ty               { padding: 20px 16px; }
-  .ty-h             { font-size: 28px; }
-  .ty-tag           { font-size: 10px; }
-  .ty-sig-name      { font-size: 20px; }
-  .ty-sig-role      { font-size: 10px; }
-  .ty-col p         { font-size: 13px; }
-  .mon-reminder     { font-size: 13px; }
+  .ty-h             { font-size: 32px; }
+  .ty-tag           { font-size: 11px; }
+  .ty-sig-name      { font-size: 22px; }
+  .ty-sig-role      { font-size: 11px; }
+  .ty-col p         { font-size: 14px; }
+  .mon-reminder     { font-size: 14px; }
 
-  .cb-lbl           { font-size: 10px; }
-  .cb-v             { font-size: 14px; }
-  .cb.neu .cb-v     { font-size: 13px; }
+  .cb-lbl           { font-size: 11px; }
+  .cb-v             { font-size: 15px; }
+  .cb.neu .cb-v     { font-size: 14px; }
 
-  .pgf-brand        { font-size: 12px; color: var(--white); }
-  .pgf-brand span   { color: var(--orange); }
-  .pgf-pg           { font-size: 11px; }
-  .p2h-brand        { font-size: 13px; color: var(--white); }
-  .p2h-brand span   { color: var(--orange); }
-  .p2h-pg           { font-size: 11px; }
-  .p2f-brand        { font-size: 11px; color: var(--white); }
-  .p2f-brand span   { color: var(--orange); }
-  .p2f-disc         { font-size: 10px; color: rgba(255,255,255,.35); text-align: left; }
+  .pgf-brand        { font-size: 13px; }
+  .pgf-pg           { font-size: 12px; }
+  .p2h-brand        { font-size: 14px; }
+  .p2h-pg           { font-size: 12px; }
+  .p2f-brand        { font-size: 12px; }
+  .p2f-disc         { font-size: 11px; }
 
-  /* GRID: single column everything */
-  .mon-row          { grid-template-columns: 1fr; gap: 20px; }
-  .s2-items         { grid-template-columns: 1fr; gap: 10px; }
-  .s3-cols          { grid-template-columns: 1fr; gap: 12px; }
-  .ty-top           { flex-direction: column; gap: 10px; }
-  .ty-sig           { text-align: left; }
-  .ty-cols          { grid-template-columns: 1fr; gap: 14px; }
-  .cbar             { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .c-pill           { flex: 1 1 100%; min-width: unset; }
+  .welcome { margin: 14px 14px 12px; padding: 16px; }
+  .c-pill { min-width: unset; flex: 1 1 100%; }
 
-  /* Fix process track: scrollable, no overflow break */
-  .trk-nodes        { min-width: 340px; }
+  .track { margin: 0 14px 14px; }
+
+  .steps { margin: 0 14px; gap: 12px; }
+
+  .sc-num { padding: 14px 16px 12px; }
+  .sc-n { font-size: 32px; }
+  .sc-body { padding: 16px; }
+
+  /* stack monitor cards vertically on small screens */
+  .mon-row { grid-template-columns: 1fr; }
+
+  /* stack ID items to 1 column on very small */
+  .s2-items { grid-template-columns: 1fr; }
+
+  /* stack step 3 cols */
+  .s3-cols { grid-template-columns: 1fr; }
+
+  .fyi { margin: 12px 14px 0; }
+  .pg-footer { margin: 12px 14px 0; }
+
+  .p2hdr { padding: 16px 14px 14px; flex-direction: column; gap: 4px; }
+  .p2-body { padding: 0 14px; }
+
+  .ty { padding: 20px 16px; }
+  .ty-top { flex-direction: column; }
+  .ty-sig { text-align: left; }
+  .ty-cols { grid-template-columns: 1fr; gap: 14px; }
+
+  .cbar { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .p2f { flex-direction: column; margin: 4px 14px 0; }
+  .p2f-disc { text-align: left; }
 }
 
-/* ── Standard phones: 481px–640px ── */
-@media (min-width: 481px) and (max-width: 640px) {
-
-  .hdr          { padding: 22px 20px 18px; flex-direction: row; align-items: center; flex-wrap: nowrap; gap: 12px; }
-  .hdr-right    { text-align: right; }
-  .welcome      { margin: 14px 20px; padding: 18px 20px; }
-  .track        { margin: 0 20px 14px; }
-  .steps        { margin: 0 20px; gap: 14px; }
-  .fyi          { margin: 14px 20px 0; }
-  .pg-footer    { margin: 14px 20px 0; }
-  .p2hdr        { padding: 18px 20px 16px; margin-top: 28px; }
-  .p2-body      { padding: 0 20px; margin-top: 16px; }
-  .p2f          { margin: 4px 20px 0; flex-direction: column; gap: 8px; }
-
-  .brand-name       { font-size: 18px; color: var(--navy); }
-  .brand-sub        { font-size: 10px; color: rgba(8,13,20,.55); }
-  .doc-eyebrow      { font-size: 10px; color: var(--orange); }
-  .doc-title        { font-size: 26px; color: var(--navy); }
-  .doc-title span   { font-size: 11px; color: var(--orange); }
-
-  .pgf-brand        { font-size: 14px; letter-spacing: .5px; color: var(--white); }
-  .pgf-brand span   { color: var(--orange); }
-  .pgf-pg           { font-size: 11px; }
-  .p2h-brand        { font-size: 14px; letter-spacing: .5px; color: var(--white); white-space: normal; }
-  .p2h-brand span   { color: var(--orange); }
-  .p2h-pg           { font-size: 11px; }
-  .p2f-brand        { font-size: 13px; letter-spacing: .5px; color: var(--white); }
-  .p2f-brand span   { color: var(--orange); }
-  .p2f-disc         { text-align: left; }
-
-  .sc-title         { font-size: 17px; }
-  .sc-sub           { font-size: 11px; }
-  .sc-body          { padding: 16px 18px; }
-
-  .mon-name         { font-size: 16px; }
-  .mon-list li      { font-size: 13px; }
-  .mon-btn          { font-size: 12px; }
-
-  .s2-label         { font-size: 14px; }
-  .cta-btn          { font-size: 14px; }
-
-  /* GRID */
-  .mon-row          { grid-template-columns: 1fr 1fr; }
-  .s2-items         { grid-template-columns: 1fr; gap: 10px; }
-  .s3-cols          { grid-template-columns: 1fr; gap: 12px; }
-  .ty-top           { flex-direction: row; flex-wrap: wrap; }
-  .ty-cols          { grid-template-columns: 1fr; gap: 14px; }
-  .cbar             { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .c-pill           { flex: 1 1 100%; min-width: unset; }
-}
-
-/* ── Tablet: 641px–860px ── */
 @media (min-width: 641px) and (max-width: 860px) {
-  .hdr          { padding: 24px 24px 20px; }
-  .welcome      { margin: 16px 24px; }
-  .track        { margin: 0 24px 16px; }
-  .steps        { margin: 0 24px; }
-  .fyi          { margin: 16px 24px 0; }
-  .pg-footer    { margin: 14px 24px 0; }
-  .p2hdr        { padding: 20px 24px 16px; }
-  .p2-body      { padding: 0 24px; }
-  .p2f          { margin: 4px 24px 0; }
-
-  .brand-name   { color: var(--navy); }
-  .brand-sub    { color: rgba(8,13,20,.55); }
-  .doc-title    { color: var(--navy); }
-  .doc-title span { color: var(--orange); }
-
-  .s2-items     { grid-template-columns: repeat(3, 1fr); }
-  .cbar         { grid-template-columns: repeat(4, 1fr); }
+  .hdr { padding: 22px 20px 18px; }
+  .steps, .fyi, .pg-footer { margin-left: 16px; margin-right: 16px; }
+  .track, .welcome { margin-left: 16px; margin-right: 16px; }
+  .p2-body { padding: 0 16px; }
+  .p2hdr { padding: 18px 20px 14px; }
+  .p2f { margin: 4px 16px 0; }
 }
 
 /* ═══════════════════════════════
@@ -855,6 +808,8 @@ body::before {
 
   body { width: 8.5in; }
   body::before { position: fixed; }
+
+  .lang-switch { display: none !important; }
 
   .site { max-width: 8.5in; padding: 0; }
 
@@ -906,36 +861,42 @@ body::before {
     <div class="logo">C8</div>
     <div class="brand-block">
       <div class="brand-name">CR8TIVE Financial Group</div>
-      <div class="brand-sub">Credit Restoration &amp; Financial Advisory</div>
+      <div class="brand-sub" data-i18n="brandSub">Credit Restoration &amp; Financial Advisory</div>
     </div>
   </div>
   <div class="hdr-right">
-    <div class="doc-eyebrow">Your Credit Journey Starts Here</div>
-    <div class="doc-title">Client<span>Onboarding Guide</span></div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active" onclick="setLang('en')">EN</button>
+      <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
+    </div>
+    <div>
+      <div class="doc-eyebrow" data-i18n="docEyebrow">Your Credit Journey Starts Here</div>
+      <div class="doc-title" data-i18n="docTitle">Client<span>Onboarding Guide</span></div>
+    </div>
   </div>
 </header>
 
 <!-- ████  PROCESS TRACK  ████ -->
 <div class="track">
-  <div class="trk-label">Program Overview</div>
+  <div class="trk-label" data-i18n="trkLabel">Program Overview</div>
   <div class="trk-nodes">
-    <div class="trk-node"><div class="trk-dot lit">01</div><div class="trk-txt">Monitor<br>Credit</div></div>
+    <div class="trk-node"><div class="trk-dot lit">01</div><div class="trk-txt" data-i18n="trk1">Monitor<br>Credit</div></div>
     <div class="trk-line"></div>
-    <div class="trk-node"><div class="trk-dot">02</div><div class="trk-txt">Book<br>Consult</div></div>
+    <div class="trk-node"><div class="trk-dot">02</div><div class="trk-txt" data-i18n="trk2">Book<br>Consult</div></div>
     <div class="trk-line"></div>
-    <div class="trk-node"><div class="trk-dot">03</div><div class="trk-txt">Credit<br>Analysis</div></div>
+    <div class="trk-node"><div class="trk-dot">03</div><div class="trk-txt" data-i18n="trk3">Credit<br>Analysis</div></div>
     <div class="trk-line"></div>
-    <div class="trk-node"><div class="trk-dot">04</div><div class="trk-txt">Dispute<br>Process</div></div>
+    <div class="trk-node"><div class="trk-dot">04</div><div class="trk-txt" data-i18n="trk4">Dispute<br>Process</div></div>
     <div class="trk-line"></div>
-    <div class="trk-node"><div class="trk-dot">05</div><div class="trk-txt">Report<br>Update</div></div>
+    <div class="trk-node"><div class="trk-dot">05</div><div class="trk-txt" data-i18n="trk5">Report<br>Update</div></div>
     <div class="trk-line"></div>
-    <div class="trk-node"><div class="trk-dot">06</div><div class="trk-txt">Repeat<br>Process</div></div>
+    <div class="trk-node"><div class="trk-dot">06</div><div class="trk-txt" data-i18n="trk6">Repeat<br>Process</div></div>
   </div>
 </div>
 
 <!-- ████  WELCOME  ████ -->
 <div class="welcome">
-  <div class="welcome-msg">
+  <div class="welcome-msg" data-i18n="welcomeMsg">
     Welcome to CR8TIVE Financial Group. <strong>Complete all 3 steps below to activate your account.</strong>
     Questions? Contact us anytime — our info is at the bottom.
   </div>
@@ -949,38 +910,38 @@ body::before {
     <div class="sc-num">
       <div class="sc-n">01</div>
       <div class="sc-num-text">
-        <div class="sc-title">Sign Up for Credit Monitoring</div>
-        <div class="sc-sub">Click a card below to register</div>
+        <div class="sc-title" data-i18n="s1Title">Sign Up for Credit Monitoring</div>
+        <div class="sc-sub" data-i18n="s1Sub">Click a card below to register</div>
       </div>
     </div>
     <div class="sc-body">
-      <div class="sc-title" style="display:none" aria-hidden="true">Sign Up for Credit Monitoring</div>
+      <div class="sc-title" style="display:none" aria-hidden="true" data-i18n="s1Title">Sign Up for Credit Monitoring</div>
       <div class="mon-row">
         <a href="https://www.smartcredit.com/?PID=24800" class="mon A" target="_blank">
-          <div class="mon-badge">Recommended</div>
+          <div class="mon-badge" data-i18n="monABadge">Recommended</div>
           <div class="mon-name">Smart Credit</div>
-          <div class="mon-price">$29.00 / month &nbsp;·&nbsp; Full 3-Bureau</div>
+          <div class="mon-price" data-i18n="monAPrice">$29.00 / month &nbsp;·&nbsp; Full 3-Bureau</div>
           <ul class="mon-list">
-            <li>3-bureau reports &amp; scores</li>
-            <li>Daily monitoring alerts</li>
-            <li>Score tracker &amp; tools</li>
-            <li>Required for all services</li>
+            <li data-i18n="monA1">3-bureau reports &amp; scores</li>
+            <li data-i18n="monA2">Daily monitoring alerts</li>
+            <li data-i18n="monA3">Score tracker &amp; tools</li>
+            <li data-i18n="monA4">Required for all services</li>
           </ul>
-          <span class="mon-btn">Sign Up for Smart Credit</span>
+          <span class="mon-btn" data-i18n="monABtn">Sign Up for Smart Credit</span>
         </a>
         <a href="https://www.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" class="mon B" target="_blank">
-          <div class="mon-badge">Backup Option</div>
+          <div class="mon-badge" data-i18n="monBBadge">Backup Option</div>
           <div class="mon-name">Identity IQ</div>
-          <div class="mon-price">$29.86 / month &nbsp;·&nbsp; 3-Bureau + Identity</div>
+          <div class="mon-price" data-i18n="monBPrice">$29.86 / month &nbsp;·&nbsp; 3-Bureau + Identity</div>
           <ul class="mon-list">
-            <li>3-bureau reports &amp; scores</li>
-            <li>Identity theft protection</li>
-            <li>Use only if Smart Credit unavailable</li>
+            <li data-i18n="monB1">3-bureau reports &amp; scores</li>
+            <li data-i18n="monB2">Identity theft protection</li>
+            <li data-i18n="monB3">Use only if Smart Credit unavailable</li>
           </ul>
-          <span class="mon-btn">Sign Up for Identity IQ</span>
+          <span class="mon-btn" data-i18n="monBBtn">Sign Up for Identity IQ</span>
         </a>
       </div>
-      <div class="warn"><strong>Do not use</strong> Credit Karma, Experian, or any free monitoring service. Already have an account? Skip to Step 2.</div>
+      <div class="warn" data-i18n="s1Warn"><strong>Do not use</strong> Credit Karma, Experian, or any free monitoring service. Already have an account? Skip to Step 2.</div>
     </div>
   </div>
 
@@ -989,8 +950,8 @@ body::before {
     <div class="sc-num">
       <div class="sc-n">02</div>
       <div class="sc-num-text">
-        <div class="sc-title">Fill Out the Client Credentials Form</div>
-        <div class="sc-sub">2 Forms of ID Required by the Bureaus</div>
+        <div class="sc-title" data-i18n="s2Title">Fill Out the Client Credentials Form</div>
+        <div class="sc-sub" data-i18n="s2Sub">2 Forms of ID Required by the Bureaus</div>
       </div>
     </div>
     <div class="sc-body">
@@ -998,18 +959,18 @@ body::before {
         <div class="s2-items">
           <div class="s2-item">
             <div class="s2-icon">ID</div>
-            <div class="s2-label">Driver's License</div>
+            <div class="s2-label" data-i18n="s2id1">Driver's License</div>
           </div>
           <div class="s2-item">
             <div class="s2-icon">SSN</div>
-            <div class="s2-label">Social Security Card <span>or Passport</span></div>
+            <div class="s2-label" data-i18n="s2id2">Social Security Card <span>or Passport</span></div>
           </div>
           <div class="s2-item">
             <div class="s2-icon">LOGIN</div>
-            <div class="s2-label">Credit Monitoring Login</div>
+            <div class="s2-label" data-i18n="s2id3">Credit Monitoring Login</div>
           </div>
         </div>
-        <a href="https://api.leadconnectorhq.com/widget/form/yRCQRUWgoA2BjXyyXpcd" class="cta-btn" target="_blank">
+        <a href="https://cr8tivebusiness.com/credentials" class="cta-btn" target="_blank" data-i18n="s2Cta">
           Submit Credentials — Click Here
         </a>
       </div>
@@ -1020,9 +981,9 @@ body::before {
 
 <!-- ████  FYI  ████ -->
 <div class="fyi">
-  <div class="fyi-head">Document Requirements</div>
-  <p>Address doesn't match your ID? Bring <strong>proof of address</strong> — utility bill, bank statement, or pay stub.</p>
-  <p>No Social Security card? A <strong>W-2 or 1099</strong> is accepted. Submit early to avoid delays.</p>
+  <div class="fyi-head" data-i18n="fyiHead">Document Requirements</div>
+  <p data-i18n="fyiP1">Address doesn't match your ID? Bring <strong>proof of address</strong> — utility bill, bank statement, or pay stub.</p>
+  <p data-i18n="fyiP2">No Social Security card? A <strong>W-2 or 1099</strong> is accepted. Submit early to avoid delays.</p>
 </div>
 
 <div class="pg-footer">
@@ -1032,7 +993,7 @@ body::before {
 
 <!-- ████  PAGE 2 HEADER  ████ -->
 <header class="p2hdr">
-  <div class="p2h-brand">CR8TIVE <span>Financial</span> Group &nbsp;·&nbsp; Client Onboarding</div>
+  <div class="p2h-brand" data-i18n="p2hBrand">CR8TIVE <span>Financial</span> Group &nbsp;·&nbsp; Client Onboarding</div>
   <div class="p2h-pg">02 / 02</div>
 </header>
 
@@ -1043,36 +1004,36 @@ body::before {
     <div class="sc-num">
       <div class="sc-n">03</div>
       <div class="sc-num-text">
-        <div class="sc-title">Save Our Number &amp; Access Your Portal</div>
-        <div class="sc-sub">Sign agreement · Log in · Track progress</div>
+        <div class="sc-title" data-i18n="s3Title">Save Our Number &amp; Access Your Portal</div>
+        <div class="sc-sub" data-i18n="s3Sub">Sign agreement · Log in · Track progress</div>
       </div>
     </div>
     <div class="sc-body">
-      <p class="s3-intro">
+      <p class="s3-intro" data-i18n="s3Intro">
         <strong>Save 786-746-7414</strong> — this is how we communicate about your disputes.
         Sign your service agreement to unlock your personalized client portal.
       </p>
       <div class="s3-cols">
         <div class="portal-box">
-          <div class="pb-head"><div class="pb-dot"></div>Your Portal</div>
+          <div class="pb-head"><div class="pb-dot"></div><span data-i18n="pbHead">Your Portal</span></div>
           <ul class="portal-list">
-            <li><span class="pl-arr">→</span>View monthly dispute updates</li>
-            <li><span class="pl-arr">→</span>Submit documents securely</li>
-            <li><span class="pl-arr">→</span>Message our team directly</li>
-            <li><span class="pl-arr">→</span>Upload bureau correspondence</li>
-            <li><span class="pl-arr">→</span>Track your credit score</li>
-            <li><span class="pl-arr">→</span>Review status anytime</li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl1">View monthly dispute updates</span></li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl2">Submit documents securely</span></li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl3">Message our team directly</span></li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl4">Upload bureau correspondence</span></li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl5">Track your credit score</span></li>
+            <li><span class="pl-arr">→</span><span data-i18n="pl6">Review status anytime</span></li>
           </ul>
         </div>
         <div class="next-box">
           <div class="nxt">
-            <div class="nxt-head">What Happens Next</div>
-            <div class="nxt-item"><div class="nxt-n">1</div>Report review within 24–48 hrs</div>
-            <div class="nxt-item"><div class="nxt-n">2</div>Personalized dispute strategy</div>
-            <div class="nxt-item"><div class="nxt-n">3</div>First disputes submitted</div>
-            <div class="nxt-item"><div class="nxt-n">4</div>Updates via portal &amp; email</div>
+            <div class="nxt-head" data-i18n="nxtHead">What Happens Next</div>
+            <div class="nxt-item"><div class="nxt-n">1</div><span data-i18n="nxt1">Report review within 24–48 hrs</span></div>
+            <div class="nxt-item"><div class="nxt-n">2</div><span data-i18n="nxt2">Personalized dispute strategy</span></div>
+            <div class="nxt-item"><div class="nxt-n">3</div><span data-i18n="nxt3">First disputes submitted</span></div>
+            <div class="nxt-item"><div class="nxt-n">4</div><span data-i18n="nxt4">Updates via portal &amp; email</span></div>
           </div>
-          <a href="https://clientportal.scorexer.com" class="portal-cta" target="_blank">
+          <a href="https://cr8tivebusiness.com/portal" class="portal-cta" target="_blank" data-i18n="portalCta">
             Access Client Portal
           </a>
         </div>
@@ -1084,25 +1045,25 @@ body::before {
   <div class="ty">
     <div class="ty-top">
       <div>
-        <div class="ty-h">Thank You<br>for <em>Joining Us.</em></div>
+        <div class="ty-h" data-i18n="tyH">Thank You<br>for <em>Joining Us.</em></div>
         <div class="ty-line"></div>
-        <div class="ty-tag">Credit Restoration · Financial Empowerment</div>
+        <div class="ty-tag" data-i18n="tyTag">Credit Restoration · Financial Empowerment</div>
       </div>
       <div class="ty-sig">
         <div class="ty-sig-name">Jador &amp; Terrence</div>
-        <div class="ty-sig-role">CR8TIVE Team</div>
+        <div class="ty-sig-role" data-i18n="tySigRole">CR8TIVE Team</div>
       </div>
     </div>
     <div class="ty-cols">
       <div class="ty-col">
-        <p>Over the coming weeks we'll review your credit, identify opportunities, and build a <strong>clear action plan</strong> designed around your goals.</p>
-        <div class="mon-reminder">
+        <p data-i18n="tyCol1P">Over the coming weeks we'll review your credit, identify opportunities, and build a <strong>clear action plan</strong> designed around your goals.</p>
+        <div class="mon-reminder" data-i18n="tyReminder">
           <strong>Keep monitoring active</strong> every month — it allows us to dispute inaccuracies and track your progress in real time.
         </div>
       </div>
       <div class="ty-col">
-        <p>We're honored to support you — whether for <em>personal or business funding</em>, buying a home, or unlocking other major life milestones.</p>
-        <p>We can't wait to see what we <strong>accomplish together.</strong></p>
+        <p data-i18n="tyCol2P1">We're honored to support you — whether for <em>personal or business funding</em>, buying a home, or unlocking other major life milestones.</p>
+        <p data-i18n="tyCol2P2">We can't wait to see what we <strong>accomplish together.</strong></p>
       </div>
     </div>
   </div>
@@ -1118,12 +1079,12 @@ body::before {
       <span class="cb-v">Terrence@cr8tivebusiness.com</span>
     </a>
     <a href="tel:7867467414" class="cb">
-      <span class="cb-lbl">Phone</span>
+      <span class="cb-lbl" data-i18n="cbPhone">Phone</span>
       <span class="cb-v">786 · 746 · 7414</span>
     </a>
     <div class="cb neu">
-      <span class="cb-lbl">Hours</span>
-      <span class="cb-v">Mon – Fri · 9AM–7PM EST</span>
+      <span class="cb-lbl" data-i18n="cbHours">Hours</span>
+      <span class="cb-v" data-i18n="cbHoursVal">Mon – Fri · 9AM–7PM EST</span>
     </div>
   </div>
 
@@ -1131,9 +1092,160 @@ body::before {
 
 <div class="p2f">
   <div class="p2f-brand">CR8TIVE <span>Financial</span> Group &copy; 2026</div>
-  <div class="p2f-disc">Not a law firm. Credit repair results vary. No specific outcome is guaranteed. By proceeding you agree to our Terms of Service and Privacy Policy.</div>
+  <div class="p2f-disc" data-i18n="p2fDisc">Not a law firm. Credit repair results vary. No specific outcome is guaranteed. By proceeding you agree to our Terms of Service and Privacy Policy.</div>
 </div>
 
 </div><!-- /site -->
+
+<script>
+/* ═══════════════════════════════
+   BILINGUAL CONTENT (EN / ES)
+   Only text is swapped — all links/hrefs stay intact.
+═══════════════════════════════ */
+var I18N = {
+  docTitleTag: {
+    en: "CR8TIVE Financial Group — Client Onboarding",
+    es: "CR8TIVE Financial Group — Bienvenida del Cliente"
+  },
+  brandSub: {
+    en: "Credit Restoration &amp; Financial Advisory",
+    es: "Restauración de Crédito y Asesoría Financiera"
+  },
+  docEyebrow: {
+    en: "Your Credit Journey Starts Here",
+    es: "Tu Camino al Crédito Comienza Aquí"
+  },
+  docTitle: {
+    en: "Client<span>Onboarding Guide</span>",
+    es: "Bienvenida<span>Guía del Cliente</span>"
+  },
+  trkLabel: { en: "Program Overview", es: "Resumen del Programa" },
+  trk1: { en: "Monitor<br>Credit", es: "Monitorear<br>Crédito" },
+  trk2: { en: "Book<br>Consult", es: "Agendar<br>Consulta" },
+  trk3: { en: "Credit<br>Analysis", es: "Análisis<br>de Crédito" },
+  trk4: { en: "Dispute<br>Process", es: "Proceso de<br>Disputa" },
+  trk5: { en: "Report<br>Update", es: "Actualizar<br>Reporte" },
+  trk6: { en: "Repeat<br>Process", es: "Repetir<br>Proceso" },
+  welcomeMsg: {
+    en: "Welcome to CR8TIVE Financial Group. <strong>Complete all 3 steps below to activate your account.</strong> Questions? Contact us anytime — our info is at the bottom.",
+    es: "Bienvenido a CR8TIVE Financial Group. <strong>Completa los 3 pasos a continuación para activar tu cuenta.</strong> ¿Preguntas? Contáctanos cuando quieras — nuestra información está al final."
+  },
+  s1Title: { en: "Sign Up for Credit Monitoring", es: "Regístrate en el Monitoreo de Crédito" },
+  s1Sub: { en: "Click a card below to register", es: "Haz clic en una tarjeta para registrarte" },
+  monABadge: { en: "Recommended", es: "Recomendado" },
+  monAPrice: { en: "$29.00 / month &nbsp;·&nbsp; Full 3-Bureau", es: "$29.00 / mes &nbsp;·&nbsp; 3 Burós Completos" },
+  monA1: { en: "3-bureau reports &amp; scores", es: "Reportes y puntajes de 3 burós" },
+  monA2: { en: "Daily monitoring alerts", es: "Alertas de monitoreo diarias" },
+  monA3: { en: "Score tracker &amp; tools", es: "Seguimiento de puntaje y herramientas" },
+  monA4: { en: "Required for all services", es: "Requerido para todos los servicios" },
+  monABtn: { en: "Sign Up for Smart Credit", es: "Regístrate en Smart Credit" },
+  monBBadge: { en: "Backup Option", es: "Opción Alternativa" },
+  monBPrice: { en: "$29.86 / month &nbsp;·&nbsp; 3-Bureau + Identity", es: "$29.86 / mes &nbsp;·&nbsp; 3 Burós + Identidad" },
+  monB1: { en: "3-bureau reports &amp; scores", es: "Reportes y puntajes de 3 burós" },
+  monB2: { en: "Identity theft protection", es: "Protección contra robo de identidad" },
+  monB3: { en: "Use only if Smart Credit unavailable", es: "Úsalo solo si Smart Credit no está disponible" },
+  monBBtn: { en: "Sign Up for Identity IQ", es: "Regístrate en Identity IQ" },
+  s1Warn: {
+    en: "<strong>Do not use</strong> Credit Karma, Experian, or any free monitoring service. Already have an account? Skip to Step 2.",
+    es: "<strong>No uses</strong> Credit Karma, Experian, ni ningún servicio de monitoreo gratuito. ¿Ya tienes una cuenta? Pasa al Paso 2."
+  },
+  s2Title: { en: "Fill Out the Client Credentials Form", es: "Completa el Formulario de Credenciales del Cliente" },
+  s2Sub: { en: "2 Forms of ID Required by the Bureaus", es: "Los Burós Requieren 2 Formas de Identificación" },
+  s2id1: { en: "Driver's License", es: "Licencia de Conducir" },
+  s2id2: { en: "Social Security Card <span>or Passport</span>", es: "Tarjeta de Seguro Social <span>o Pasaporte</span>" },
+  s2id3: { en: "Credit Monitoring Login", es: "Acceso al Monitoreo de Crédito" },
+  s2Cta: { en: "Submit Credentials — Click Here", es: "Enviar Credenciales — Haz Clic Aquí" },
+  fyiHead: { en: "Document Requirements", es: "Requisitos de Documentos" },
+  fyiP1: {
+    en: "Address doesn't match your ID? Bring <strong>proof of address</strong> — utility bill, bank statement, or pay stub.",
+    es: "¿La dirección no coincide con tu identificación? Trae un <strong>comprobante de domicilio</strong> — factura de servicios, estado de cuenta bancario o talón de pago."
+  },
+  fyiP2: {
+    en: "No Social Security card? A <strong>W-2 or 1099</strong> is accepted. Submit early to avoid delays.",
+    es: "¿No tienes tarjeta de Seguro Social? Se acepta un <strong>W-2 o 1099</strong>. Envíalo pronto para evitar retrasos."
+  },
+  p2hBrand: {
+    en: "CR8TIVE <span>Financial</span> Group &nbsp;·&nbsp; Client Onboarding",
+    es: "CR8TIVE <span>Financial</span> Group &nbsp;·&nbsp; Bienvenida del Cliente"
+  },
+  s3Title: { en: "Save Our Number &amp; Access Your Portal", es: "Guarda Nuestro Número y Accede a tu Portal" },
+  s3Sub: { en: "Sign agreement · Log in · Track progress", es: "Firma el acuerdo · Inicia sesión · Sigue tu progreso" },
+  s3Intro: {
+    en: "<strong>Save 786-746-7414</strong> — this is how we communicate about your disputes. Sign your service agreement to unlock your personalized client portal.",
+    es: "<strong>Guarda el 786-746-7414</strong> — así nos comunicamos contigo sobre tus disputas. Firma tu acuerdo de servicio para desbloquear tu portal de cliente personalizado."
+  },
+  pbHead: { en: "Your Portal", es: "Tu Portal" },
+  pl1: { en: "View monthly dispute updates", es: "Ver actualizaciones mensuales de disputas" },
+  pl2: { en: "Submit documents securely", es: "Enviar documentos de forma segura" },
+  pl3: { en: "Message our team directly", es: "Enviar mensajes a nuestro equipo directamente" },
+  pl4: { en: "Upload bureau correspondence", es: "Subir correspondencia de los burós" },
+  pl5: { en: "Track your credit score", es: "Seguir tu puntaje de crédito" },
+  pl6: { en: "Review status anytime", es: "Revisar el estado en cualquier momento" },
+  nxtHead: { en: "What Happens Next", es: "Qué Sigue Ahora" },
+  nxt1: { en: "Report review within 24–48 hrs", es: "Revisión del reporte en 24–48 hrs" },
+  nxt2: { en: "Personalized dispute strategy", es: "Estrategia de disputa personalizada" },
+  nxt3: { en: "First disputes submitted", es: "Primeras disputas enviadas" },
+  nxt4: { en: "Updates via portal &amp; email", es: "Actualizaciones por portal y correo" },
+  portalCta: { en: "Access Client Portal", es: "Acceder al Portal del Cliente" },
+  tyH: { en: "Thank You<br>for <em>Joining Us.</em>", es: "Gracias<br>por <em>Unirte a Nosotros.</em>" },
+  tyTag: { en: "Credit Restoration · Financial Empowerment", es: "Restauración de Crédito · Empoderamiento Financiero" },
+  tySigRole: { en: "CR8TIVE Team", es: "Equipo CR8TIVE" },
+  tyCol1P: {
+    en: "Over the coming weeks we'll review your credit, identify opportunities, and build a <strong>clear action plan</strong> designed around your goals.",
+    es: "En las próximas semanas revisaremos tu crédito, identificaremos oportunidades y crearemos un <strong>plan de acción claro</strong> diseñado según tus metas."
+  },
+  tyReminder: {
+    en: "<strong>Keep monitoring active</strong> every month — it allows us to dispute inaccuracies and track your progress in real time.",
+    es: "<strong>Mantén el monitoreo activo</strong> cada mes — nos permite disputar inexactitudes y seguir tu progreso en tiempo real."
+  },
+  tyCol2P1: {
+    en: "We're honored to support you — whether for <em>personal or business funding</em>, buying a home, or unlocking other major life milestones.",
+    es: "Es un honor apoyarte — ya sea para <em>financiamiento personal o de negocio</em>, comprar una casa o alcanzar otros grandes logros de la vida."
+  },
+  tyCol2P2: {
+    en: "We can't wait to see what we <strong>accomplish together.</strong>",
+    es: "No podemos esperar a ver lo que <strong>lograremos juntos.</strong>"
+  },
+  cbPhone: { en: "Phone", es: "Teléfono" },
+  cbHours: { en: "Hours", es: "Horario" },
+  cbHoursVal: { en: "Mon – Fri · 9AM–7PM EST", es: "Lun – Vie · 9AM–7PM EST" },
+  p2fDisc: {
+    en: "Not a law firm. Credit repair results vary. No specific outcome is guaranteed. By proceeding you agree to our Terms of Service and Privacy Policy.",
+    es: "No somos un bufete de abogados. Los resultados de reparación de crédito varían. No se garantiza ningún resultado específico. Al continuar, aceptas nuestros Términos de Servicio y Política de Privacidad."
+  }
+};
+
+var STORE_KEY = "cr8tive-onboarding-lang";
+
+function setLang(lang) {
+  if (lang !== "en" && lang !== "es") lang = "en";
+
+  document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    var key = el.getAttribute("data-i18n");
+    if (I18N[key] && I18N[key][lang] != null) {
+      if (el.tagName === "TITLE") {
+        document.title = I18N[key][lang].replace(/<[^>]+>/g, "");
+      } else {
+        el.innerHTML = I18N[key][lang];
+      }
+    }
+  });
+
+  document.documentElement.setAttribute("lang", lang);
+
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+  });
+
+  try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
+}
+
+(function () {
+  var saved = "en";
+  try { saved = localStorage.getItem(STORE_KEY) || "en"; } catch (e) {}
+  setLang(saved);
+})();
+</script>
+
 </body>
 </html>
