@@ -331,6 +331,10 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
     <div id="pkg-list" role="radiogroup" aria-label="Choose a package" style="margin-top:18px"></div>
 
+    <!-- Shown only on the ?agent=terrence variant (Membership hidden): routes
+         lower-budget leads to contact directly for a custom payment plan. -->
+    <p class="memnote" id="lower-opt-note" hidden>Looking for a lower monthly option? Text or call <a href="tel:7867467414" style="font-weight:700;color:var(--orange-dark)">786-746-7414</a> and we'll set up a plan that fits your budget.</p>
+
     <div id="pay-wrap" hidden>
       <p class="qlabel" style="font-weight:700;margin:18px 0 8px">Payment option</p>
       <div class="pay" id="pay-options"></div>
@@ -470,8 +474,15 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
   /* ---------------- Program screen: packages + payment ------------------- */
   var selPkg = null, selMode = null;
+  // Agent variant: ?agent=terrence hides the Membership package. Terrence routes
+  // lower-budget leads to contact him directly instead. One source of truth so
+  // every other gateway edit applies to both versions automatically.
+  var AGENT = (new URLSearchParams(location.search)).get("agent");
+  var HIDE_MEMBERSHIP = (AGENT === "terrence");
+  var lowerNote = document.getElementById("lower-opt-note");
+  if(HIDE_MEMBERSHIP && lowerNote) lowerNote.hidden = false;
   var list = document.getElementById("pkg-list");
-  PACKAGES.forEach(function(p){
+  PACKAGES.filter(function(p){ return !(HIDE_MEMBERSHIP && p.isMembership); }).forEach(function(p){
     var el = document.createElement("button");
     el.className = "pkg"; el.type = "button"; el.setAttribute("role","radio"); el.setAttribute("aria-checked","false"); el.dataset.key = p.key;
     var tagHtml = p.tag ? '<span class="pkg-tag">'+p.tag+'</span>' : '';
