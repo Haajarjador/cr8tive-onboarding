@@ -3,536 +3,382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="CR8TIVE Financial Group client onboarding: set up credit monitoring, submit your credentials, and access your client portal.">
+<meta name="description" content="CR8TIVE Financial Group client onboarding: finish your setup in a few quick steps.">
+<meta name="robots" content="noindex">
 <title>CR8TIVE Financial Group · Client Onboarding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800;125,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-img{max-width:100%}[hidden]{display:none!important}
-/* Layout: navy masthead with a white activation "ticket", then three numbered work sections on ivory, closing with a signed letter and contact strip. Single deliberate light look (brand page). */
+/* =========================================================================
+   CR8TIVE Onboarding (V2) — design system per Cr8tive_Gateway_Design_Spec.md
+   Navy #0B1730, orange button #C2510F, bright-orange accent #F08A4B.
+   Headings DM Serif Display, body Inter. Mobile first, 320px up.
+   ========================================================================= */
 :root{
-  --navy:#102442; --navy-2:#173556; --orange:#E36B2C; --orange-ink:#B9501A; --gold:#BA9458;
-  --ivory:#FDFBF8; --white:#FFFFFF; --mist:#F3F5F8; --ink:#162338; --muted:#5A6578; --line:#E3E7EE;
-  --on-navy:#F6F3EC; --on-navy-muted:#B7C1D3;
-  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
-  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --wrap:1120px; color-scheme:light;
+  --navy:#0B1730; --navy-panel:#13254A; --navy-line:#22355E;
+  --orange:#C2510F; --orange-accent:#F08A4B; --orange-dark:#9A3F0B;
+  --orange-tint:#FFF4EC; --orange-soft:#FDEBDD;
+  --page:#F5F6F9; --border:#D7DCE7; --white:#FFFFFF;
+  --ink:#0B1730; --ink-2:#4A5571; --on-navy:#D4DBEA; --on-navy-2:#B9C4DA;
+  --f-head:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:560px; color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+img{max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
-.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.05}
+h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
 
-/* Top bar */
-.bar{background:var(--navy);color:var(--on-navy);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
-.bar .wrap{display:flex;align-items:center;gap:16px;padding-block:12px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
-.mark{width:42px;height:42px;display:grid;place-items:center;background:var(--orange);color:var(--white);font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:17px;letter-spacing:-.02em;border-radius:3px;flex:none}
-.brand b{display:block;font-family:var(--f-display);font-stretch:112%;font-weight:800;font-size:15px;letter-spacing:.02em;text-transform:uppercase}
-.brand small{display:block;font-size:12px;color:var(--on-navy-muted)}
-.bar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.lang{display:inline-flex;border:1px solid rgba(255,255,255,.25);border-radius:3px;overflow:hidden}
-.lang button{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:12px;font-weight:600;padding:7px 12px;color:var(--on-navy-muted)}
-.lang button[aria-pressed="true"]{background:var(--on-navy);color:var(--navy)}
-.lang button:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
-.bar-call{font-family:var(--f-mono);font-size:13px;font-weight:600;text-decoration:none;color:var(--on-navy);padding:7px 12px;border:1px solid var(--gold);border-radius:3px;white-space:nowrap}
-.bar-call:hover{background:rgba(186,148,88,.18)}
+/* Header */
+.bar{background:var(--navy);color:var(--on-navy);position:sticky;top:0;z-index:20;border-bottom:1px solid var(--navy-line)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.ring{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:50%;border:2px solid var(--orange-accent);color:var(--white);font-family:var(--f-head);font-size:15px;letter-spacing:.02em}
+.brand b{font-family:var(--f-head);font-size:16px;color:var(--white);white-space:nowrap}
+.lang{margin-left:auto;display:inline-flex;border:1px solid var(--navy-line);border-radius:8px;overflow:hidden}
+.lang button{all:unset;cursor:pointer;font-size:13px;font-weight:600;padding:8px 13px;min-height:36px;color:var(--on-navy-2);box-sizing:border-box}
+.lang button[aria-pressed="true"]{background:var(--orange);color:var(--white)}
+.lang button:focus-visible{outline:3px solid var(--orange-accent);outline-offset:-3px}
 
-/* Masthead */
-.mast{background:var(--navy);color:var(--on-navy);padding-block:56px 72px;position:relative;overflow:hidden}
-.mast::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border:56px solid rgba(227,107,44,.10);border-radius:50%;pointer-events:none}
-.mast .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:end;position:relative;z-index:1}
-.mast .eyebrow{color:var(--gold)}
-.mast h1{font-weight:800;font-stretch:125%;font-size:clamp(34px,5.6vw,62px);letter-spacing:-.02em;margin-top:14px}
-.mast h1 em{font-style:normal;color:var(--orange)}
-.mast p.lede{max-width:52ch;color:var(--on-navy-muted);font-size:17px;margin:20px 0 0}
-.mast p.lede strong{color:var(--on-navy)}
-.ticket{background:var(--white);color:var(--ink);border-radius:4px;padding:22px 22px 18px;box-shadow:0 24px 48px -24px rgba(0,0,0,.5);min-width:0}
-.ticket-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:6px}
-.ticket-head h2{font-size:18px;font-stretch:112%;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
-.ticket-head span{color:var(--muted);font-size:12px}
-.ticket ol{list-style:none;margin:0;padding:0}
-.ticket li a{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;text-decoration:none;padding:12px 4px;border-bottom:1px solid var(--line)}
-.ticket li:last-child a{border-bottom:0}
-.ticket li a:hover .t-go{color:var(--orange)}
-.t-num{font-family:var(--f-mono);font-weight:600;font-size:13px;color:var(--white);background:var(--navy);width:34px;height:34px;display:grid;place-items:center;border-radius:3px}
-.t-txt b{display:block;font-size:15px;line-height:1.3}
-.t-txt small{display:block;color:var(--muted);font-size:13px;line-height:1.35}
-.t-go{color:var(--muted);font-family:var(--f-mono);font-size:13px}
-.ticket-foot{margin-top:10px;font-size:13px;color:var(--muted)}
+/* Hero */
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{padding-block:34px 30px}
+.hero .kicker{color:var(--orange-accent)}
+.hero h1{color:var(--white);font-size:clamp(30px,8vw,38px);margin-top:12px}
+.hero p{color:var(--on-navy);margin:12px 0 0;max-width:40ch}
+.progress{margin-top:22px}
+.progress-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--on-navy-2);font-weight:600}
+.progress-top .count{font-variant-numeric:tabular-nums;color:var(--white)}
+.track{margin-top:8px;height:8px;border-radius:999px;background:var(--navy-line);overflow:hidden}
+.track i{display:block;height:100%;width:40%;background:var(--orange);border-radius:999px;transition:width .4s ease}
 
-/* Program overview track */
-.track{background:var(--white);border-bottom:1px solid var(--line)}
-.track .wrap{padding-block:28px}
-.track-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.track-row .eyebrow{color:var(--muted);flex:none}
-.stages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);flex:1;min-width:0;counter-reset:s}
-.stages li{position:relative;padding:10px 10px 10px 0;display:flex;gap:10px;align-items:center;min-width:0}
-.stages li:not(:last-child)::after{content:"";position:absolute;right:10px;left:calc(100% - 10px);top:50%}
-.st-n{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--orange-ink);flex:none}
-.st-l{font-weight:600;font-size:14px;line-height:1.2}
-.stages li + li{border-left:1px solid var(--line);padding-left:12px}
-.stages li.loop .st-l::after{content:" \21BB";color:var(--gold);font-weight:700}
-
-/* Steps */
-.step{padding-block:72px;border-bottom:1px solid var(--line)}
-.step.alt{background:var(--mist)}
-.step-head{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;margin-bottom:36px}
-.big-n{font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:clamp(64px,10vw,112px);line-height:.8;color:var(--navy);letter-spacing:-.04em}
-.big-n span{color:var(--orange)}
-.step-head h2{font-weight:800;font-stretch:112%;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.01em;margin-top:6px}
-.step-head p{color:var(--muted);margin:10px 0 0;max-width:60ch}
-.step-head .eyebrow{color:var(--orange-ink)}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;text-decoration:none;padding:15px 22px;border-radius:3px;min-height:48px;transition:transform .15s ease, background .15s ease}
-.btn:hover{transform:translateY(-1px)}
+/* Checklist */
+.list{padding-block:26px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:14px;align-items:start}
+.card.todo{border:2px solid var(--orange)}
+.badge{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
+.card.done .badge{background:var(--navy);color:var(--white)}
+.card.todo .badge{border:2px solid var(--orange);color:var(--orange);background:var(--orange-tint)}
+.badge svg{width:18px;height:18px}
+.c-body{min-width:0}
+.c-body h3{font-size:19px}
+.c-body p{margin:5px 0 0;font-size:15px;color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--f-body);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:0;padding:13px 20px;border-radius:10px;min-height:48px;margin-top:14px;width:100%}
 .btn-primary{background:var(--orange);color:var(--white)}
-.btn-primary:hover{background:var(--orange-ink)}
-.btn-navy{background:var(--navy);color:var(--white)}
-.btn-navy:hover{background:var(--navy-2)}
-.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
-.ext{font-family:var(--f-mono);font-size:14px}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-ghost{background:var(--white);color:var(--navy);border:1.5px solid var(--navy);margin-top:10px}
+.btn-ghost:hover{background:var(--page)}
+.ext{font-size:13px}
+.subtle{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.note{margin-top:10px;font-size:12.5px;color:var(--ink-2)}
 
-/* Providers */
-.providers{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-.prov{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.prov.rec{border:2px solid var(--navy)}
-.prov-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
-.tag{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:2px}
-.tag-rec{background:var(--orange);color:var(--white)}
-.tag-bk{background:var(--mist);color:var(--muted);border:1px solid var(--line)}
-.prov h3{font-size:26px;font-weight:800;font-stretch:112%;margin-top:10px}
-.price{text-align:right}
-.price b{font-family:var(--f-mono);font-size:28px;font-weight:600;color:var(--navy);display:block;line-height:1}
-.price small{color:var(--muted);font-size:12px}
-.plan{font-size:13px;color:var(--muted);margin-top:-8px}
-.feats{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.feats li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:15px}
-.feats li::before{content:"";width:10px;height:10px;margin-top:7px;background:var(--gold);border-radius:1px}
-.prov .btn{margin-top:auto}
-.warn{margin-top:20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--white);border:1px solid var(--line);border-radius:4px;padding:16px 20px}
-.warn p{margin:0;font-size:15px;min-width:0;flex:1 1 320px}
-.warn strong{color:var(--orange-ink)}
-.skip{font-weight:700;font-size:14px;color:var(--navy);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+/* What happens next */
+.next{background:var(--navy);color:var(--on-navy);border-radius:16px;padding:24px;margin-bottom:26px}
+.next .kicker{color:var(--orange-accent)}
+.next h2{color:var(--white);font-size:24px;margin-top:8px}
+.next dl{margin:16px 0 0;display:grid;gap:0}
+.next .row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--navy-line)}
+.next dt{font-weight:700;color:var(--white);font-size:14px}
+.next dd{margin:0;font-size:14.5px;color:var(--on-navy)}
 
-/* Credentials */
-.cred-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:start}
-.panel{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:28px;min-width:0}
-.panel h3{font-size:15px;font-weight:800;font-stretch:112%;text-transform:uppercase;letter-spacing:.04em}
-.docs{list-style:none;margin:18px 0 24px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.docs li{border:1px solid var(--line);border-radius:3px;padding:16px;background:var(--ivory);min-width:0}
-.docs .code{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--white);background:var(--navy);display:inline-block;padding:3px 8px;border-radius:2px}
-.docs b{display:block;margin-top:10px;font-size:15px;line-height:1.3}
-.req{display:grid;gap:14px;margin-top:16px}
-.req div{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px}
-.req i{font-style:normal;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:13px}
-.req p{margin:2px 0 0}
+/* Footer */
+.foot{background:var(--page);border-top:1px solid var(--border)}
+.foot .wrap{padding-block:30px 40px;text-align:center}
+.foot p{margin:0 0 6px;color:var(--ink-2);font-size:15px}
+.foot a.phone{font-family:var(--f-head);font-size:30px;color:var(--navy);text-decoration:none;display:inline-block}
+.foot .legal{margin-top:18px;font-size:12px;color:var(--ink-2);line-height:1.5}
 
-/* Step 3 */
-.phone-block{background:var(--navy);color:var(--on-navy);border-radius:4px;padding:32px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:20px}
-.phone-block .eyebrow{color:var(--gold)}
-.phone-num{font-family:var(--f-mono);font-weight:600;font-size:clamp(30px,5vw,48px);letter-spacing:.02em;margin:6px 0;color:var(--white);text-decoration:none;display:inline-block}
-.phone-block p{margin:0;color:var(--on-navy-muted);max-width:52ch}
-.phone-actions{display:flex;flex-direction:column;gap:10px}
-.phone-actions .btn-ghost{color:var(--on-navy);border-color:rgba(255,255,255,.4);cursor:pointer;font-family:inherit;background:transparent}
-.s3-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.portal-list{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
-.portal-list li{font-size:15px;display:grid;grid-template-columns:16px 1fr;gap:8px}
-.portal-list li::before{content:"\2192";color:var(--orange);font-weight:700}
-.next{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:0}
-.next li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
-.next li:last-child{border-bottom:0}
-.next i{font-style:normal;font-family:var(--f-mono);font-weight:600;font-size:13px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--mist);color:var(--navy);border:1px solid var(--line)}
-.portal-cta{margin-top:20px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:4px;padding:20px 24px}
-.portal-cta p{margin:0;flex:1 1 320px;font-size:15px;color:var(--muted)}
-.portal-cta p strong{color:var(--ink)}
-
-/* Letter */
-.letter{padding-block:80px}
-.letter .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px}
-.letter h2{font-weight:800;font-stretch:125%;font-size:clamp(38px,6vw,68px);letter-spacing:-.03em;color:var(--navy)}
-.letter h2 span{color:var(--orange);display:block}
-.letter .eyebrow{color:var(--gold);margin-top:18px;display:block}
-.letter-body{font-size:17px;max-width:60ch}
-.letter-body p{margin:0 0 16px}
-.letter-body strong{color:var(--navy)}
-.sig{margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
-.sig b{font-family:var(--f-display);font-stretch:112%;font-weight:800;font-size:22px;color:var(--navy)}
-.sig small{display:block;color:var(--muted);font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-
-/* Contact */
-.contact{background:var(--navy);color:var(--on-navy)}
-.contact .wrap{padding-block:40px}
-.c-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,.14);border-radius:4px}
-.c-grid > *{padding:20px;text-decoration:none;min-width:0}
-.c-grid > * + *{border-left:1px solid rgba(255,255,255,.14)}
-.c-grid a:hover{background:rgba(255,255,255,.05)}
-.c-grid small{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.c-grid b{display:block;font-size:15px;overflow-wrap:anywhere}
-.c-grid span{display:block;font-size:13px;color:var(--on-navy-muted);overflow-wrap:anywhere}
-.legal{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;margin-top:24px;font-size:12px;color:var(--on-navy-muted)}
-.legal p{margin:0;max-width:72ch}
-
-/* Responsive */
-@media (max-width:900px){
-  .mast .wrap,.providers,.cred-grid,.s3-grid,.letter .wrap{grid-template-columns:1fr}
-  .stages{grid-template-columns:repeat(3,1fr)}
-  .stages li:nth-child(4){border-left:0;padding-left:0}
-  .c-grid{grid-template-columns:1fr 1fr}
-  .c-grid > :nth-child(3){border-left:0}
-  .c-grid > :nth-child(n+3){border-top:1px solid rgba(255,255,255,.14)}
-  .letter .wrap{gap:28px}
-}
-@media (max-width:600px){
-  .bar .wrap{gap:10px}
-  .brand small{display:none}
-  .bar-call{display:none}
-  .mast{padding-block:40px 48px}
-  .step{padding-block:52px}
-  .step-head{grid-template-columns:1fr;gap:8px}
-  .stages{grid-template-columns:1fr 1fr}
-  .stages li:nth-child(odd){border-left:0;padding-left:0}
-  .stages li:nth-child(4){border-left:1px solid var(--line);padding-left:12px}
-  .docs{grid-template-columns:1fr}
-  .phone-block{grid-template-columns:1fr;padding:24px}
-  .portal-list{grid-template-columns:1fr}
-  .prov,.panel{padding:22px}
-  .c-grid{grid-template-columns:1fr}
-  .c-grid > *{border-left:0!important}
-  .c-grid > * + *{border-top:1px solid rgba(255,255,255,.14)}
-  .btn{width:100%}
+@media (max-width:360px){
+  .next .row{grid-template-columns:1fr}
+  .next dd{padding-top:2px}
 }
 </style>
-
 </head>
 <body>
 <header class="bar">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="CR8TIVE Financial Group">
-      <span class="mark" aria-hidden="true">C8</span>
-      <span><b>CR8TIVE Financial Group</b><small data-i18n="tagline">Credit Restoration &amp; Financial Advisory</small></span>
+      <span class="ring" aria-hidden="true">CR</span>
+      <b>CR8TIVE</b>
     </a>
-    <div class="bar-right">
-      <a class="bar-call" href="tel:7867467414">786 · 746 · 7414</a>
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" id="lang-es" data-lang="es" aria-pressed="false">ES</button>
-      </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true" data-i18n="lang_en">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false" data-i18n="lang_es">ES</button>
     </div>
   </div>
 </header>
 
 <main id="top">
-  <section class="mast">
+  <section class="hero">
     <div class="wrap">
-      <div>
-        <span class="eyebrow" data-i18n="eyebrow">Client Onboarding Guide</span>
-        <h1 data-i18n-html="h1">Your credit journey <em>starts here.</em></h1>
-        <p class="lede" data-i18n-html="lede">Welcome to CR8TIVE Financial Group. <strong>Complete all 3 steps below to activate your account.</strong> Questions? Contact us anytime. Our info is at the bottom.</p>
-      </div>
-      <aside class="ticket" aria-labelledby="ticket-title">
-        <div class="ticket-head">
-          <h2 id="ticket-title" data-i18n="ticketTitle">Activate your account</h2>
-          <span class="mono" data-i18n="ticketCount">3 steps</span>
+      <span class="kicker" data-i18n="kicker">YOU'RE ENROLLED</span>
+      <h1 data-i18n="title">Welcome to Cr8tive. Let's finish your setup.</h1>
+      <p data-i18n="sub" data-sub-two="sub_two" data-sub-three="sub_three">Three quick steps and our team starts on your file.</p>
+      <div class="progress">
+        <div class="progress-top">
+          <span data-i18n="progress">Setup progress</span>
+          <span class="count"><span id="done-n">2</span> / 5</span>
         </div>
-        <ol>
-          <li><a href="#step1"><span class="t-num">01</span><span class="t-txt"><b data-i18n="s1title">Sign up for credit monitoring</b><small data-i18n="s1short">Smart Credit or Identity IQ</small></span><span class="t-go" aria-hidden="true">↓</span></a></li>
-          <li><a href="#step2"><span class="t-num">02</span><span class="t-txt"><b data-i18n="s2title">Fill out the Client Credentials Form</b><small data-i18n="s2short">2 forms of ID + monitoring login</small></span><span class="t-go" aria-hidden="true">↓</span></a></li>
-          <li><a href="#step3"><span class="t-num">03</span><span class="t-txt"><b data-i18n="s3title">Save our number &amp; access your portal</b><small data-i18n="s3short">Sign agreement · First round · Portal access</small></span><span class="t-go" aria-hidden="true">↓</span></a></li>
-        </ol>
-        <p class="ticket-foot" data-i18n="ticketFoot">Each step opens in a new tab so you never lose this page.</p>
-      </aside>
-    </div>
-  </section>
-
-  <section class="track" aria-labelledby="ov-title">
-    <div class="wrap track-row">
-      <span class="eyebrow" id="ov-title" data-i18n="overview">Program Overview</span>
-      <ol class="stages">
-        <li><span class="st-n">01</span><span class="st-l" data-i18n="p1">Monitor Credit</span></li>
-        <li><span class="st-n">02</span><span class="st-l" data-i18n="p2">Book Consult</span></li>
-        <li><span class="st-n">03</span><span class="st-l" data-i18n="p3">Credit Analysis</span></li>
-        <li><span class="st-n">04</span><span class="st-l" data-i18n="p4">Dispute Process</span></li>
-        <li><span class="st-n">05</span><span class="st-l" data-i18n="p5">Report Update</span></li>
-        <li class="loop"><span class="st-n">06</span><span class="st-l" data-i18n="p6">Repeat Process</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- STEP 1 -->
-  <section class="step" id="step1" aria-labelledby="h-step1">
-    <div class="wrap">
-      <div class="step-head">
-        <div class="big-n" aria-hidden="true">0<span>1</span></div>
-        <div>
-          <span class="eyebrow" data-i18n="stepLabel1">Step 1 of 3</span>
-          <h2 id="h-step1" data-i18n="s1title">Sign up for credit monitoring</h2>
-          <p data-i18n="s1sub">Choose a card below to register. Monitoring is billed by the provider, separate from CR8TIVE.</p>
-        </div>
-      </div>
-
-      <div class="providers">
-        <article class="prov rec">
-          <div class="prov-top">
-            <div>
-              <span class="tag tag-rec" data-i18n="recommended">Recommended</span>
-              <h3>Smart Credit</h3>
-            </div>
-            <div class="price"><b>$29.00</b><small data-i18n="perMonth">per month</small></div>
-          </div>
-          <div class="plan" data-i18n="scPlan">Full 3-Bureau</div>
-          <ul class="feats">
-            <li data-i18n="sc1">3-bureau reports &amp; scores</li>
-            <li data-i18n="sc2">Daily monitoring alerts</li>
-            <li data-i18n="sc3">Score tracker &amp; tools</li>
-            <li data-i18n="sc4">Required for all services</li>
-          </ul>
-          <a class="btn btn-primary" href="https://www.smartcredit.com/?PID=24800" target="_blank" rel="noopener"><span data-i18n="scBtn">Sign Up for Smart Credit</span> <span class="ext" aria-hidden="true">↗</span></a>
-        </article>
-
-        <article class="prov">
-          <div class="prov-top">
-            <div>
-              <span class="tag tag-bk" data-i18n="backup">Backup Option</span>
-              <h3>Identity IQ</h3>
-            </div>
-            <div class="price"><b>$29.86</b><small data-i18n="perMonth">per month</small></div>
-          </div>
-          <div class="plan" data-i18n="iqPlan">3-Bureau + Identity</div>
-          <ul class="feats">
-            <li data-i18n="iq1">3-bureau reports &amp; scores</li>
-            <li data-i18n="iq2">Identity theft protection</li>
-            <li data-i18n="iq3">Use only if Smart Credit unavailable</li>
-          </ul>
-          <a class="btn btn-navy" href="https://www.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" target="_blank" rel="noopener"><span data-i18n="iqBtn">Sign Up for Identity IQ</span> <span class="ext" aria-hidden="true">↗</span></a>
-        </article>
-      </div>
-
-      <div class="warn">
-        <p data-i18n-html="warn"><strong>Do not use</strong> Credit Karma, Experian, or any free monitoring service.</p>
-        <a class="skip" href="#step2" data-i18n="skip">Already have an account? Skip to Step 2 ↓</a>
+        <div class="track"><i id="bar"></i></div>
       </div>
     </div>
   </section>
 
-  <!-- STEP 2 -->
-  <section class="step alt" id="step2" aria-labelledby="h-step2">
+  <section class="list">
     <div class="wrap">
-      <div class="step-head">
-        <div class="big-n" aria-hidden="true">0<span>2</span></div>
-        <div>
-          <span class="eyebrow" data-i18n="stepLabel2">Step 2 of 3</span>
-          <h2 id="h-step2" data-i18n="s2title">Fill out the Client Credentials Form</h2>
-          <p data-i18n="s2sub">2 forms of ID are required by the bureaus. Have these ready before you open the form.</p>
+
+      <!-- 1. Service agreement (done by default; agreement signed before payment) -->
+      <article class="card done" id="step1">
+        <div class="badge" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
+        <div class="c-body">
+          <h3 data-i18n="s1_title">Service agreement signed</h3>
+          <p data-i18n="s1_body">Signed before payment. A copy is in your email.</p>
+          <a class="btn btn-primary" id="s1-action" href="#" target="_blank" rel="noopener" hidden><span data-i18n="s1_action">Sign Agreement</span> <span class="ext" aria-hidden="true">↗</span></a>
         </div>
+      </article>
+
+      <!-- 2. Payment complete (always done; page only opens after payment) -->
+      <article class="card done" id="step2">
+        <div class="badge" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
+        <div class="c-body">
+          <h3 data-i18n="s2_title">Payment complete</h3>
+          <p data-i18n="s2_body">Your receipt was sent to your email.</p>
+        </div>
+      </article>
+
+      <!-- 3. Credit monitoring (done for review clients, action for the rest) -->
+      <article class="card todo" id="step3">
+        <div class="badge" aria-hidden="true"><span class="num">3</span><svg class="chk" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" hidden><path d="M4 10.5l4 4 8-9"/></svg></div>
+        <div class="c-body">
+          <h3 data-i18n="s3_title">Set up credit monitoring and share your login</h3>
+          <p data-i18n="s3_body">Sign up for SmartCredit, then share your login securely so we can pull all 3 bureaus.</p>
+          <a class="btn btn-primary" id="s3-action" href="https://www.smartcredit.com/?PID=24800" target="_blank" rel="noopener"><span data-i18n="s3_action">Set Up SmartCredit</span> <span class="ext" aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" id="s3-iq" href="https://member.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" target="_blank" rel="noopener"><span data-i18n="s3_iq_action">Sign Up for IdentityIQ</span> <span class="ext" aria-hidden="true">↗</span></a>
+          <p class="note" id="s3-iq-note" data-i18n="s3_iq_note">IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.</p>
+          <!-- D3: DisputeFox secure credential form — placeholder until the real link is confirmed -->
+          <a class="subtle" id="s3-secure" href="https://api.leadconnectorhq.com/widget/form/25Sd8GOFIqxR898uDLJk" target="_blank" rel="noopener" data-i18n="s3_secure">Share your login securely</a>
+        </div>
+      </article>
+
+      <!-- 4. Client Credentials Form -->
+      <article class="card todo" id="step4">
+        <div class="badge" aria-hidden="true"><span class="num">4</span></div>
+        <div class="c-body">
+          <h3 data-i18n="s4_title">Complete your Client Credentials Form</h3>
+          <p data-i18n="s4_body">Takes about 5 minutes. Needed to start your disputes.</p>
+          <a class="btn btn-primary" href="https://api.leadconnectorhq.com/widget/form/yRCQRUWgoA2BjXyyXpcd" target="_blank" rel="noopener"><span data-i18n="s4_action">Open Form</span> <span class="ext" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <!-- 5. Save our number + open client portal -->
+      <article class="card todo" id="step5">
+        <div class="badge" aria-hidden="true"><span class="num">5</span></div>
+        <div class="c-body">
+          <h3 data-i18n="s5_title">Save our number and open your client portal</h3>
+          <p data-i18n="s5_body">All dispute updates are posted in your client portal.</p>
+          <p class="note" data-i18n="s5_note">Portal access will be available once we process and complete your disputes. We'll text your login details when it's ready.</p>
+          <a class="btn btn-primary" href="https://clientportal.scorexer.com" target="_blank" rel="noopener"><span data-i18n="s5_action">Open Client Portal</span> <span class="ext" aria-hidden="true">↗</span></a>
+          <a class="subtle" href="contact.vcf" download data-i18n="s5_link">Save our contact</a>
+        </div>
+      </article>
+
+      <!-- What happens next -->
+      <div class="next" aria-labelledby="next-h">
+        <span class="kicker" data-i18n="next_kicker">WHAT HAPPENS NEXT</span>
+        <h2 id="next-h" data-i18n="next_h">What happens next</h2>
+        <dl>
+          <div class="row"><dt data-i18n="next1_when">Day 1</dt><dd data-i18n="next1_what">We build your dispute strategy and send out disputes.</dd></div>
+          <div class="row"><dt data-i18n="next2_when">Every 30 days</dt><dd data-i18n="next2_what">You get a credit update in your client portal.</dd></div>
+          <div class="row"><dt data-i18n="next3_when">Anytime</dt><dd data-i18n="next3_what">Text us with questions. A real person answers.</dd></div>
+        </dl>
       </div>
 
-      <div class="cred-grid">
-        <div class="panel">
-          <h3 data-i18n="haveReady">What to have ready</h3>
-          <ul class="docs">
-            <li><span class="code">ID</span><b data-i18n="d1">Driver's License</b></li>
-            <li><span class="code">SSN</span><b data-i18n="d2">Social Security Card or Passport</b></li>
-            <li><span class="code">LOGIN</span><b data-i18n="d3">Credit Monitoring Login</b></li>
-          </ul>
-          <a class="btn btn-primary" href="https://api.leadconnectorhq.com/widget/form/yRCQRUWgoA2BjXyyXpcd" target="_blank" rel="noopener"><span data-i18n="credBtn">Submit Credentials</span> <span class="ext" aria-hidden="true">↗</span></a>
-        </div>
-        <div class="panel">
-          <h3 data-i18n="docReq">Document Requirements</h3>
-          <div class="req">
-            <div><i>A</i><p data-i18n-html="r1">Address doesn't match your ID? Bring <strong>proof of address</strong>: utility bill, bank statement, or pay stub.</p></div>
-            <div><i>B</i><p data-i18n-html="r2">No Social Security card? A <strong>W-2 or 1099</strong> is accepted. Submit early to avoid delays.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STEP 3 -->
-  <section class="step" id="step3" aria-labelledby="h-step3">
-    <div class="wrap">
-      <div class="step-head">
-        <div class="big-n" aria-hidden="true">0<span>3</span></div>
-        <div>
-          <span class="eyebrow" data-i18n="stepLabel3">Step 3 of 3</span>
-          <h2 id="h-step3" data-i18n="s3title">Save our number &amp; access your portal</h2>
-          <p data-i18n="s3short">Sign agreement · First round · Portal access</p>
-        </div>
-      </div>
-
-      <div class="phone-block">
-        <div>
-          <span class="eyebrow" data-i18n="saveNum">Save this number</span>
-          <div><a class="phone-num" href="tel:7867467414">786-746-7414</a></div>
-          <p data-i18n="phoneTxt">This is how we communicate about your disputes. Sign your service agreement to get started.</p>
-        </div>
-        <div class="phone-actions">
-          <a class="btn btn-primary" href="tel:7867467414" data-i18n="callBtn">Call Us</a>
-          <button type="button" class="btn btn-ghost" id="copy-phone" data-i18n="copyBtn">Copy Number</button>
-        </div>
-      </div>
-
-      <div class="s3-grid">
-        <div class="panel">
-          <h3 data-i18n="yourPortal">Your Portal</h3>
-          <ul class="portal-list">
-            <li data-i18n="pl1">View monthly dispute updates</li>
-            <li data-i18n="pl2">Submit documents securely</li>
-            <li data-i18n="pl3">Message our team directly</li>
-            <li data-i18n="pl4">Upload bureau correspondence</li>
-            <li data-i18n="pl5">Track your credit score</li>
-            <li data-i18n="pl6">Review status anytime</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3 data-i18n="whatNext">What Happens Next</h3>
-          <ol class="next">
-            <li><i>1</i><span data-i18n="n1">Report review within 24 to 48 hrs</span></li>
-            <li><i>2</i><span data-i18n="n2">Personalized dispute strategy</span></li>
-            <li><i>3</i><span data-i18n="n3">First disputes submitted</span></li>
-            <li><i>4</i><span data-i18n="n4">Updates via portal &amp; email</span></li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="portal-cta">
-        <p data-i18n-html="portalNote"><strong>Portal access opens after your first dispute round has been processed.</strong> We'll text your login details as soon as it's ready. There's nothing you need to do until then.</p>
-        <a class="btn btn-navy" href="https://clientportal.scorexer.com" target="_blank" rel="noopener"><span data-i18n="portalBtn">Access Client Portal</span> <span class="ext" aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LETTER -->
-  <section class="letter" aria-labelledby="h-thanks">
-    <div class="wrap">
-      <div>
-        <h2 id="h-thanks" data-i18n-html="thanks">Thank you <span>for joining us.</span></h2>
-        <span class="eyebrow" data-i18n="thanksSub">Credit Restoration · Financial Empowerment</span>
-      </div>
-      <div class="letter-body">
-        <p data-i18n-html="l1">Over the coming weeks we'll review your credit, identify opportunities, and build a <strong>clear action plan</strong> designed around your goals.</p>
-        <p data-i18n-html="l2"><strong>Keep monitoring active</strong> every month. It allows us to dispute inaccuracies and track your progress in real time.</p>
-        <p data-i18n-html="l3">We're honored to support you, whether for <strong>personal or business funding</strong>, buying a home, or unlocking other major life milestones.</p>
-        <p data-i18n-html="l4">We can't wait to see what we <strong>accomplish together.</strong></p>
-        <div class="sig"><b>Jador &amp; Terrence</b><small data-i18n="team">CR8TIVE Team</small></div>
-      </div>
     </div>
   </section>
 </main>
 
-<footer class="contact" aria-label="Contact">
+<footer class="foot">
   <div class="wrap">
-    <div class="c-grid">
-      <a href="mailto:Jador@cr8tivebusiness.com"><small>Jador</small><b>Email</b><span>Jador@cr8tivebusiness.com</span></a>
-      <a href="mailto:Terrence@cr8tivebusiness.com"><small>Terrence</small><b>Email</b><span>Terrence@cr8tivebusiness.com</span></a>
-      <a href="tel:7867467414"><small data-i18n="phone">Phone</small><b class="mono">786 · 746 · 7414</b><span>786-746-7414</span></a>
-      <div><small data-i18n="hours">Hours</small><b data-i18n="hoursVal">Mon to Fri · 9AM to 7PM EST</b></div>
-    </div>
-    <div class="legal">
-      <p data-i18n="legal">Not a law firm. Credit repair results vary. No specific outcome is guaranteed. By proceeding you agree to our Terms of Service and Privacy Policy.</p>
-      <p>CR8TIVE Financial Group © 2026</p>
-    </div>
+    <p data-i18n="help">Questions? Text or call us.</p>
+    <a class="phone" href="tel:7867467414">786-746-7414</a>
+    <p class="legal" data-i18n="legal">Not a law firm. Credit repair results vary. No specific outcome is guaranteed.</p>
   </div>
 </footer>
 
 <script>
 (function(){
-  var ES = {
-    tagline:"Restauración de Crédito y Asesoría Financiera",
-    eyebrow:"Guía de Incorporación del Cliente",
-    h1:"Su camino al crédito <em>comienza aquí.</em>",
-    lede:"Bienvenido a CR8TIVE Financial Group. <strong>Complete los 3 pasos a continuación para activar su cuenta.</strong> ¿Preguntas? Contáctenos en cualquier momento. Nuestra información está al final de la página.",
-    ticketTitle:"Active su cuenta", ticketCount:"3 pasos",
-    s1title:"Inscríbase en el monitoreo de crédito", s1short:"Smart Credit o Identity IQ",
-    s2title:"Complete el Formulario de Credenciales del Cliente", s2short:"2 formas de identificación + acceso al monitoreo",
-    s3title:"Guarde nuestro número y acceda a su portal", s3short:"Firma del acuerdo · Primera ronda · Acceso al portal",
-    ticketFoot:"Cada paso se abre en una pestaña nueva para que nunca pierda esta página.",
-    overview:"Resumen del Programa",
-    p1:"Monitorear Crédito", p2:"Agendar Consulta", p3:"Análisis de Crédito", p4:"Proceso de Disputa", p5:"Actualización del Reporte", p6:"Repetir Proceso",
-    stepLabel1:"Paso 1 de 3", stepLabel2:"Paso 2 de 3", stepLabel3:"Paso 3 de 3",
-    s1sub:"Elija una tarjeta a continuación para registrarse. El monitoreo lo cobra el proveedor, aparte de CR8TIVE.",
-    recommended:"Recomendado", backup:"Opción Alternativa", perMonth:"por mes",
-    scPlan:"3 Burós Completo", sc1:"Reportes y puntajes de los 3 burós", sc2:"Alertas de monitoreo diarias", sc3:"Seguimiento de puntaje y herramientas", sc4:"Requerido para todos los servicios",
-    scBtn:"Inscribirse en Smart Credit",
-    iqPlan:"3 Burós + Identidad", iq1:"Reportes y puntajes de los 3 burós", iq2:"Protección contra robo de identidad", iq3:"Úselo solo si Smart Credit no está disponible",
-    iqBtn:"Inscribirse en Identity IQ",
-    warn:"<strong>No use</strong> Credit Karma, Experian ni ningún servicio de monitoreo gratuito.",
-    skip:"¿Ya tiene una cuenta? Pase al Paso 2 ↓",
-    s2sub:"Los burós requieren 2 formas de identificación. Téngalas listas antes de abrir el formulario.",
-    haveReady:"Qué tener listo", d1:"Licencia de Conducir", d2:"Tarjeta de Seguro Social o Pasaporte", d3:"Acceso al Monitoreo de Crédito",
-    credBtn:"Enviar Credenciales",
-    docReq:"Requisitos de Documentos",
-    r1:"¿Su dirección no coincide con su identificación? Traiga <strong>comprobante de domicilio</strong>: factura de servicios, estado de cuenta bancario o talón de pago.",
-    r2:"¿No tiene tarjeta de Seguro Social? Se acepta un <strong>W-2 o 1099</strong>. Envíelo temprano para evitar retrasos.",
-    saveNum:"Guarde este número",
-    phoneTxt:"Así nos comunicamos con usted sobre sus disputas. Firme su acuerdo de servicio para comenzar.",
-    callBtn:"Llámenos", copyBtn:"Copiar Número", copied:"Número copiado",
-    yourPortal:"Su Portal",
-    pl1:"Vea actualizaciones mensuales de disputas", pl2:"Envíe documentos de forma segura", pl3:"Envíe mensajes directamente a nuestro equipo", pl4:"Suba correspondencia de los burós", pl5:"Siga su puntaje de crédito", pl6:"Revise su estado en cualquier momento",
-    whatNext:"Qué Sigue",
-    n1:"Revisión del reporte en 24 a 48 horas", n2:"Estrategia de disputa personalizada", n3:"Primeras disputas enviadas", n4:"Actualizaciones por portal y correo electrónico",
-    portalNote:"<strong>El acceso al portal se abre después de procesar su primera ronda de disputas.</strong> Le enviaremos sus datos de acceso por mensaje de texto en cuanto esté listo. No necesita hacer nada hasta entonces.",
-    portalBtn:"Acceder al Portal del Cliente",
-    thanks:"Gracias <span>por unirse a nosotros.</span>",
-    thanksSub:"Restauración de Crédito · Empoderamiento Financiero",
-    l1:"En las próximas semanas revisaremos su crédito, identificaremos oportunidades y crearemos un <strong>plan de acción claro</strong> diseñado según sus metas.",
-    l2:"<strong>Mantenga su monitoreo activo</strong> cada mes. Esto nos permite disputar errores y seguir su progreso en tiempo real.",
-    l3:"Es un honor apoyarle, ya sea para <strong>financiamiento personal o de negocio</strong>, comprar una casa o alcanzar otras metas importantes en su vida.",
-    l4:"Estamos ansiosos por ver lo que <strong>lograremos juntos.</strong>",
-    team:"Equipo CR8TIVE",
-    phone:"Teléfono", hours:"Horario", hoursVal:"Lun a Vie · 9AM a 7PM EST",
-    legal:"No somos un bufete de abogados. Los resultados de la reparación de crédito varían. No se garantiza ningún resultado específico. Al continuar, usted acepta nuestros Términos de Servicio y Política de Privacidad."
+  /* ----------------------------------------------------------------------
+     Build-time switches
+     TRIAL_ENABLED: off until SmartCredit confirms the trial link (D8).
+     AGREEMENT_SIGNED_FIRST: true once D5 is approved (agreement before payment).
+       When false, step 1 becomes a "Sign Agreement" action instead of done.
+     SMARTCREDIT_SIGNUP / SMARTCREDIT_TRIAL: provider links (D8).
+     AGREEMENT_LINK: service agreement URL (only used if not signed first).
+     ---------------------------------------------------------------------- */
+  var TRIAL_ENABLED = false;
+  var AGREEMENT_SIGNED_FIRST = true;
+  var SMARTCREDIT_SIGNUP = "https://www.smartcredit.com/?PID=24800";
+  var SMARTCREDIT_TRIAL = "";                 // set when D8 confirmed
+  var AGREEMENT_LINK = "#AGREEMENT-LINK-NEEDED";
+
+  /* ---- Translations (EN/ES) — all copy in one object (spec Section 3) ---- */
+  var T = {
+    en:{
+      lang_en:"EN", lang_es:"ES",
+      kicker:"YOU'RE ENROLLED",
+      title:"Welcome to Cr8tive. Let's finish your setup.",
+      sub_two:"Two quick steps and our team starts on your file.",
+      sub_three:"Three quick steps and our team starts on your file.",
+      progress:"Setup progress",
+      s1_title:"Service agreement signed",
+      s1_body:"Signed before payment. A copy is in your email.",
+      s1_action:"Sign Agreement",
+      s2_title:"Payment complete",
+      s2_body:"Your receipt was sent to your email.",
+      s3_done_title:"Credit monitoring connected",
+      s3_done_body:"We already have your monitoring access from your review.",
+      s3_title:"Set up credit monitoring and share your login",
+      s3_body:"Sign up for SmartCredit, then share your login securely so we can pull all 3 bureaus.",
+      s3_action:"Set Up SmartCredit",
+      s3_iq_action:"Sign Up for IdentityIQ",
+      s3_iq_note:"IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.",
+      s3_secure:"Share your login securely",
+      s4_title:"Complete your Client Credentials Form",
+      s4_body:"Takes about 5 minutes. Needed to start your disputes.",
+      s4_action:"Open Form",
+      s5_title:"Save our number and open your client portal",
+      s5_body:"All dispute updates are posted in your client portal.",
+      s5_action:"Open Client Portal",
+      s5_note:"Portal access will be available once we process and complete your disputes. We'll text your login details when it's ready.",
+      s5_link:"Save our contact",
+      next_kicker:"WHAT HAPPENS NEXT",
+      next_h:"What happens next",
+      next1_when:"Day 1", next1_what:"We build your dispute strategy and send out disputes.",
+      next2_when:"Every 30 days", next2_what:"You get a credit update in your client portal.",
+      next3_when:"Anytime", next3_what:"Text us with questions. A real person answers.",
+      help:"Questions? Text or call us.",
+      legal:"Not a law firm. Credit repair results vary. No specific outcome is guaranteed."
+    },
+    es:{
+      lang_en:"EN", lang_es:"ES",
+      kicker:"YA ESTÁS INSCRITO",
+      title:"Bienvenido a Cr8tive. Terminemos tu registro.",
+      sub_two:"Dos pasos rápidos y nuestro equipo empieza con tu archivo.",
+      sub_three:"Tres pasos rápidos y nuestro equipo empieza con tu archivo.",
+      progress:"Progreso",
+      s1_title:"Contrato de servicio firmado",
+      s1_body:"Firmado antes del pago. Tienes una copia en tu correo.",
+      s1_action:"Firmar contrato",
+      s2_title:"Pago completado",
+      s2_body:"Tu recibo fue enviado a tu correo.",
+      s3_done_title:"Monitoreo de crédito conectado",
+      s3_done_body:"Ya tenemos acceso a tu monitoreo desde tu revisión.",
+      s3_title:"Activa tu monitoreo y comparte tu acceso",
+      s3_body:"Regístrate en SmartCredit y comparte tu acceso de forma segura para ver los 3 burós.",
+      s3_action:"Activar SmartCredit",
+      s3_iq_action:"Inscribirse en Identity IQ",
+      s3_iq_note:"IdentityIQ es una opción alternativa. Úsala solo si SmartCredit no está disponible.",
+      s3_secure:"Comparte tu acceso de forma segura",
+      s4_title:"Completa tu formulario de credenciales",
+      s4_body:"Toma unos 5 minutos. Es necesario para iniciar tus disputas.",
+      s4_action:"Abrir formulario",
+      s5_title:"Guarda nuestro número y abre tu portal",
+      s5_body:"Todas las actualizaciones se publican en tu portal de cliente.",
+      s5_action:"Abrir portal de cliente",
+      s5_note:"El acceso al portal estará disponible una vez que procesemos y completemos tus disputas. Te enviaremos tus datos de acceso cuando esté listo.",
+      s5_link:"Guardar nuestro contacto",
+      next_kicker:"LO QUE SIGUE",
+      next_h:"Lo que sigue",
+      next1_when:"Día 1", next1_what:"Creamos tu estrategia de disputa y enviamos tus disputas.",
+      next2_when:"Cada 30 días", next2_what:"Recibes una actualización en tu portal.",
+      next3_when:"Siempre", next3_what:"Envíanos un mensaje. Te responde una persona real.",
+      help:"¿Preguntas? Escríbenos o llámanos.",
+      legal:"No somos un bufete de abogados. Los resultados de la reparación de crédito varían. No se garantiza ningún resultado específico."
+    }
   };
-  var EN = {copied:"Number copied", copyBtn:"Copy Number"};
-  var nodes = document.querySelectorAll("[data-i18n],[data-i18n-html]");
-  nodes.forEach(function(n){
-    if(n.hasAttribute("data-i18n")) EN[n.getAttribute("data-i18n")] = n.textContent;
-    else EN[n.getAttribute("data-i18n-html")] = n.innerHTML;
-  });
-  var current = "en";
+
+  /* ---- Which checklist state? Phase 1: GHL sends /?from=review or / ----
+     from=review  -> step 3 already done (came through Credit Review), 3/5, "Two"
+     default      -> step 3 is an action (Ready to Start),            2/5, "Three" */
+  var fromReview = false;
+  try{ fromReview = new URLSearchParams(location.search).get("from") === "review"; }catch(e){}
+
+  var step3 = document.getElementById("step3");
+  var doneN = fromReview ? 3 : 2;
+
+  function applyStateStrings(lang){
+    var d = T[lang];
+    // step 3 title/body swap depending on state
+    var h = step3.querySelector("h3"), p = step3.querySelector("p");
+    if(fromReview){ h.textContent = d.s3_done_title; p.textContent = d.s3_done_body; }
+    else { h.textContent = d.s3_title; p.textContent = d.s3_body; }
+    // hero subtext: two vs three
+    var sub = document.querySelector("[data-i18n='sub'], [data-sub-two]");
+  }
+
+  /* Convert step 3 to the "done" look when the client came from review */
+  if(fromReview){
+    step3.classList.remove("todo"); step3.classList.add("done");
+    var badge = step3.querySelector(".badge");
+    var num = badge.querySelector(".num"); if(num) num.hidden = true;
+    var chk = badge.querySelector(".chk"); if(chk) chk.removeAttribute("hidden");
+    var act = document.getElementById("s3-action"); if(act) act.hidden = true;
+    var iq = document.getElementById("s3-iq"); if(iq) iq.hidden = true;
+    var iqn = document.getElementById("s3-iq-note"); if(iqn) iqn.hidden = true;
+    var sec = document.getElementById("s3-secure"); if(sec) sec.hidden = true;
+  }
+
+  /* Step 1: if agreement is NOT signed before payment, show the action */
+  if(!AGREEMENT_SIGNED_FIRST){
+    var s1 = document.getElementById("step1");
+    s1.classList.remove("done"); s1.classList.add("todo");
+    var b1 = s1.querySelector(".badge"); b1.innerHTML = '<span class="num">1</span>';
+    var a1 = document.getElementById("s1-action"); a1.hidden = false; a1.href = AGREEMENT_LINK;
+  }
+
+  /* SmartCredit link + trial wording */
+  var s3a = document.getElementById("s3-action");
+  if(TRIAL_ENABLED && SMARTCREDIT_TRIAL){ s3a.href = SMARTCREDIT_TRIAL; }
+  else { s3a.href = SMARTCREDIT_SIGNUP; }
+
+  /* Progress bar + count */
+  document.getElementById("done-n").textContent = doneN;
+  document.getElementById("bar").style.width = (doneN/5*100) + "%";
+
+  /* ---- i18n apply ---- */
+  var nodes = document.querySelectorAll("[data-i18n]");
   function apply(lang){
-    current = lang;
-    var dict = lang === "es" ? ES : EN;
+    var d = T[lang] || T.en;
     nodes.forEach(function(n){
       var k = n.getAttribute("data-i18n");
-      if(k){ if(dict[k]!=null) n.textContent = dict[k]; }
-      else { k = n.getAttribute("data-i18n-html"); if(dict[k]!=null) n.innerHTML = dict[k]; }
+      if(k === "sub"){ n.textContent = fromReview ? d.sub_two : d.sub_three; return; }
+      if(d[k] != null) n.textContent = d[k];
     });
+    // step 3 state strings win over the default data-i18n text
+    applyStateStrings(lang);
     document.documentElement.lang = lang;
-    document.getElementById("lang-en").setAttribute("aria-pressed", lang==="en");
-    document.getElementById("lang-es").setAttribute("aria-pressed", lang==="es");
+    document.querySelectorAll(".lang button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang);
+    });
     try{ localStorage.setItem("cr8-lang", lang); }catch(e){}
   }
   document.querySelectorAll(".lang button").forEach(function(b){
     b.addEventListener("click", function(){ apply(b.getAttribute("data-lang")); });
   });
+
   var saved = null;
   try{ saved = localStorage.getItem("cr8-lang"); }catch(e){}
-  if(!saved && (navigator.language||"").toLowerCase().indexOf("es")===0) saved = "es";
-  if(saved === "es") apply("es");
-
-  var copyBtn = document.getElementById("copy-phone");
-  copyBtn.addEventListener("click", function(){
-    var dict = current === "es" ? ES : EN;
-    function done(){ copyBtn.textContent = dict.copied; setTimeout(function(){ copyBtn.textContent = dict.copyBtn; }, 2000); }
-    try{
-      navigator.clipboard.writeText("786-746-7414").then(done, function(){ selectNum(); });
-    }catch(e){ selectNum(); }
-    function selectNum(){
-      var el = document.querySelector(".phone-num"), r = document.createRange();
-      r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-    }
-  });
+  if(!saved && (navigator.language||"").toLowerCase().indexOf("es") === 0) saved = "es";
+  apply(saved === "es" ? "es" : "en");
 })();
 </script>
-
 </body>
 </html>
