@@ -28,6 +28,43 @@ Terrence's workflows.
 
 ---
 
+## 🔴 PRIORITY FIX — onboarding email misses (confirmed by audit)
+
+**What's wrong:** The `new client purchase email onboarding` workflow triggers only on the
+`commas-purchase` tag. That tag is applied by the Commas→Zapier Zap, which misses some
+checkouts. When it misses, the client is enrolled (they get `split-pay-enrolled` or
+`paid-in-full-enrolled`) but **never gets `commas-purchase`, so the onboarding email never
+sends.** Confirmed real cases: **Silee Mitchell** (`split-pay-enrolled`, Round 1) and
+**Diana Erazo** (`paid-in-full-enrolled`, Round 1) — both enrolled, both missing the tag.
+
+**The fix (do this in the GHL UI — the API cannot edit workflows):**
+1. Automation → Workflows → open **`new client purchase email onboarding`**.
+2. On the trigger, ADD two more "Contact Tag" triggers (keep the existing `commas-purchase` one):
+   - Contact Tag **added** = `split-pay-enrolled`
+   - Contact Tag **added** = `paid-in-full-enrolled`
+   (These land reliably on every real enrollment, so the email fires even when the Zap misses.)
+3. Leave **Allow Re-entry OFF** (default) so a buyer who gets both tags only receives one email.
+4. Save and **Publish**.
+
+**Also:** fix the Zap so it applies `commas-purchase` on every checkout (belt-and-suspenders),
+and check that buyers' Email isn't set to DND/inactive (a few are — the email is suppressed
+for them regardless).
+
+**Note:** Silee and Diana are already active in dispute rounds, so they were onboarded manually
+— do NOT retroactively tag them (it would send a late "finish setup" email). The fix above is
+to stop FUTURE misses.
+
+---
+
+## ⚠️ SECURITY — client passwords in plaintext (confirmed)
+
+Pulling contacts for the audit, client **monitoring passwords, usernames, and last-4 SSN are
+stored in plaintext** in the "Credit Monitoring Password" custom field, readable by anyone with
+API access. Recommend: restrict which team members can view these fields, and clear the password
+field once your team has entered it into DisputeFox.
+
+---
+
 ## Ground rules (do not skip)
 
 1. **ADD ONLY.** Never edit, rename, pause, or delete anything that already exists.
