@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="CR8TIVE Financial Group: review your credit or start services.">
+<meta name="robots" content="noindex">
+<title>CR8TIVE Financial Group · Get Started</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* =========================================================================
+   CR8TIVE Gateway (V6) — design system per Cr8tive_Gateway_Design_Spec.md
+   Navy #0B1730, orange button #C2510F, accent #F08A4B. DM Serif + Inter.
+   Mobile first, 320px up. No step counter. No em dashes in copy.
+   ========================================================================= */
+:root{
+  --navy:#0B1730; --navy-panel:#13254A; --navy-line:#22355E;
+  --orange:#C2510F; --orange-accent:#F08A4B; --orange-dark:#9A3F0B;
+  --orange-tint:#FFF4EC; --orange-soft:#FDEBDD;
+  --page:#F5F6F9; --border:#D7DCE7; --white:#FFFFFF;
+  --ink:#0B1730; --ink-2:#4A5571; --on-navy:#D4DBEA; --on-navy-2:#B9C4DA;
+  --f-head:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:560px; color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.12}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+
+/* Header */
+.bar{background:var(--navy);color:var(--on-navy);position:sticky;top:0;z-index:20;border-bottom:1px solid var(--navy-line)}
+.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.ring{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:50%;border:2px solid var(--orange-accent);color:var(--white);font-family:var(--f-head);font-size:15px}
+.brand b{font-family:var(--f-head);font-size:16px;color:var(--white)}
+
+/* Screens */
+.screen{display:none}
+.screen.active{display:block}
+.screen.navy{background:var(--navy);color:var(--on-navy);min-height:calc(100vh - 63px)}
+.pad{padding-block:30px 40px}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--ink-2);font-family:var(--f-body);font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;min-height:40px}
+.screen.navy .back{color:var(--on-navy-2)}
+
+/* Hero bits */
+.hero-k{color:var(--orange-accent)}
+h1.big{font-size:clamp(30px,8vw,38px);margin-top:10px}
+.screen.navy h1.big,.screen.navy h2{color:var(--white)}
+.lede{margin:12px 0 0;max-width:42ch}
+.screen.navy .lede{color:var(--on-navy)}
+h1.big em{font-style:normal;color:var(--orange-accent)}
+
+/* Path cards (screen 01) */
+.paths{display:grid;gap:14px;margin-top:26px}
+.path{display:grid;grid-template-columns:48px 1fr 34px;gap:14px;align-items:center;width:100%;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:20px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.path.hi{border:2px solid var(--orange)}
+.path:hover{transform:translateY(-1px)}
+.path .tile{width:48px;height:48px;border-radius:12px;background:var(--orange-soft);display:grid;place-items:center;color:var(--orange-dark)}
+.path .tile svg{width:24px;height:24px}
+.path h3{font-size:20px}
+.path p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+.path .tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--orange-dark);background:var(--orange-tint);border-radius:6px;padding:4px 8px}
+.path .arrow{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;color:var(--orange);font-weight:700}
+
+/* Numbered step blocks */
+.stepblk{margin-top:24px}
+.stephd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.stepno{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:700;border:2px solid var(--orange);color:var(--orange);background:var(--orange-tint)}
+.stephd h2{font-size:21px}
+.screen.navy .stepno{background:transparent}
+
+/* Provider cards */
+.prov{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:12px}
+.prov.rec{border:2px solid var(--orange)}
+.prov-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ptag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:6px}
+.ptag-rec{background:var(--orange);color:#fff}
+.ptag-bk{background:var(--page);color:var(--ink-2);border:1px solid var(--border)}
+.prov h3{font-size:22px;margin-top:8px}
+.price b{font-family:var(--f-head);font-size:26px;display:block;line-height:1}
+.price small{color:var(--ink-2);font-size:12px}
+.price{text-align:right}
+.feats{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:7px}
+.feats li{display:grid;grid-template-columns:16px 1fr;gap:9px;font-size:14px}
+.feats li::before{content:"";width:9px;height:9px;margin-top:6px;background:var(--orange-accent);border-radius:2px}
+.trialnote{margin-top:12px;background:var(--orange-tint);border-radius:10px;padding:12px;font-size:13px;color:var(--orange-dark)}
+.smallprint{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--f-body);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:0;padding:13px 20px;border-radius:10px;min-height:48px;margin-top:14px;width:100%}
+.btn-primary{background:var(--orange);color:var(--white)}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-ghost{background:var(--white);color:var(--navy);border:1.5px solid var(--navy)}
+.btn[disabled]{background:var(--border);color:var(--ink-2);cursor:not-allowed}
+.ext{font-size:13px}
+.hint{font-size:12.5px;color:var(--ink-2);margin-top:8px;text-align:center}
+.screen.navy .hint{color:var(--on-navy-2)}
+
+/* Share panel */
+.sharepanel{background:var(--navy-panel);color:var(--on-navy);border-radius:16px;padding:22px;margin-top:10px}
+.sharepanel .kicker{color:var(--orange-accent)}
+.sharepanel h2{color:#fff;font-size:21px;margin-top:6px}
+.sharepanel p{margin-top:8px;color:var(--on-navy)}
+
+/* Results strip */
+.results{margin-top:28px}
+.results-hd{display:flex;justify-content:space-between;align-items:baseline}
+.results-hd h2{font-size:22px}
+.results-hd span{font-size:12px;color:var(--ink-2)}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:14px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.rcard{flex:0 0 auto;scroll-snap-align:start;width:240px}
+.rimg{width:240px;height:170px;border-radius:14px;object-fit:cover;object-position:top;display:block;background:var(--navy);border:1px solid var(--border)}
+.rcard .cap{margin-top:8px;font-size:13px;font-weight:700}
+.rcard .cap span{display:block;font-weight:500;color:var(--ink-2);font-size:12px;margin-top:2px}
+.rlink{display:inline-block;margin-top:12px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.disclaim{margin-top:10px;font-size:12px;color:var(--ink-2)}
+.buildnote{margin-top:12px;font-size:12px;color:var(--orange-dark);background:var(--orange-tint);border-radius:8px;padding:10px}
+
+/* Confirmation (book screen) */
+.confirm{text-align:center;padding-top:10px}
+.confirm .chk{width:56px;height:56px;border-radius:50%;background:var(--orange);display:grid;place-items:center;margin:0 auto 14px}
+.confirm .chk svg{width:28px;height:28px;color:#fff}
+
+/* Chips + option boxes */
+.qcard{background:var(--white);color:var(--ink);border-radius:16px;padding:20px;margin-top:20px}
+.qcard .qlabel{font-weight:700;font-size:15px;margin:0 0 10px}
+.qcard .qlabel.opt::after{content:"Optional";float:right;font-weight:600;font-size:12px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--border);background:var(--white);color:var(--ink);border-radius:999px;min-height:44px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.chip[aria-checked="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.obox{border:1px solid var(--border);background:var(--white);color:var(--ink);border-radius:12px;min-height:52px;padding:12px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px}
+.obox::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex:none}
+.obox[aria-checked="true"]{border-color:var(--orange);background:var(--orange-tint)}
+.obox[aria-checked="true"]::before{border-color:var(--orange);background:radial-gradient(circle,var(--orange) 0 5px,transparent 6px)}
+
+/* On-call panel */
+.callpanel{background:var(--navy-panel);border-radius:16px;padding:20px;margin-top:22px;color:var(--on-navy)}
+
+/* Package list (Path B) */
+.pkg{display:block;width:100%;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;cursor:pointer;font:inherit;color:var(--ink)}
+.pkg[aria-checked="true"]{border:2px solid var(--orange);background:var(--orange-tint)}
+.pkg-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pkg h3{font-size:20px}
+.pkg .amt{font-family:var(--f-head);font-size:22px}
+.pkg .line{margin-top:4px;font-size:14px;color:var(--ink-2)}
+.pkg-tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--orange);border-radius:6px;padding:3px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px}
+.summary b{font-size:15px}
+.summary p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+.memnote{margin-top:14px;background:var(--white);border:1px dashed var(--border);border-radius:12px;padding:14px;font-size:14px;color:var(--ink-2)}
+
+/* Need help */
+.needhelp{text-align:center;padding:22px 0 30px;font-size:14px;color:var(--ink-2)}
+.screen.navy .needhelp{color:var(--on-navy-2)}
+.needhelp a{font-weight:700;color:inherit}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#choose" aria-label="CR8TIVE Financial Group">
+      <span class="ring" aria-hidden="true">CR</span><b>CR8TIVE</b>
+    </a>
+  </div>
+</header>
+
+<!-- ============================ SCREEN 01: CHOOSE A PATH ============================ -->
+<section class="screen navy" id="choose">
+  <div class="wrap pad">
+    <h1 class="big">Let's get you <em>started.</em></h1>
+    <p class="lede">Choose how you'd like to move forward.</p>
+    <div class="paths">
+      <button class="path hi" data-go="review">
+        <span class="tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h10l4 4v12H4z"/><path d="M14 4v4h4"/><circle cx="11" cy="13" r="2.5"/><path d="M13 15l2 2"/></svg></span>
+        <span>
+          <h3>I Want My Credit Reviewed</h3>
+          <p>We'll go over your report with you and show you what we'd fix.</p>
+          <span class="tag" id="trial-tag" hidden>Free review, 7-day free monitoring trial</span>
+        </span>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+      </button>
+      <button class="path" data-go="program">
+        <span class="tile" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <span>
+          <h3>I'm Ready to Start Services</h3>
+          <p>Choose your program and payment option.</p>
+        </span>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+      </button>
+    </div>
+  </div>
+  <div class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></div>
+</section>
+
+<!-- ============================ SCREEN 02A: CREDIT REVIEW ============================ -->
+<section class="screen" id="review">
+  <div class="wrap pad">
+    <button class="back" data-go="choose">&larr; Back</button>
+    <span class="kicker hero-k" style="color:var(--orange-dark)">CREDIT REVIEW</span>
+    <h1 class="big">Set Up Credit Monitoring</h1>
+    <p class="lede" style="color:var(--ink-2)">Sign up, then share your login so we can review your credit with you.</p>
+
+    <div class="stepblk">
+      <div class="stephd"><span class="stepno">1</span><h2>Choose a monitoring provider</h2></div>
+
+      <article class="prov rec">
+        <div class="prov-top">
+          <div><span class="ptag ptag-rec">Recommended</span><h3>SmartCredit</h3></div>
+          <div class="price">
+            <b id="sc-price-big">$29.00</b>
+            <small id="sc-price-sub">per month</small>
+          </div>
+        </div>
+        <div class="trialnote" id="sc-trialnote" hidden>Your free review happens inside your 7-day trial. Not a fit? Cancel with SmartCredit before day 7 and pay nothing.</div>
+        <ul class="feats">
+          <li>3-bureau reports and scores</li>
+          <li>Daily monitoring alerts</li>
+          <li>Score tracker and tools</li>
+        </ul>
+        <a class="btn btn-primary" id="sc-btn" href="https://www.smartcredit.com/?PID=24800" target="_blank" rel="noopener"><span id="sc-btn-label">Sign Up for SmartCredit</span> <span class="ext" aria-hidden="true">&#8599;</span></a>
+      </article>
+
+      <article class="prov">
+        <div class="prov-top">
+          <div><span class="ptag ptag-bk">Backup option</span><h3>IdentityIQ</h3></div>
+          <div class="price"><b>$29.86</b><small>per month</small></div>
+        </div>
+        <ul class="feats">
+          <li>3-bureau reports and scores</li>
+          <li>Identity theft protection</li>
+          <li>Use only if SmartCredit is unavailable</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://member.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" target="_blank" rel="noopener">Sign Up for IdentityIQ <span class="ext" aria-hidden="true">&#8599;</span></a>
+      </article>
+
+      <p class="smallprint" id="monitoring-print">Monitoring is billed by the provider, separate from CR8TIVE service fees.</p>
+    </div>
+
+    <div class="stepblk">
+      <div class="sharepanel">
+        <span class="kicker">SHARE ACCESS</span>
+        <h2>Share Your Monitoring Login</h2>
+        <p>Enter the email and password you just created. We use it only to pull your report and review it with you.</p>
+        <!-- Opens the short review-only intake (share-login.html), which hosts the GHL
+             form for the client's monitoring login, then continues to the booking screen. -->
+        <a class="btn btn-primary" id="share-btn" href="share-login.html">Share Login Securely</a>
+        <p class="smallprint" style="color:var(--on-navy-2)">Please don't text your password. Use this secure form only.</p>
+      </div>
+    </div>
+
+    <div class="results">
+      <div class="results-hd"><h2>Real Client Results</h2><span>Swipe &rarr;</span></div>
+      <div class="strip" id="results-strip"></div>
+      <a class="rlink" href="https://credit.cr8tivebusiness.com" target="_blank" rel="noopener">See all results on our website</a>
+      <p class="disclaim">Individual results vary. No results guaranteed. Score changes shown are each client's 3-bureau increase (Equifax / Experian / TransUnion).</p>
+    </div>
+  </div>
+  <div class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></div>
+</section>
+
+<!-- ============================ SCREEN 02A-2: GOAL + TIMELINE + BOOK ============================ -->
+<section class="screen navy" id="book">
+  <div class="wrap pad">
+    <button class="back" data-go="review">&larr; Back</button>
+    <div class="confirm">
+      <div class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+      <h1 class="big">Got it. Let's review your credit together.</h1>
+      <p class="lede" style="margin-left:auto;margin-right:auto">We received your monitoring login. Answer two quick questions, then pick a time.</p>
+    </div>
+
+    <div class="qcard">
+      <p class="qlabel">What are you working toward?</p>
+      <div class="chips" id="goal-chips" role="radiogroup" aria-label="What are you working toward?">
+        <button class="chip" role="radio" aria-checked="false" data-val="home">Buy a home</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="car">Buy a car</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="rent">Rent a place</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="business">Business funding</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="cards">Get approved for cards</button>
+        <button class="chip" role="radio" aria-checked="false" data-val="improve">Just improve my credit</button>
+      </div>
+      <p class="qlabel" style="margin-top:20px">When do you need it?</p>
+      <div class="grid2" id="time-boxes" role="radiogroup" aria-label="When do you need it?">
+        <button class="obox" role="radio" aria-checked="false" data-val="0-3">0 to 3 months</button>
+        <button class="obox" role="radio" aria-checked="false" data-val="3-6">3 to 6 months</button>
+        <button class="obox" role="radio" aria-checked="false" data-val="6-12">6 to 12 months</button>
+        <button class="obox" role="radio" aria-checked="false" data-val="none">No deadline</button>
+      </div>
+    </div>
+
+    <a class="btn btn-primary" id="book-btn" href="#" aria-disabled="true">Book My Credit Review</a>
+    <p class="hint" id="book-hint">Choose a goal and a time frame to continue.</p>
+
+    <div class="callpanel">
+      <p style="margin:0">We pull your 3-bureau report before the call, go over it with you, and recommend a program that fits. No pressure.</p>
+    </div>
+  </div>
+  <div class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></div>
+</section>
+
+<!-- ============================ SCREEN 02B: CHOOSE PROGRAM ============================ -->
+<section class="screen" id="program">
+  <div class="wrap pad">
+    <button class="back" data-go="choose">&larr; Back</button>
+    <span class="kicker hero-k" style="color:var(--orange-dark)">START SERVICES</span>
+    <h1 class="big">Choose Your Program</h1>
+    <p class="lede" style="color:var(--ink-2)">Select your package and payment option.</p>
+
+    <div class="qcard">
+      <p class="qlabel opt">What are you working toward?</p>
+      <div class="chips" id="goal-chips-b" aria-label="What are you working toward? (optional)">
+        <button class="chip" aria-pressed="false" data-val="home">Buy a home</button>
+        <button class="chip" aria-pressed="false" data-val="car">Buy a car</button>
+        <button class="chip" aria-pressed="false" data-val="rent">Rent a place</button>
+        <button class="chip" aria-pressed="false" data-val="business">Business funding</button>
+        <button class="chip" aria-pressed="false" data-val="cards">Cards</button>
+        <button class="chip" aria-pressed="false" data-val="improve">Just improve</button>
+      </div>
+    </div>
+
+    <div id="pkg-list" role="radiogroup" aria-label="Choose a package" style="margin-top:18px"></div>
+
+    <div id="pay-wrap" hidden>
+      <p class="qlabel" style="font-weight:700;margin:18px 0 8px">Payment option</p>
+      <div class="pay" id="pay-options"></div>
+    </div>
+
+    <div class="summary" id="summary" hidden>
+      <b id="sum-title"></b>
+      <p id="sum-detail"></p>
+    </div>
+
+    <a class="btn btn-primary" id="continue-btn" href="#" aria-disabled="true">Review Agreement &amp; Continue</a>
+    <p class="hint">You'll sign your service agreement first, then pay on our secure checkout. You may cancel within 3 business days of signing.</p>
+
+    <div class="memnote">Prefer smaller monthly payments? Ask about our monthly plan. Same service, smaller payments. Text or call <a href="tel:7867467414" style="font-weight:700">786-746-7414</a>.</div>
+  </div>
+  <div class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></div>
+</section>
+
+<script>
+(function(){
+  /* ---------------------------------------------------------------------
+     SETTINGS
+     TRIAL_ENABLED: off until SmartCredit confirms the trial link (D8).
+     BOOKING_LINK: GHL review calendar (confirmed).
+     SMARTCREDIT_*: provider links. IDENTITYIQ handled inline.
+     --------------------------------------------------------------------- */
+  var TRIAL_ENABLED = false;
+  var SMARTCREDIT_SIGNUP = "https://www.smartcredit.com/?PID=24800";
+  var SMARTCREDIT_TRIAL  = "";            // set when D8 confirmed
+  var SMARTCREDIT_MONTHLY = "29.00";      // confirm on provider site before launch
+  var SMARTCREDIT_AFTER_TRIAL = "29.00";
+  var BOOKING_LINK = "https://api.leadconnectorhq.com/widget/booking/4x1fxP5qWWWVP0xQ5MPm";
+
+  /* Packages mirror the LIVE checkout config:
+     cr8tive-funnels/apps/credit/src/main.tsx (credit.cr8tivebusiness.com).
+     Keep in sync with that file. Do not invent amounts. */
+  var CHECKOUT_BASE = "https://credit.cr8tivebusiness.com";
+  var ENROLL_PATH = "enroll"; // production: _redirects maps /enroll -> /enroll.html
+  // Local preview only (never true in production): walk the full flow against
+  // the local enroll.html test server.
+  if(location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+    CHECKOUT_BASE = "http://localhost:4179"; ENROLL_PATH = "enroll.html";
+  }
+  var PACKAGES = [
+    { key:"membership", name:"Cr8tive Credit Membership", price:199.99, display:"$199.99",
+      tag:"LOWEST UPFRONT", isMembership:true, monthly:129,
+      line:"$199.99 to start, then $129/month. Items disputed in stages.",
+      enroll:"/enroll?package=membership" },
+    { key:"starter", name:"Starter", price:599.99, display:"$599.99",
+      line:"Best for straightforward credit profiles.",
+      full:"/enroll?package=starter&mode=full", split:"/enroll?package=starter&mode=split" },
+    { key:"silver", name:"Silver", price:750, display:"$750.00",
+      line:"For clients ready for comprehensive credit improvement.",
+      full:"/enroll?package=silver&mode=full", split:"/enroll?package=silver&mode=split" },
+    { key:"gold", name:"Gold", price:1000, display:"$1,000.00",
+      line:"For complex credit situations that need advanced strategy.",
+      full:"/enroll?package=gold&mode=full", split:"/enroll?package=gold&mode=split" }
+  ];
+
+  function money(n){ return "$" + n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  /* ---------------- Screen navigation via hash (browser back works) ------ */
+  var screens = ["choose","review","book","program"];
+  function show(id){
+    if(screens.indexOf(id) === -1) id = "choose";
+    document.querySelectorAll(".screen").forEach(function(s){ s.classList.toggle("active", s.id === id); });
+    window.scrollTo(0,0);
+  }
+  function go(id){ if(location.hash !== "#"+id){ location.hash = id; } else { show(id); } }
+  window.addEventListener("hashchange", function(){ show((location.hash||"#choose").slice(1)); });
+  document.querySelectorAll("[data-go]").forEach(function(b){
+    b.addEventListener("click", function(){ go(b.getAttribute("data-go")); });
+  });
+
+  /* ---------------- Trial wording (D8) ----------------------------------- */
+  if(TRIAL_ENABLED){
+    document.getElementById("trial-tag").hidden = false;
+    document.getElementById("sc-trialnote").hidden = false;
+    document.getElementById("sc-price-big").textContent = "7 days free";
+    document.getElementById("sc-price-sub").textContent = "then " + money(parseFloat(SMARTCREDIT_AFTER_TRIAL)) + "/month";
+    document.getElementById("sc-btn-label").textContent = "Start My Free Trial";
+    document.getElementById("sc-btn").href = SMARTCREDIT_TRIAL || SMARTCREDIT_SIGNUP;
+    document.getElementById("monitoring-print").textContent =
+      "The credit review is free. Monitoring is billed by the provider, separate from CR8TIVE service fees. Trial terms are set by SmartCredit.";
+  } else {
+    document.getElementById("sc-price-big").textContent = money(parseFloat(SMARTCREDIT_MONTHLY));
+    document.getElementById("sc-btn").href = SMARTCREDIT_SIGNUP;
+  }
+
+  /* ---------------- Share login -> booking screen ------------------------ */
+  /* "Share Login Securely" is a plain link to share-login.html (the review-only
+     intake). No JS needed; the intake page continues to #book afterward. */
+
+  /* ---------------- Book screen: goal + timeline ------------------------- */
+  var goal = null, timeline = null;
+  function pickRadio(group, val, setter){
+    group.querySelectorAll("[role=radio]").forEach(function(b){
+      var on = b.getAttribute("data-val") === val;
+      b.setAttribute("aria-checked", on);
+    });
+  }
+  document.querySelectorAll("#goal-chips [role=radio]").forEach(function(b){
+    b.addEventListener("click", function(){ goal = b.getAttribute("data-val"); pickRadio(document.getElementById("goal-chips"), goal); updateBook(); });
+  });
+  document.querySelectorAll("#time-boxes [role=radio]").forEach(function(b){
+    b.addEventListener("click", function(){ timeline = b.getAttribute("data-val"); pickRadio(document.getElementById("time-boxes"), timeline); updateBook(); });
+  });
+  function updateBook(){
+    var btn = document.getElementById("book-btn"), hint = document.getElementById("book-hint");
+    if(goal && timeline){
+      btn.setAttribute("aria-disabled","false");
+      btn.classList.remove("btn-disabled");
+      // goal + timeline are not personal data, so they may ride in the booking link.
+      // NOTE: confirm these param keys match the review calendar's custom-field keys.
+      btn.href = BOOKING_LINK + (BOOKING_LINK.indexOf("?")>-1?"&":"?") + "credit_goal=" + encodeURIComponent(goal) + "&goal_timeline=" + encodeURIComponent(timeline);
+      btn.target = "_blank"; btn.rel = "noopener";
+      hint.textContent = "Opens our calendar. Your answers come with you.";
+    } else {
+      btn.setAttribute("aria-disabled","true");
+      btn.removeAttribute("href");
+      hint.textContent = "Choose a goal and a time frame to continue.";
+    }
+  }
+  document.getElementById("book-btn").addEventListener("click", function(e){
+    if(this.getAttribute("aria-disabled") === "true"){ e.preventDefault(); }
+  });
+
+  /* ---------------- Program screen: optional goal chips (toggle) --------- */
+  document.querySelectorAll("#goal-chips-b .chip").forEach(function(b){
+    b.addEventListener("click", function(){
+      var on = b.getAttribute("aria-pressed") === "true";
+      // tapping the chosen chip again clears it; only one at a time
+      document.querySelectorAll("#goal-chips-b .chip").forEach(function(o){ o.setAttribute("aria-pressed","false"); o.setAttribute("aria-checked","false"); });
+      if(!on){ b.setAttribute("aria-pressed","true"); b.setAttribute("aria-checked","true"); }
+    });
+  });
+
+  /* ---------------- Program screen: packages + payment ------------------- */
+  var selPkg = null, selMode = null;
+  var list = document.getElementById("pkg-list");
+  PACKAGES.forEach(function(p){
+    var el = document.createElement("button");
+    el.className = "pkg"; el.type = "button"; el.setAttribute("role","radio"); el.setAttribute("aria-checked","false"); el.dataset.key = p.key;
+    var tagHtml = p.tag ? '<span class="pkg-tag">'+p.tag+'</span>' : '';
+    el.innerHTML = '<div class="pkg-top"><h3>'+p.name+'</h3><span class="amt">'+p.display+'</span></div>'+tagHtml+'<p class="line">'+p.line+'</p>';
+    el.addEventListener("click", function(){ selectPkg(p.key); });
+    list.appendChild(el);
+  });
+  function selectPkg(key){
+    selPkg = PACKAGES.filter(function(p){return p.key===key;})[0];
+    selMode = null;
+    list.querySelectorAll(".pkg").forEach(function(el){ el.setAttribute("aria-checked", el.dataset.key===key); });
+    renderPay();
+  }
+  function renderPay(){
+    var wrap = document.getElementById("pay-wrap"), opts = document.getElementById("pay-options");
+    opts.innerHTML = "";
+    if(selPkg.isMembership){
+      opts.style.gridTemplateColumns = "1fr";
+      opts.appendChild(mkOpt("monthly", "Monthly", money(selPkg.price) + " today, then " + money(selPkg.monthly) + "/month after."));
+    } else {
+      opts.style.gridTemplateColumns = "1fr 1fr";
+      var half = Math.round((selPkg.price/2)*100)/100;
+      opts.appendChild(mkOpt("full", "Pay in Full", "One payment, " + money(selPkg.price) + "."));
+      opts.appendChild(mkOpt("split", "Split Pay", money(half) + " today, " + money(selPkg.price - half) + " in 30 days. Total " + money(selPkg.price) + "."));
+    }
+    wrap.hidden = false;
+    updateSummary();
+  }
+  function mkOpt(mode, title, detail){
+    var b = document.createElement("button");
+    b.className = "obox"; b.type="button"; b.setAttribute("role","radio"); b.setAttribute("aria-checked","false"); b.dataset.mode = mode;
+    b.style.alignItems = "flex-start";
+    b.innerHTML = '<span><b style="display:block;font-size:14px">'+title+'</b><span style="font-size:12.5px;color:var(--ink-2)">'+detail+'</span></span>';
+    b.addEventListener("click", function(){
+      selMode = mode;
+      document.querySelectorAll("#pay-options .obox").forEach(function(o){ o.setAttribute("aria-checked", o.dataset.mode===mode); });
+      updateSummary();
+    });
+    return b;
+  }
+  function updateSummary(){
+    var sum = document.getElementById("summary"), t = document.getElementById("sum-title"), d = document.getElementById("sum-detail");
+    var btn = document.getElementById("continue-btn");
+    if(selPkg && selMode){
+      var modeLabel, detail, path;
+      if(selPkg.isMembership){
+        modeLabel = "Monthly";
+        detail = money(selPkg.price) + " today, then " + money(selPkg.monthly) + "/month until you cancel. Final amounts are confirmed on the secure checkout.";
+        path = selPkg.enroll;
+      } else if(selMode === "full"){
+        modeLabel = "Pay in Full";
+        detail = "One payment, " + money(selPkg.price) + ". Final amount is confirmed on the secure checkout.";
+        path = selPkg.full;
+      } else {
+        modeLabel = "Split Pay";
+        var half = Math.round((selPkg.price/2)*100)/100;
+        detail = money(half) + " today, then " + money(selPkg.price-half) + " in 30 days. Final amounts are confirmed on the secure checkout.";
+        path = selPkg.split;
+      }
+      t.textContent = selPkg.name + ", " + modeLabel;
+      d.textContent = detail;
+      sum.hidden = false;
+      btn.setAttribute("aria-disabled","false");
+      // from=gateway tells enroll.html to skip its Program/upsell step and
+      // open on Step 2 (Your Info), since the program + plan are chosen here.
+      btn.href = CHECKOUT_BASE + path.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway";
+      btn.target = "_blank"; btn.rel = "noopener";
+    } else {
+      sum.hidden = true;
+      btn.setAttribute("aria-disabled","true");
+      btn.removeAttribute("href");
+    }
+  }
+  document.getElementById("continue-btn").addEventListener("click", function(e){
+    if(this.getAttribute("aria-disabled") === "true"){ e.preventDefault(); }
+  });
+
+  /* ---------------- Results strip (real client results, copied in) ------- */
+  var RESULTS = [
+    {img:"megan-a.png",   name:"Megan A.",   gain:"+190 / +249 / +250"},
+    {img:"markita-r.png", name:"Markita R.", gain:"+167 / +171 / +162"},
+    {img:"jose-r.png",    name:"Jose R.",    gain:"+154 / +121 / +116"},
+    {img:"brian-a.png",   name:"Brian A.",   gain:"+150 / +131 / +146"},
+    {img:"regina-r.png",  name:"Regina R.",  gain:"+133 / +133 / +83"},
+    {img:"john-f.png",    name:"John F.",    gain:"+109 / +110 / +110"}
+  ];
+  (function(){
+    var strip = document.getElementById("results-strip");
+    if(strip) strip.innerHTML = RESULTS.map(function(r){
+      return '<div class="rcard"><img class="rimg" src="assets/results/' + r.img +
+        '" alt="Three-bureau credit score progress report" loading="lazy">' +
+        '<div class="cap">' + r.name + ' <span>' + r.gain + '</span></div></div>';
+    }).join("");
+  })();
+
+  /* ---------------- Boot ------------------------------------------------- */
+  show((location.hash||"#choose").slice(1));
+})();
+</script>
+</body>
+</html>

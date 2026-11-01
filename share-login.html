@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Securely share your credit monitoring login with CR8TIVE for your credit review.">
+<meta name="robots" content="noindex">
+<title>CR8TIVE Financial Group · Share Your Monitoring Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* =========================================================================
+   CR8TIVE — Review-only "Share Your Monitoring Login" intake.
+   The actual fields (incl. the monitoring login) live in the GHL review form
+   embedded below, so submissions land in GHL exactly like your other forms.
+   This page is only the branded wrapper + the "book your review" next step.
+   Design system per Cr8tive_Gateway_Design_Spec.md.
+   ========================================================================= */
+:root{
+  --navy:#0B1730; --navy-panel:#13254A; --navy-line:#22355E;
+  --orange:#C2510F; --orange-accent:#F08A4B; --orange-dark:#9A3F0B;
+  --orange-tint:#FFF4EC; --page:#F5F6F9; --border:#D7DCE7; --white:#FFFFFF;
+  --ink:#0B1730; --ink-2:#4A5571; --on-navy:#D4DBEA; --on-navy-2:#B9C4DA;
+  --f-head:"DM Serif Display",Georgia,serif; --f-body:"Inter",system-ui,sans-serif;
+  --wrap:560px; color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+h1,h2{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.12}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.bar{background:var(--navy);color:var(--on-navy);border-bottom:1px solid var(--navy-line)}
+.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.ring{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:50%;border:2px solid var(--orange-accent);color:var(--white);font-family:var(--f-head);font-size:15px}
+.brand b{font-family:var(--f-head);font-size:16px;color:var(--white)}
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{padding-block:30px 28px}
+.hero .kicker{color:var(--orange-accent)}
+.hero h1{color:var(--white);font-size:clamp(28px,7.5vw,36px);margin-top:10px}
+.hero p{color:var(--on-navy);margin:12px 0 0;max-width:46ch}
+.main{padding-block:26px}
+.formcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:8px;min-height:420px;overflow:hidden}
+.formcard iframe{width:100%;min-height:560px;border:0;display:block;border-radius:12px}
+/* Placeholder shown until the GHL review form is embedded */
+.formph{display:grid;place-items:center;text-align:center;padding:48px 20px;color:var(--ink-2);border:2px dashed var(--border);border-radius:12px;min-height:360px}
+.formph b{display:block;font-family:var(--f-head);font-size:20px;color:var(--navy);margin-bottom:8px}
+.smallprint{font-size:12.5px;color:var(--ink-2);margin-top:12px}
+.nextpanel{background:var(--navy-panel);color:var(--on-navy);border-radius:16px;padding:22px;margin-top:22px}
+.nextpanel .kicker{color:var(--orange-accent)}
+.nextpanel h2{color:#fff;font-size:21px;margin-top:6px}
+.nextpanel p{margin-top:8px;color:var(--on-navy)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;text-decoration:none;padding:13px 20px;border-radius:10px;min-height:48px;margin-top:14px;width:100%;background:var(--orange);color:#fff}
+.btn:hover{background:var(--orange-dark)}
+.needhelp{text-align:center;padding:22px 0 30px;font-size:14px;color:var(--ink-2)}
+.needhelp a{font-weight:700;color:inherit}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="gateway.html#review" aria-label="CR8TIVE Financial Group">
+      <span class="ring" aria-hidden="true">CR</span><b>CR8TIVE</b>
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">SHARE ACCESS</span>
+    <h1>Share Your Monitoring Login</h1>
+    <p>Enter the email and password you just created for your monitoring. We use it only to pull your report and review it with you.</p>
+  </div>
+</section>
+
+<main class="main">
+  <div class="wrap">
+    <div class="formcard">
+      <!-- Short "Credit Review - Monitoring Login" GHL form (name, provider,
+           monitoring username + password). Styled to match via the form's own
+           Custom CSS in GHL; form_embed.js (below) handles auto-sizing. -->
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/25Sd8GOFIqxR898uDLJk"
+        id="inline-25Sd8GOFIqxR898uDLJk"
+        title="Share your monitoring login for your credit review"
+        loading="lazy"></iframe>
+    </div>
+    <p class="smallprint">This is a secure intake form. Please share your password only here, not by text.</p>
+
+    <div class="nextpanel">
+      <span class="kicker">NEXT STEP</span>
+      <h2>Book your credit review</h2>
+      <p>Once you have submitted your login above, pick a time and we will go over your report with you.</p>
+      <a class="btn" id="book-btn" href="gateway.html#book">Continue to Book My Review</a>
+    </div>
+  </div>
+</main>
+
+<footer class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></footer>
+<!-- GoHighLevel form auto-resize helper -->
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+</body>
+</html>
