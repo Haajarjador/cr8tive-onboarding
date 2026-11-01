@@ -4,6 +4,25 @@ This is the step-by-step for the GoHighLevel side. The pages (gateway, onboardin
 share-login) are already built. This covers what to create in GHL so leads get
 tracked and no one stalls without a follow-up.
 
+---
+
+## ✅ BUILD STATUS (updated after Part 2B — your 6 audit decisions applied)
+
+**Done automatically (via API, purely additive — proof in `ghl-snapshot-before.json` / `ghl-snapshot-after.json`):**
+- Created these 7 new tags: `gw-gateway-opened`, `gw-path-credit-review`, `gw-path-direct-enrollment`, `gw-monitoring-shared`, `gw-contract-signed`, `gw-priority-urgent`, `gw-owner-conflict`. (68 existing tags untouched.)
+- Switched the gateway's review booking to your **Credit Consultation** calendar (`No3aNZM7qY3wqPC1JCWG`) in the page code (decision #1).
+
+**Decisions applied — overrides below where they differ from the original sections:**
+- **#2 Owner tags:** REUSE your existing `owner-jador` / `owner-terrence` (do NOT make `gw-owner-` copies). `commas-purchase` reused as-is.
+- **#3 Goal/timeline fields:** REUSE existing `What are you leveraging your credit for?` (as the goal) and `Preferred Timeline for Improvement` (as the timeline). Do NOT create `credit_goal` / `goal_timeline`.
+
+**Still to do BY HAND in the GHL UI (the API can't build these):**
+1. **3 new custom fields** (Section A) — the create-field API can't set dropdown options, so add these in the UI as dropdowns: `GW Gateway Path` (review, direct), `GW Recommended Package` (membership, starter, silver, gold), `GW Consult Outcome` (Ready, Price, Later Date, Thinking, No-Show).
+2. **Pipeline** `GW | Cr8tive Leads` (Section C).
+3. **Trigger links** (Section D).
+4. **All workflows** (Section F–G) as DRAFTS — GHL has no API to build automations. Use the recipes, and in them use `owner-jador` (not `gw-owner-jador`).
+5. **Review calendar questions** — add the goal + timeline questions to the Credit Consultation booking form if they aren't already there. It is Jador's own consultation calendar; if adding them would disturb anything shared, tell me and we decide.
+
 **Scope:** Jador's **ENROLL** leads only. Do NOT touch the START keyword or any of
 Terrence's workflows.
 

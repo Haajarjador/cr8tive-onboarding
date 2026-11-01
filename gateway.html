@@ -343,8 +343,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
     <a class="btn btn-primary" id="continue-btn" href="#" aria-disabled="true">Review Agreement &amp; Continue</a>
     <p class="hint">You'll sign your service agreement first, then pay on our secure checkout. You may cancel within 3 business days of signing.</p>
-
-    <div class="memnote">Prefer smaller monthly payments? Ask about our monthly plan. Same service, smaller payments. Text or call <a href="tel:7867467414" style="font-weight:700">786-746-7414</a>.</div>
   </div>
   <div class="needhelp">Need help? <a href="tel:7867467414">Text or call 786-746-7414</a></div>
 </section>
@@ -362,7 +360,9 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
   var SMARTCREDIT_TRIAL  = "";            // set when D8 confirmed
   var SMARTCREDIT_MONTHLY = "29.00";      // confirm on provider site before launch
   var SMARTCREDIT_AFTER_TRIAL = "29.00";
-  var BOOKING_LINK = "https://api.leadconnectorhq.com/widget/booking/4x1fxP5qWWWVP0xQ5MPm";
+  // Credit Consultation calendar (audit fix): the previous calendar
+  // (4x1fxP5qWWWVP0xQ5MPm) is for EXISTING clients needing an add-on, not new reviews.
+  var BOOKING_LINK = "https://api.leadconnectorhq.com/widget/booking/No3aNZM7qY3wqPC1JCWG";
 
   /* Packages mirror the LIVE checkout config:
      cr8tive-funnels/apps/credit/src/main.tsx (credit.cr8tivebusiness.com).

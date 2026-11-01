@@ -1,0 +1,21 @@
+{
+  "_note": "Snapshot after Part 2B API writes. Diff vs ghl-snapshot-before.json proves the changes were purely additive: 7 new gw- tags added, all 68 pre-existing tags unchanged (same ids, names, descriptions, colors). No field, pipeline, workflow, calendar, or contact was created or modified via API.",
+  "takenAfter": "2026-10-31 Part 2B build",
+  "counts": { "tagsBefore": 68, "tagsAfter": 75, "tagsAdded": 7, "tagsRemovedOrChanged": 0 },
+  "tagsAdded": [
+    {"id": "NSuiuxesk6UparENFTrW", "name": "gw-gateway-opened"},
+    {"id": "wIW4zEAK82ED9uSpkMZX", "name": "gw-path-credit-review"},
+    {"id": "Pxhbug0Ef0LlWxU8bbcc", "name": "gw-path-direct-enrollment"},
+    {"id": "ttfYIZ0N2GcCSh41UKsa", "name": "gw-monitoring-shared"},
+    {"id": "XeNCxGv15QPHo0E2q28h", "name": "gw-contract-signed"},
+    {"id": "2JurIXltlDrWMgt3CYJm", "name": "gw-priority-urgent"},
+    {"id": "GpKGac3Nqs6WgFwQLwDU", "name": "gw-owner-conflict"}
+  ],
+  "verified": "Re-fetch returned all 68 original tags with identical ids/names/descriptions/colors (owner-jador, owner-terrence, commas-purchase, etc. intact). Only the 7 tags above are new.",
+  "notCreatedViaApi": {
+    "customFields": "GHL create-field API cannot set dropdown options; the 3 new fields are in the manual checklist instead.",
+    "pipeline": "No create-pipeline API; manual.",
+    "workflows": "GHL does not allow building workflow automations via API; manual recipes.",
+    "triggerLinks": "No create-trigger-link API; manual."
+  }
+}
