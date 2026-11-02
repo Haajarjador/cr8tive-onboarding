@@ -148,11 +148,12 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 .callpanel{background:var(--navy-panel);border-radius:16px;padding:20px;margin-top:22px;color:var(--on-navy)}
 
 /* Package list (Path B) */
-.pkg{display:block;width:100%;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;cursor:pointer;font:inherit;color:var(--ink)}
-.pkg[aria-checked="true"]{border:2px solid var(--orange);background:var(--orange-tint)}
+.pkg{display:block;width:100%;text-align:left;background:var(--orange-tint);border:1.5px solid var(--orange-accent);border-radius:14px;padding:18px;margin-bottom:10px;cursor:pointer;font:inherit;color:var(--ink);box-shadow:0 3px 12px rgba(194,81,15,0.10);transition:border-color .2s,background .2s,box-shadow .2s,transform .12s}
+.pkg:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(194,81,15,0.16)}
+.pkg[aria-checked="true"]{border:2px solid var(--orange);background:var(--orange-soft);box-shadow:0 0 0 3px rgba(194,81,15,0.16),0 6px 18px rgba(194,81,15,0.14)}
 .pkg-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .pkg h3{font-size:20px}
-.pkg .amt{font-family:var(--f-head);font-size:22px}
+.pkg .amt{font-family:var(--f-head);font-size:22px;color:var(--orange-dark)}
 .pkg .line{margin-top:4px;font-size:14px;color:var(--ink-2)}
 .pkg-tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--orange);border-radius:6px;padding:3px 8px}
 .pkg-tag.rec{background:var(--navy)}
