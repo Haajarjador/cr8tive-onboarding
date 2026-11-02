@@ -171,11 +171,12 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 .pd-list li.inc .pd-ic{color:#1E874B}
 .pd-list li.exc{color:var(--ink-2)}
 .pd-list li.exc .pd-ic{color:#B23B3B}
-/* Membership box (Jador version only) */
-.membox{margin-top:16px;background:var(--orange-tint);border:1px solid var(--orange-soft);border-radius:14px;padding:18px}
-.membox h3{font-size:19px;color:var(--ink);margin-bottom:6px}
-.membox p{font-size:14px;color:var(--ink-2);margin:0 0 14px;line-height:1.55}
-.membox .btn{margin-top:0}
+/* Split-pay reassurance + Membership fallback (shown only after Split Pay) */
+.split-note{margin:14px 0 0;font-size:13px;font-weight:600;color:#1E874B;line-height:1.5}
+.mem-fallback{margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.mf-head{margin:0 0 6px;font-size:15px;font-weight:700;color:var(--ink)}
+.mf-text{margin:0 0 8px;font-size:14px;color:var(--ink-2);line-height:1.6}
+.mf-link{display:inline-flex;align-items:center;min-height:44px;color:var(--orange-dark);font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px}
 /* Helper line under the plans */
 .plan-help{margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.6}
 .plan-help a{font-weight:700;color:var(--orange-dark)}
@@ -355,15 +356,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
     <div id="pkg-list" role="radiogroup" aria-label="Choose a package" style="margin-top:18px"></div>
 
-    <!-- Jador version only: Membership as a box below the cards. The button goes
-         straight to the Membership checkout (/enroll?package=membership). Shown
-         by JS when there is no ?agent=terrence. -->
-    <div class="membox" id="membership-box" hidden>
-      <h3>Need a smaller payment to get started?</h3>
-      <p>Start with Starter coverage for $199.99, then $129 a month. Your items are disputed in stages as payments come in, with one strategy call to go over your credit. Cancel anytime, or pay the balance to dispute everything at once.</p>
-      <a class="btn btn-primary" id="membership-btn" href="#" target="_blank" rel="noopener">Pay Monthly, $199.99 to Start</a>
-    </div>
-
     <!-- Terrence version only (?agent=terrence): no Membership anywhere; route
          lower-budget leads to contact Terrence directly. Shown by JS on that variant. -->
     <p class="memnote" id="lower-opt-note" hidden>Looking for a lower payment option? Text or call Terrence directly at <a href="tel:7182337404" style="font-weight:700;color:var(--orange-dark)">718-233-7404</a> and he'll set up a plan that fits your budget.</p>
@@ -379,6 +371,16 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
     <div class="summary" id="summary" hidden>
       <b id="sum-title"></b>
       <p id="sum-detail"></p>
+    </div>
+
+    <!-- Split-pay reassurance + Membership fallback. Shown only after Split Pay is
+         selected; copy + link depend on the plan. Never shown on the Terrence
+         variant (no Membership anywhere). -->
+    <p class="split-note" id="split-note" hidden>All your items disputed at once, starting now.</p>
+    <div class="mem-fallback" id="mem-fallback" hidden>
+      <p class="mf-head">Need a lower payment?</p>
+      <p class="mf-text" id="mf-text"></p>
+      <a class="mf-link" id="mf-link" href="#" target="_blank" rel="noopener">Switch to monthly</a>
     </div>
 
     <a class="btn btn-primary" id="continue-btn" href="#" aria-disabled="true">Review Agreement &amp; Continue</a>
@@ -550,7 +552,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
   // Membership is never a card. Jador shows it as a box below the cards;
   // Terrence shows nothing (a "contact Terrence directly" note instead).
-  var membershipBox = document.getElementById("membership-box");
   var lowerNote = document.getElementById("lower-opt-note");
   var membershipPkg = PACKAGES.filter(function(p){ return p.isMembership; })[0];
   if(IS_TERRENCE){
@@ -559,12 +560,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
     document.querySelectorAll(".needhelp a").forEach(function(a){
       a.href = "tel:7182337404"; a.textContent = "Text or call 718-233-7404";
     });
-  } else if(membershipBox && membershipPkg){
-    membershipBox.hidden = false;
-    var mbtn = document.getElementById("membership-btn");
-    if(mbtn){
-      mbtn.href = CHECKOUT_BASE + membershipPkg.enroll.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway";
-    }
   }
 
   // Free-review link under the plans (both versions).
@@ -645,6 +640,32 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
     });
     return b;
   }
+  // Membership fallback copy per plan (mirrors /enroll). Shown only after Split
+  // Pay is selected, and never on the Terrence variant.
+  var MEMBERSHIP_COPY = {
+    starter: { text:"Pay $199.99 today, then $129 a month for the same Starter plan. The difference: your items are disputed in phases, a few at a time as payments come in, instead of all at once.", link:"Switch to monthly" },
+    silver: { text:"Monthly payments are only available on our Starter plan: $199.99 today, then $129 a month. You would lose your assigned advisor, your strategy game plan, and priority processing, and your items are disputed in phases, a few at a time, instead of all at once.", link:"Switch to monthly Starter plan" },
+    gold: { text:"Pay $199.99 today, then $129 a month on our Membership plan. Your items are disputed in phases, a few at a time, so with 10 or more items, progress takes longer. Membership does not include Gold's assigned advisor, strategy game plan, monthly strategy calls, or priority processing. You can pay your remaining Gold balance anytime to unlock them.", link:"Switch to monthly" }
+  };
+  function updateMembershipFallback(){
+    var note = document.getElementById("split-note");
+    var fb = document.getElementById("mem-fallback");
+    var onSplit = (selMode === "split" && selPkg && !selPkg.isMembership);
+    if(note) note.hidden = !onSplit;
+    if(!fb) return;
+    if(onSplit && !IS_TERRENCE && MEMBERSHIP_COPY[selPkg.key] && membershipPkg){
+      var copy = MEMBERSHIP_COPY[selPkg.key];
+      document.getElementById("mf-text").textContent = copy.text;
+      var link = document.getElementById("mf-link");
+      link.textContent = copy.link;
+      // Continue to the existing Membership checkout, carrying the origin plan
+      // as ?file= so enroll.html tags the contact file-<plan>.
+      link.href = CHECKOUT_BASE + membershipPkg.enroll.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway&file=" + selPkg.key;
+      fb.hidden = false;
+    } else {
+      fb.hidden = true;
+    }
+  }
   function updateSummary(){
     var sum = document.getElementById("summary"), t = document.getElementById("sum-title"), d = document.getElementById("sum-detail");
     var btn = document.getElementById("continue-btn");
@@ -677,6 +698,7 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
       btn.setAttribute("aria-disabled","true");
       btn.removeAttribute("href");
     }
+    updateMembershipFallback();
   }
   document.getElementById("continue-btn").addEventListener("click", function(e){
     if(this.getAttribute("aria-disabled") === "true"){ e.preventDefault(); }
