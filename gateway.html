@@ -155,6 +155,30 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 .pkg .amt{font-family:var(--f-head);font-size:22px}
 .pkg .line{margin-top:4px;font-size:14px;color:var(--ink-2)}
 .pkg-tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--orange);border-radius:6px;padding:3px 8px}
+.pkg-tag.rec{background:var(--navy)}
+/* "See what's included" expandable panel */
+.pkg-group{margin-bottom:10px}
+.pkg-group>.pkg{margin-bottom:0}
+.pkg-toggle{appearance:none;display:block;width:100%;min-height:44px;margin-top:8px;background:var(--white);border:1px solid var(--border);border-radius:12px;color:var(--ink-2);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.pkg-toggle:hover{border-color:var(--orange-accent);color:var(--ink)}
+.pkg-details{margin-top:8px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px}
+.pd-group+.pd-group{margin-top:14px}
+.pd-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--orange-dark);margin-bottom:6px}
+.pd-text{font-size:14px;color:var(--ink-2);margin:0;line-height:1.55}
+.pd-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.pd-list li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink);line-height:1.5}
+.pd-ic{flex-shrink:0;font-weight:800;width:16px;text-align:center}
+.pd-list li.inc .pd-ic{color:#1E874B}
+.pd-list li.exc{color:var(--ink-2)}
+.pd-list li.exc .pd-ic{color:#B23B3B}
+/* Membership box (Jador version only) */
+.membox{margin-top:16px;background:var(--orange-tint);border:1px solid var(--orange-soft);border-radius:14px;padding:18px}
+.membox h3{font-size:19px;color:var(--ink);margin-bottom:6px}
+.membox p{font-size:14px;color:var(--ink-2);margin:0 0 14px;line-height:1.55}
+.membox .btn{margin-top:0}
+/* Helper line under the plans */
+.plan-help{margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.plan-help a{font-weight:700;color:var(--orange-dark)}
 .pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 .summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px}
 .summary b{font-size:15px}
@@ -331,9 +355,21 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
 
     <div id="pkg-list" role="radiogroup" aria-label="Choose a package" style="margin-top:18px"></div>
 
-    <!-- Shown only on the ?agent=terrence variant (Membership hidden): routes
-         lower-budget leads to contact directly for a custom payment plan. -->
-    <p class="memnote" id="lower-opt-note" hidden>Looking for a lower monthly option? Text or call <a href="tel:7867467414" style="font-weight:700;color:var(--orange-dark)">786-746-7414</a> and we'll set up a plan that fits your budget.</p>
+    <!-- Jador version only: Membership as a box below the cards. The button goes
+         straight to the Membership checkout (/enroll?package=membership). Shown
+         by JS when there is no ?agent=terrence. -->
+    <div class="membox" id="membership-box" hidden>
+      <h3>Need a smaller payment to get started?</h3>
+      <p>Start with Starter coverage for $199.99, then $129 a month. Your items are disputed in stages as payments come in, with one strategy call to go over your credit. Cancel anytime, or pay the balance to dispute everything at once.</p>
+      <a class="btn btn-primary" id="membership-btn" href="#" target="_blank" rel="noopener">Pay Monthly, $199.99 to Start</a>
+    </div>
+
+    <!-- Terrence version only (?agent=terrence): no Membership anywhere; route
+         lower-budget leads to contact Terrence directly. Shown by JS on that variant. -->
+    <p class="memnote" id="lower-opt-note" hidden>Looking for a lower payment option? Text or call Terrence directly at <a href="tel:7182337404" style="font-weight:700;color:var(--orange-dark)">718-233-7404</a> and he'll set up a plan that fits your budget.</p>
+
+    <!-- Both versions: nudge undecided leads to the free review. -->
+    <p class="plan-help" id="plan-help">Not sure which fits? <a id="review-link" href="#" target="_blank" rel="noopener">Book your free credit review</a> and we'll recommend one. Results vary by credit file. Cr8tive Financial Group cannot guarantee the removal of accurate information or a specific score.</p>
 
     <div id="pay-wrap" hidden>
       <p class="qlabel" style="font-weight:700;margin:18px 0 8px">Payment option</p>
@@ -380,17 +416,49 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
   }
   var PACKAGES = [
     { key:"membership", name:"Cr8tive Credit Membership", price:199.99, display:"$199.99",
-      tag:"LOWEST UPFRONT", isMembership:true, monthly:129,
+      isMembership:true, monthly:129,
       line:"$199.99 to start, then $129/month. Items disputed in stages.",
       enroll:"/enroll?package=membership" },
     { key:"starter", name:"Starter", price:599.99, display:"$599.99",
-      line:"Best for straightforward credit profiles.",
+      line:"Fewer negative items, a straightforward cleanup.",
+      who:"Clients with fewer negative items and inquiries who want a straightforward credit repair service, without an advisor or a strategy plan.",
+      incl:[
+        {t:"Comprehensive credit report analysis across all 3 bureaus", inc:true},
+        {t:"3 rounds of disputes", inc:true},
+        {t:"A credit update every 30 days in your client portal", inc:true},
+        {t:"A monthly call to review your credit update", inc:true},
+        {t:"Email support", inc:true},
+        {t:"Assigned advisor", inc:false},
+        {t:"Strategy game plan", inc:false},
+        {t:"Priority processing (standard processing)", inc:false}
+      ],
       full:"/enroll?package=starter&mode=full", split:"/enroll?package=starter&mode=split" },
-    { key:"silver", name:"Silver", price:750, display:"$750.00",
-      line:"For clients ready for comprehensive credit improvement.",
+    { key:"silver", name:"Silver", price:750, display:"$750.00", tag:"RECOMMENDED",
+      line:"2 more rounds, an advisor and a strategy plan, for $150 more than Starter.",
+      who:"Clients who want disputes plus guidance: an assigned advisor and a strategy plan built around their goals.",
+      incl:[
+        {t:"Comprehensive credit report analysis across all 3 bureaus", inc:true},
+        {t:"5 rounds of disputes", inc:true},
+        {t:"Priority processing", inc:true},
+        {t:"Your own assigned credit advisor", inc:true},
+        {t:"A strategy game plan built around your goals", inc:true},
+        {t:"A monthly strategy call with your advisor to go over every item on your report, so you understand it and how to leverage your credit", inc:true},
+        {t:"A credit update every 30 days in your client portal", inc:true}
+      ],
       full:"/enroll?package=silver&mode=full", split:"/enroll?package=silver&mode=split" },
     { key:"gold", name:"Gold", price:1000, display:"$1,000.00",
-      line:"For complex credit situations that need advanced strategy.",
+      line:"For 10 or more negative items, or a bankruptcy.",
+      who:"Clients with 10 or more negative items on their credit report, or a bankruptcy.",
+      incl:[
+        {t:"Everything in Silver, for files with 10 or more negative items or a bankruptcy", inc:true},
+        {t:"5 rounds of disputes", inc:true},
+        {t:"Priority processing", inc:true},
+        {t:"Your own assigned credit advisor", inc:true},
+        {t:"A strategy game plan built around your goals, including funding or loan approval", inc:true},
+        {t:"A monthly strategy call with your advisor to go over every item on your report", inc:true},
+        {t:"Bankruptcy and repossession dispute strategy", inc:true},
+        {t:"A credit update every 30 days in your client portal", inc:true}
+      ],
       full:"/enroll?package=gold&mode=full", split:"/enroll?package=gold&mode=split" }
   ];
 
@@ -478,17 +546,71 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
   // lower-budget leads to contact him directly instead. One source of truth so
   // every other gateway edit applies to both versions automatically.
   var AGENT = (new URLSearchParams(location.search)).get("agent");
-  var HIDE_MEMBERSHIP = (AGENT === "terrence");
+  var IS_TERRENCE = (AGENT === "terrence");
+
+  // Membership is never a card. Jador shows it as a box below the cards;
+  // Terrence shows nothing (a "contact Terrence directly" note instead).
+  var membershipBox = document.getElementById("membership-box");
   var lowerNote = document.getElementById("lower-opt-note");
-  if(HIDE_MEMBERSHIP && lowerNote) lowerNote.hidden = false;
+  var membershipPkg = PACKAGES.filter(function(p){ return p.isMembership; })[0];
+  if(IS_TERRENCE){
+    if(lowerNote) lowerNote.hidden = false;
+    // Terrence: swap every "Need help?" number to his line. No 786 anywhere.
+    document.querySelectorAll(".needhelp a").forEach(function(a){
+      a.href = "tel:7182337404"; a.textContent = "Text or call 718-233-7404";
+    });
+  } else if(membershipBox && membershipPkg){
+    membershipBox.hidden = false;
+    var mbtn = document.getElementById("membership-btn");
+    if(mbtn){
+      mbtn.href = CHECKOUT_BASE + membershipPkg.enroll.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway";
+    }
+  }
+
+  // Free-review link under the plans (both versions).
+  var reviewLink = document.getElementById("review-link");
+  if(reviewLink) reviewLink.href = BOOKING_LINK;
+
   var list = document.getElementById("pkg-list");
-  PACKAGES.filter(function(p){ return !(HIDE_MEMBERSHIP && p.isMembership); }).forEach(function(p){
+  PACKAGES.filter(function(p){ return !p.isMembership; }).forEach(function(p){
+    var group = document.createElement("div");
+    group.className = "pkg-group";
+
     var el = document.createElement("button");
     el.className = "pkg"; el.type = "button"; el.setAttribute("role","radio"); el.setAttribute("aria-checked","false"); el.dataset.key = p.key;
-    var tagHtml = p.tag ? '<span class="pkg-tag">'+p.tag+'</span>' : '';
+    var tagHtml = p.tag ? '<span class="pkg-tag'+(p.key==="silver"?" rec":"")+'">'+p.tag+'</span>' : '';
     el.innerHTML = '<div class="pkg-top"><h3>'+p.name+'</h3><span class="amt">'+p.display+'</span></div>'+tagHtml+'<p class="line">'+p.line+'</p>';
     el.addEventListener("click", function(){ selectPkg(p.key); });
-    list.appendChild(el);
+    group.appendChild(el);
+
+    // "See what's included" panel. The toggle is a sibling of the card button,
+    // so opening the panel never selects the package.
+    if(p.who || (p.incl && p.incl.length)){
+      var tog = document.createElement("button");
+      tog.className = "pkg-toggle"; tog.type = "button"; tog.setAttribute("aria-expanded","false");
+      tog.textContent = "See what's included";
+      var panel = document.createElement("div");
+      panel.className = "pkg-details"; panel.hidden = true;
+      var html = "";
+      if(p.who){ html += '<div class="pd-group"><div class="pd-label">Who it\'s for</div><p class="pd-text">'+p.who+'</p></div>'; }
+      if(p.incl && p.incl.length){
+        html += '<div class="pd-group"><div class="pd-label">What\'s included</div><ul class="pd-list">';
+        p.incl.forEach(function(it){
+          html += '<li class="'+(it.inc?"inc":"exc")+'"><span class="pd-ic">'+(it.inc?"✓":"✕")+'</span>'+it.t+'</li>';
+        });
+        html += '</ul></div>';
+      }
+      panel.innerHTML = html;
+      tog.addEventListener("click", function(){
+        var open = panel.hidden;
+        panel.hidden = !open;
+        tog.setAttribute("aria-expanded", open ? "true" : "false");
+        tog.textContent = open ? "Hide details" : "See what's included";
+      });
+      group.appendChild(tog);
+      group.appendChild(panel);
+    }
+    list.appendChild(group);
   });
   function selectPkg(key){
     selPkg = PACKAGES.filter(function(p){return p.key===key;})[0];
