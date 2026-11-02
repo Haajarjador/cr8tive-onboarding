@@ -343,18 +343,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
     <h1 class="big">Choose Your Program</h1>
     <p class="lede" style="color:var(--ink-2)">Select your package and payment option.</p>
 
-    <div class="qcard">
-      <p class="qlabel opt">What are you working toward?</p>
-      <div class="chips" id="goal-chips-b" aria-label="What are you working toward? (optional)">
-        <button class="chip" aria-pressed="false" data-val="home">Buy a home</button>
-        <button class="chip" aria-pressed="false" data-val="car">Buy a car</button>
-        <button class="chip" aria-pressed="false" data-val="rent">Rent a place</button>
-        <button class="chip" aria-pressed="false" data-val="business">Business funding</button>
-        <button class="chip" aria-pressed="false" data-val="cards">Cards</button>
-        <button class="chip" aria-pressed="false" data-val="improve">Just improve</button>
-      </div>
-    </div>
-
     <div id="pkg-list" role="radiogroup" aria-label="Choose a package" style="margin-top:18px"></div>
 
     <!-- Terrence version only (?agent=terrence): no Membership anywhere; route
@@ -531,16 +519,6 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
   }
   document.getElementById("book-btn").addEventListener("click", function(e){
     if(this.getAttribute("aria-disabled") === "true"){ e.preventDefault(); }
-  });
-
-  /* ---------------- Program screen: optional goal chips (toggle) --------- */
-  document.querySelectorAll("#goal-chips-b .chip").forEach(function(b){
-    b.addEventListener("click", function(){
-      var on = b.getAttribute("aria-pressed") === "true";
-      // tapping the chosen chip again clears it; only one at a time
-      document.querySelectorAll("#goal-chips-b .chip").forEach(function(o){ o.setAttribute("aria-pressed","false"); o.setAttribute("aria-checked","false"); });
-      if(!on){ b.setAttribute("aria-pressed","true"); b.setAttribute("aria-checked","true"); }
-    });
   });
 
   /* ---------------- Program screen: packages + payment ------------------- */
