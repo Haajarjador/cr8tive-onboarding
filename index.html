@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="CR8TIVE Financial Group client onboarding: finish your setup in a few quick steps.">
+<meta name="description" content="CR8TIVE Financial Group client onboarding: finish your setup in one place.">
 <meta name="robots" content="noindex">
 <title>CR8TIVE Financial Group · Client Onboarding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,9 +11,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
 <style>
 /* =========================================================================
-   CR8TIVE Onboarding (V2) — design system per Cr8tive_Gateway_Design_Spec.md
+   CR8TIVE Onboarding (V3, one-link flow)
+   Design system per Cr8tive_Gateway_Design_Spec.md
    Navy #0B1730, orange button #C2510F, bright-orange accent #F08A4B.
    Headings DM Serif Display, body Inter. Mobile first, 320px up.
+   The client finishes every step on this page. Steps open one at a time.
    ========================================================================= */
 :root{
   --navy:#0B1730; --navy-panel:#13254A; --navy-line:#22355E;
@@ -58,27 +60,45 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 .progress-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--on-navy-2);font-weight:600}
 .progress-top .count{font-variant-numeric:tabular-nums;color:var(--white)}
 .track{margin-top:8px;height:8px;border-radius:999px;background:var(--navy-line);overflow:hidden}
-.track i{display:block;height:100%;width:40%;background:var(--orange);border-radius:999px;transition:width .4s ease}
+.track i{display:block;height:100%;width:20%;background:var(--orange);border-radius:999px;transition:width .4s ease}
 
-/* Checklist */
+/* Steps */
 .list{padding-block:26px}
 .card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:14px;align-items:start}
-.card.todo{border:2px solid var(--orange)}
-.badge{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
-.card.done .badge{background:var(--navy);color:var(--white)}
-.card.todo .badge{border:2px solid var(--orange);color:var(--orange);background:var(--orange-tint)}
+.card.active{border:2px solid var(--orange)}
+.card.locked{opacity:.55}
+.badge{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none;border:2px solid var(--border);color:var(--ink-2)}
+.card.done .badge{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.card.active .badge{border-color:var(--orange);color:var(--orange);background:var(--orange-tint)}
 .badge svg{width:18px;height:18px}
+.card.done .badge .num{display:none}
+.card:not(.done) .badge svg{display:none}
 .c-body{min-width:0}
 .c-body h3{font-size:19px}
-.c-body p{margin:5px 0 0;font-size:15px;color:var(--ink-2)}
+.c-body > p{margin:5px 0 0;font-size:15px;color:var(--ink-2)}
+.step-detail{margin-top:4px}
+.card:not(.active) .step-detail{display:none}
+.reopen{all:unset;cursor:pointer;margin-top:6px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.card:not(.done) .reopen{display:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--f-body);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:0;padding:13px 20px;border-radius:10px;min-height:48px;margin-top:14px;width:100%}
 .btn-primary{background:var(--orange);color:var(--white)}
 .btn-primary:hover{background:var(--orange-dark)}
 .btn-ghost{background:var(--white);color:var(--navy);border:1.5px solid var(--navy);margin-top:10px}
 .btn-ghost:hover{background:var(--page)}
+.btn-next{background:var(--navy);color:var(--white)}
+.btn-next:hover{background:var(--navy-panel)}
 .ext{font-size:13px}
 .subtle{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
 .note{margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.sub-h{font-family:var(--f-body);font-size:14px;font-weight:700;margin:18px 0 6px;color:var(--ink)}
+.formbox{margin-top:10px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white)}
+.formbox iframe{width:100%;min-height:520px;border:0;display:block}
+.waiting{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--orange-tint);border:1px solid var(--orange-soft);font-size:14px;color:var(--ink)}
+.ready{display:grid;gap:0;margin-top:12px}
+.ready .row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--border);font-size:14.5px}
+.ready dt{font-weight:700}
+.ready .row > *{min-width:0}
+.ready dd{margin:0;color:var(--ink-2);overflow-wrap:anywhere}
 
 /* What happens next */
 .next{background:var(--navy);color:var(--on-navy);border-radius:16px;padding:24px;margin-bottom:26px}
@@ -89,6 +109,19 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 .next dt{font-weight:700;color:var(--white);font-size:14px}
 .next dd{margin:0;font-size:14.5px;color:var(--on-navy)}
 
+/* Results strip (same as gateway.html) */
+.results{margin-bottom:26px}
+.results-hd{display:flex;justify-content:space-between;align-items:baseline}
+.results-hd h2{font-size:22px}
+.results-hd span{font-size:12px;color:var(--ink-2)}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:14px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.rcard{flex:0 0 auto;scroll-snap-align:start;width:240px}
+.rimg{width:240px;height:170px;border-radius:14px;object-fit:cover;object-position:top;display:block;background:var(--navy);border:1px solid var(--border)}
+.rcard .cap{margin-top:8px;font-size:13px;font-weight:700}
+.rcard .cap span{display:block;font-weight:500;color:var(--ink-2);font-size:12px;margin-top:2px}
+.rlink{display:inline-block;margin-top:12px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.disclaim{margin-top:10px;font-size:12px;color:var(--ink-2)}
+
 /* Footer */
 .foot{background:var(--page);border-top:1px solid var(--border)}
 .foot .wrap{padding-block:30px 40px;text-align:center}
@@ -97,8 +130,7 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 .foot .legal{margin-top:18px;font-size:12px;color:var(--ink-2);line-height:1.5}
 
 @media (max-width:360px){
-  .next .row{grid-template-columns:1fr}
-  .next dd{padding-top:2px}
+  .next .row,.ready .row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -119,13 +151,13 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <span class="kicker" data-i18n="kicker">YOU'RE ENROLLED</span>
-      <h1 data-i18n="title">Welcome to Cr8tive. Let's finish your setup.</h1>
-      <p data-i18n="sub" data-sub-two="sub_two" data-sub-three="sub_three">Three quick steps and our team starts on your file.</p>
+      <span class="kicker" id="hero-k" data-i18n="kicker">YOU'RE ENROLLED</span>
+      <h1 id="hero-h" data-i18n="title">Welcome to Cr8tive. Let's finish your setup.</h1>
+      <p id="hero-p" data-i18n="sub">Everything happens on this page. Keep it open until you see "You're all set."</p>
       <div class="progress">
         <div class="progress-top">
           <span data-i18n="progress">Setup progress</span>
-          <span class="count"><span id="done-n">2</span> / 5</span>
+          <span class="count"><span id="done-n">1</span> / 5</span>
         </div>
         <div class="track"><i id="bar"></i></div>
       </div>
@@ -135,58 +167,84 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
   <section class="list">
     <div class="wrap">
 
-      <!-- 1. Service agreement (done by default; agreement signed before payment) -->
-      <article class="card done" id="step1">
-        <div class="badge" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
+      <!-- 1. Payment complete (always done; this page only opens after payment) -->
+      <article class="card done" id="card-pay">
+        <div class="badge" aria-hidden="true"><span class="num">1</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="s1_title">Service agreement signed</h3>
-          <p data-i18n="s1_body">Signed before payment. A copy is in your email.</p>
-          <a class="btn btn-primary" id="s1-action" href="#" target="_blank" rel="noopener" hidden><span data-i18n="s1_action">Sign Agreement</span> <span class="ext" aria-hidden="true">↗</span></a>
+          <h3 data-i18n="pay_title">Payment complete</h3>
+          <p data-i18n="pay_body">Your receipt and payment agreement were sent to your email.</p>
         </div>
       </article>
 
-      <!-- 2. Payment complete (always done; page only opens after payment) -->
-      <article class="card done" id="step2">
-        <div class="badge" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
+      <!-- 2. Service agreement (GHL), signed right here -->
+      <article class="card" id="card-agree" data-step="agree">
+        <div class="badge" aria-hidden="true"><span class="num">2</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="s2_title">Payment complete</h3>
-          <p data-i18n="s2_body">Your receipt was sent to your email.</p>
+          <h3 data-i18n="agree_title">Sign your service agreement</h3>
+          <p data-i18n="agree_body">Read and sign below. You may cancel within 3 business days of signing.</p>
+          <button type="button" class="reopen" data-open="agree" data-i18n="reopen">Open again</button>
+          <div class="step-detail">
+            <!-- Embedded GHL agreement form (signature field). Filled in by JS
+                 from AGREEMENT_FORM_ID. If that is blank, the fallback below shows. -->
+            <div class="formbox" id="agree-embed" hidden></div>
+            <div class="waiting" id="agree-fallback" hidden data-i18n="agree_fallback">Your service agreement was sent to your phone and email. Open it, sign it, then come back here and tap the button below.</div>
+            <button type="button" class="btn btn-next" data-done="agree" data-i18n="agree_next">I signed my agreement, continue</button>
+          </div>
         </div>
       </article>
 
-      <!-- 3. Credit monitoring (done for review clients, action for the rest) -->
-      <article class="card todo" id="step3">
-        <div class="badge" aria-hidden="true"><span class="num">3</span><svg class="chk" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" hidden><path d="M4 10.5l4 4 8-9"/></svg></div>
+      <!-- 3. Credit monitoring (opens in a new tab; this page waits) -->
+      <article class="card" id="card-mon" data-step="mon">
+        <div class="badge" aria-hidden="true"><span class="num">3</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="s3_title">Set up credit monitoring and share your login</h3>
-          <p data-i18n="s3_body">Sign up for SmartCredit, then share your login securely so we can pull all 3 bureaus.</p>
-          <a class="btn btn-primary" id="s3-action" href="https://www.smartcredit.com/?PID=24800" target="_blank" rel="noopener"><span data-i18n="s3_action">Set Up SmartCredit</span> <span class="ext" aria-hidden="true">↗</span></a>
-          <a class="btn btn-ghost" id="s3-iq" href="https://member.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" target="_blank" rel="noopener"><span data-i18n="s3_iq_action">Sign Up for IdentityIQ</span> <span class="ext" aria-hidden="true">↗</span></a>
-          <p class="note" id="s3-iq-note" data-i18n="s3_iq_note">IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.</p>
-          <!-- D3: DisputeFox secure credential form — placeholder until the real link is confirmed -->
-          <a class="subtle" id="s3-secure" href="https://api.leadconnectorhq.com/widget/form/25Sd8GOFIqxR898uDLJk" target="_blank" rel="noopener" data-i18n="s3_secure">Share your login securely</a>
+          <h3 data-i18n="mon_title">Set up credit monitoring</h3>
+          <p data-i18n="mon_body">This lets us pull all 3 bureaus. It opens in a new tab, so this page stays right here.</p>
+          <button type="button" class="reopen" data-open="mon" data-i18n="reopen">Open again</button>
+          <div class="step-detail">
+            <a class="btn btn-primary" id="sc-btn" href="https://www.smartcredit.com/?PID=24800" target="_blank" rel="noopener"><span data-i18n="mon_sc">Set Up SmartCredit</span> <span class="ext" aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" id="iq-btn" href="https://member.identityiq.com/sc-securepreferred.aspx?offercode=431269KD" target="_blank" rel="noopener"><span data-i18n="mon_iq">Sign Up for IdentityIQ</span> <span class="ext" aria-hidden="true">↗</span></a>
+            <p class="note" data-i18n="mon_iq_note">IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.</p>
+            <div class="waiting" id="mon-wait" hidden data-i18n="mon_wait">When you finish signing up, come back to this tab and tap the button below. Write down the email and password you created. You will need them in the next step.</div>
+            <button type="button" class="btn btn-next" data-done="mon" data-i18n="mon_next">I set up my monitoring, continue</button>
+          </div>
         </div>
       </article>
 
-      <!-- 4. Client Credentials Form -->
-      <article class="card todo" id="step4">
-        <div class="badge" aria-hidden="true"><span class="num">4</span></div>
+      <!-- 4. Monitoring login + documents, one screen -->
+      <article class="card" id="card-docs" data-step="docs">
+        <div class="badge" aria-hidden="true"><span class="num">4</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="s4_title">Complete your Client Credentials Form</h3>
-          <p data-i18n="s4_body">Takes about 5 minutes. Needed to start your disputes.</p>
-          <a class="btn btn-primary" href="https://api.leadconnectorhq.com/widget/form/yRCQRUWgoA2BjXyyXpcd" target="_blank" rel="noopener"><span data-i18n="s4_action">Open Form</span> <span class="ext" aria-hidden="true">↗</span></a>
+          <h3 data-i18n="docs_title">Share your login and upload your documents</h3>
+          <p data-i18n="docs_body">Two short forms on this screen. About 5 minutes total.</p>
+          <button type="button" class="reopen" data-open="docs" data-i18n="reopen">Open again</button>
+          <div class="step-detail">
+            <p class="sub-h" data-i18n="docs_login_h">A. Your monitoring login</p>
+            <div class="formbox" data-form="25Sd8GOFIqxR898uDLJk" data-title="Share your monitoring login"></div>
+            <p class="note" data-i18n="docs_login_note">Share your password only here, never by text.</p>
+            <p class="sub-h" data-i18n="docs_form_h">B. Your Client Credentials Form and documents</p>
+            <div class="formbox" data-form="yRCQRUWgoA2BjXyyXpcd" data-title="Client Credentials Form"></div>
+            <button type="button" class="btn btn-next" data-done="docs" data-i18n="docs_next">I submitted both forms, finish</button>
+          </div>
         </div>
       </article>
 
-      <!-- 5. Save our number + open client portal -->
-      <article class="card todo" id="step5">
-        <div class="badge" aria-hidden="true"><span class="num">5</span></div>
+      <!-- 5. You're all set: number, portal, what's next -->
+      <article class="card" id="card-final" data-step="final">
+        <div class="badge" aria-hidden="true"><span class="num">5</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="s5_title">Save our number and open your client portal</h3>
-          <p data-i18n="s5_body">All dispute updates are posted in your client portal.</p>
-          <p class="note" data-i18n="s5_note">Portal access will be available once we process and complete your disputes. We'll text your login details when it's ready.</p>
-          <a class="btn btn-primary" href="https://clientportal.scorexer.com" target="_blank" rel="noopener"><span data-i18n="s5_action">Open Client Portal</span> <span class="ext" aria-hidden="true">↗</span></a>
-          <a class="subtle" href="contact.vcf" download data-i18n="s5_link">Save our contact</a>
+          <h3 data-i18n="final_title">Save our number and your portal login</h3>
+          <p data-i18n="final_body">This is everything you need. We'll also text and email you a copy.</p>
+          <div class="step-detail">
+            <dl class="ready">
+              <div class="row"><dt data-i18n="final_num_k">Our number</dt><dd><a href="tel:7867467414">(786) 746-7414</a><br><span data-i18n="final_num_v">All dispute updates come from this number only.</span></dd></div>
+              <div class="row"><dt data-i18n="final_portal_k">Client portal</dt><dd><a href="https://clientportal.scorexer.com" target="_blank" rel="noopener">clientportal.scorexer.com</a></dd></div>
+              <div class="row"><dt data-i18n="final_user_k">Username</dt><dd data-i18n="final_user_v">Your email</dd></div>
+              <div class="row"><dt data-i18n="final_pass_k">Password</dt><dd data-i18n="final_pass_v">You create it the first time you log in</dd></div>
+            </dl>
+            <a class="btn btn-primary" href="contact.vcf" download><span data-i18n="final_save">Save Our Contact</span></a>
+            <a class="btn btn-ghost" href="https://clientportal.scorexer.com" target="_blank" rel="noopener"><span data-i18n="final_open">Open Client Portal</span> <span class="ext" aria-hidden="true">↗</span></a>
+            <p class="note" data-i18n="final_note">Your dispute updates show up in the portal after your first round is sent.</p>
+          </div>
         </div>
       </article>
 
@@ -199,6 +257,14 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
           <div class="row"><dt data-i18n="next2_when">Every 30 days</dt><dd data-i18n="next2_what">You get a credit update in your client portal.</dd></div>
           <div class="row"><dt data-i18n="next3_when">Anytime</dt><dd data-i18n="next3_what">Text us with questions. A real person answers.</dd></div>
         </dl>
+      </div>
+
+      <!-- Real client results (same strip and link as gateway.html) -->
+      <div class="results">
+        <div class="results-hd"><h2 data-i18n="res_h">Real Client Results</h2><span data-i18n="res_swipe">Swipe →</span></div>
+        <div class="strip" id="results-strip"></div>
+        <a class="rlink" href="https://credit.cr8tivebusiness.com" target="_blank" rel="noopener" data-i18n="res_link">See all results on our website</a>
+        <p class="disclaim" data-i18n="res_disc">Individual results vary. No results guaranteed. Score changes shown are each client's 3-bureau increase (Equifax / Experian / TransUnion).</p>
       </div>
 
     </div>
@@ -216,54 +282,69 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 <script>
 (function(){
   /* ----------------------------------------------------------------------
-     Build-time switches
-     TRIAL_ENABLED: off until SmartCredit confirms the trial link (D8).
-     AGREEMENT_SIGNED_FIRST: true once D5 is approved (agreement before payment).
-       When false, step 1 becomes a "Sign Agreement" action instead of done.
-     SMARTCREDIT_SIGNUP / SMARTCREDIT_TRIAL: provider links (D8).
-     AGREEMENT_LINK: service agreement URL (only used if not signed first).
+     SETTINGS
+     AGREEMENT_FORM_ID: the GHL form (with a signature field) that holds the
+       service agreement. Paste its ID from GHL > Sites > Forms > Share.
+       Leave blank and step 2 falls back to "we texted you the agreement",
+       which is how it works today, so nothing breaks before it exists.
+     TRIAL_ENABLED / SMARTCREDIT_*: provider links (D8).
      ---------------------------------------------------------------------- */
+  var AGREEMENT_FORM_ID = "";
   var TRIAL_ENABLED = false;
-  var AGREEMENT_SIGNED_FIRST = true;
   var SMARTCREDIT_SIGNUP = "https://www.smartcredit.com/?PID=24800";
-  var SMARTCREDIT_TRIAL = "";                 // set when D8 confirmed
-  var AGREEMENT_LINK = "#AGREEMENT-LINK-NEEDED";
+  var SMARTCREDIT_TRIAL = "";
 
-  /* ---- Translations (EN/ES) — all copy in one object (spec Section 3) ---- */
+  /* ---- Translations (EN/ES) ---- */
   var T = {
     en:{
       lang_en:"EN", lang_es:"ES",
       kicker:"YOU'RE ENROLLED",
       title:"Welcome to Cr8tive. Let's finish your setup.",
-      sub_two:"Two quick steps and our team starts on your file.",
-      sub_three:"Three quick steps and our team starts on your file.",
+      sub:"Everything happens on this page. Keep it open until you see \"You're all set.\"",
+      done_kicker:"YOU'RE ALL SET",
+      done_title:"You're all set. Our team is starting on your file.",
+      done_sub:"Save the details below. We'll also text and email you a copy.",
       progress:"Setup progress",
-      s1_title:"Service agreement signed",
-      s1_body:"Signed before payment. A copy is in your email.",
-      s1_action:"Sign Agreement",
-      s2_title:"Payment complete",
-      s2_body:"Your receipt was sent to your email.",
-      s3_done_title:"Credit monitoring connected",
-      s3_done_body:"We already have your monitoring access from your review.",
-      s3_title:"Set up credit monitoring and share your login",
-      s3_body:"Sign up for SmartCredit, then share your login securely so we can pull all 3 bureaus.",
-      s3_action:"Set Up SmartCredit",
-      s3_iq_action:"Sign Up for IdentityIQ",
-      s3_iq_note:"IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.",
-      s3_secure:"Share your login securely",
-      s4_title:"Complete your Client Credentials Form",
-      s4_body:"Takes about 5 minutes. Needed to start your disputes.",
-      s4_action:"Open Form",
-      s5_title:"Save our number and open your client portal",
-      s5_body:"All dispute updates are posted in your client portal.",
-      s5_action:"Open Client Portal",
-      s5_note:"Portal access will be available once we process and complete your disputes. We'll text your login details when it's ready.",
-      s5_link:"Save our contact",
+      reopen:"Open again",
+      pay_title:"Payment complete",
+      pay_body:"Your receipt and payment agreement were sent to your email.",
+      agree_title:"Sign your service agreement",
+      agree_body:"Read and sign below. You may cancel within 3 business days of signing.",
+      agree_fallback:"Your service agreement was sent to your phone and email. Open it, sign it, then come back here and tap the button below.",
+      agree_next:"I signed my agreement, continue",
+      mon_title:"Set up credit monitoring",
+      mon_body:"This lets us pull all 3 bureaus. It opens in a new tab, so this page stays right here.",
+      mon_done_title:"Credit monitoring connected",
+      mon_done_body:"We already have your monitoring access from your review.",
+      mon_sc:"Set Up SmartCredit",
+      mon_iq:"Sign Up for IdentityIQ",
+      mon_iq_note:"IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.",
+      mon_wait:"When you finish signing up, come back to this tab and tap the button below. Write down the email and password you created. You will need them in the next step.",
+      mon_next:"I set up my monitoring, continue",
+      docs_title:"Share your login and upload your documents",
+      docs_body:"Two short forms on this screen. About 5 minutes total.",
+      docs_login_h:"A. Your monitoring login",
+      docs_login_note:"Share your password only here, never by text.",
+      docs_form_h:"B. Your Client Credentials Form and documents",
+      docs_next:"I submitted both forms, finish",
+      final_title:"Save our number and your portal login",
+      final_body:"This is everything you need. We'll also text and email you a copy.",
+      final_num_k:"Our number",
+      final_num_v:"All dispute updates come from this number only.",
+      final_portal_k:"Client portal",
+      final_user_k:"Username", final_user_v:"Your email",
+      final_pass_k:"Password", final_pass_v:"You create it the first time you log in",
+      final_save:"Save Our Contact",
+      final_open:"Open Client Portal",
+      final_note:"Your dispute updates show up in the portal after your first round is sent.",
       next_kicker:"WHAT HAPPENS NEXT",
       next_h:"What happens next",
       next1_when:"Day 1", next1_what:"We build your dispute strategy and send out disputes.",
       next2_when:"Every 30 days", next2_what:"You get a credit update in your client portal.",
       next3_when:"Anytime", next3_what:"Text us with questions. A real person answers.",
+      res_h:"Real Client Results", res_swipe:"Swipe →",
+      res_link:"See all results on our website",
+      res_disc:"Individual results vary. No results guaranteed. Score changes shown are each client's 3-bureau increase (Equifax / Experian / TransUnion).",
       help:"Questions? Text or call us.",
       legal:"Not a law firm. Credit repair results vary. No specific outcome is guaranteed."
     },
@@ -271,104 +352,198 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       lang_en:"EN", lang_es:"ES",
       kicker:"YA ESTÁS INSCRITO",
       title:"Bienvenido a Cr8tive. Terminemos tu registro.",
-      sub_two:"Dos pasos rápidos y nuestro equipo empieza con tu archivo.",
-      sub_three:"Tres pasos rápidos y nuestro equipo empieza con tu archivo.",
+      sub:"Todo se hace en esta página. Mantenla abierta hasta que veas \"Todo listo.\"",
+      done_kicker:"TODO LISTO",
+      done_title:"Todo listo. Nuestro equipo ya empieza con tu archivo.",
+      done_sub:"Guarda los datos de abajo. También te los enviaremos por texto y correo.",
       progress:"Progreso",
-      s1_title:"Contrato de servicio firmado",
-      s1_body:"Firmado antes del pago. Tienes una copia en tu correo.",
-      s1_action:"Firmar contrato",
-      s2_title:"Pago completado",
-      s2_body:"Tu recibo fue enviado a tu correo.",
-      s3_done_title:"Monitoreo de crédito conectado",
-      s3_done_body:"Ya tenemos acceso a tu monitoreo desde tu revisión.",
-      s3_title:"Activa tu monitoreo y comparte tu acceso",
-      s3_body:"Regístrate en SmartCredit y comparte tu acceso de forma segura para ver los 3 burós.",
-      s3_action:"Activar SmartCredit",
-      s3_iq_action:"Inscribirse en Identity IQ",
-      s3_iq_note:"IdentityIQ es una opción alternativa. Úsala solo si SmartCredit no está disponible.",
-      s3_secure:"Comparte tu acceso de forma segura",
-      s4_title:"Completa tu formulario de credenciales",
-      s4_body:"Toma unos 5 minutos. Es necesario para iniciar tus disputas.",
-      s4_action:"Abrir formulario",
-      s5_title:"Guarda nuestro número y abre tu portal",
-      s5_body:"Todas las actualizaciones se publican en tu portal de cliente.",
-      s5_action:"Abrir portal de cliente",
-      s5_note:"El acceso al portal estará disponible una vez que procesemos y completemos tus disputas. Te enviaremos tus datos de acceso cuando esté listo.",
-      s5_link:"Guardar nuestro contacto",
+      reopen:"Abrir de nuevo",
+      pay_title:"Pago completado",
+      pay_body:"Tu recibo y tu acuerdo de pago fueron enviados a tu correo.",
+      agree_title:"Firma tu contrato de servicio",
+      agree_body:"Léelo y fírmalo abajo. Puedes cancelar dentro de 3 días hábiles después de firmar.",
+      agree_fallback:"Tu contrato de servicio fue enviado a tu teléfono y correo. Ábrelo, fírmalo y regresa aquí para tocar el botón de abajo.",
+      agree_next:"Ya firmé mi contrato, continuar",
+      mon_title:"Activa tu monitoreo de crédito",
+      mon_body:"Así podemos ver los 3 burós. Se abre en otra pestaña, así que esta página se queda aquí.",
+      mon_done_title:"Monitoreo de crédito conectado",
+      mon_done_body:"Ya tenemos acceso a tu monitoreo desde tu revisión.",
+      mon_sc:"Activar SmartCredit",
+      mon_iq:"Inscribirse en IdentityIQ",
+      mon_iq_note:"IdentityIQ es una opción alternativa. Úsala solo si SmartCredit no está disponible.",
+      mon_wait:"Cuando termines de registrarte, regresa a esta pestaña y toca el botón de abajo. Anota el correo y la contraseña que creaste. Los necesitarás en el siguiente paso.",
+      mon_next:"Ya activé mi monitoreo, continuar",
+      docs_title:"Comparte tu acceso y sube tus documentos",
+      docs_body:"Dos formularios cortos en esta pantalla. Unos 5 minutos en total.",
+      docs_login_h:"A. Tu acceso al monitoreo",
+      docs_login_note:"Comparte tu contraseña solo aquí, nunca por texto.",
+      docs_form_h:"B. Tu formulario de credenciales y documentos",
+      docs_next:"Ya envié ambos formularios, terminar",
+      final_title:"Guarda nuestro número y tu acceso al portal",
+      final_body:"Esto es todo lo que necesitas. También te enviaremos una copia por texto y correo.",
+      final_num_k:"Nuestro número",
+      final_num_v:"Todas las actualizaciones de disputas vienen solo de este número.",
+      final_portal_k:"Portal de cliente",
+      final_user_k:"Usuario", final_user_v:"Tu correo",
+      final_pass_k:"Contraseña", final_pass_v:"La creas la primera vez que entras",
+      final_save:"Guardar nuestro contacto",
+      final_open:"Abrir portal de cliente",
+      final_note:"Tus actualizaciones aparecen en el portal después de enviar tu primera ronda.",
       next_kicker:"LO QUE SIGUE",
       next_h:"Lo que sigue",
       next1_when:"Día 1", next1_what:"Creamos tu estrategia de disputa y enviamos tus disputas.",
       next2_when:"Cada 30 días", next2_what:"Recibes una actualización en tu portal.",
       next3_when:"Siempre", next3_what:"Envíanos un mensaje. Te responde una persona real.",
+      res_h:"Resultados reales de clientes", res_swipe:"Desliza →",
+      res_link:"Ver todos los resultados en nuestro sitio",
+      res_disc:"Los resultados individuales varían. No se garantizan resultados. Los cambios mostrados son el aumento de cada cliente en los 3 burós (Equifax / Experian / TransUnion).",
       help:"¿Preguntas? Escríbenos o llámanos.",
       legal:"No somos un bufete de abogados. Los resultados de la reparación de crédito varían. No se garantiza ningún resultado específico."
     }
   };
 
-  /* ---- Which checklist state? Phase 1: GHL sends /?from=review or / ----
-     from=review  -> step 3 already done (came through Credit Review), 3/5, "Two"
-     default      -> step 3 is an action (Ready to Start),            2/5, "Three" */
-  var fromReview = false;
-  try{ fromReview = new URLSearchParams(location.search).get("from") === "review"; }catch(e){}
+  /* ---- URL params ----
+     ?from=review   client came through the Credit Review path, monitoring is done
+     ?step=agree|mon|docs   resume link (used by the GHL "still not finished" text)
+     first_name, last_name, email, phone   passed into the embedded GHL forms so
+       they prefill and attach to the same contact. GHL adds these to the link. */
+  var q; try{ q = new URLSearchParams(location.search); }catch(e){ q = { get:function(){ return null; } }; }
+  var fromReview = q.get("from") === "review";
+  var prefill = "";
+  ["first_name","last_name","email","phone"].forEach(function(k){
+    var v = q.get(k); if(v) prefill += (prefill ? "&" : "?") + k + "=" + encodeURIComponent(v);
+  });
 
-  var step3 = document.getElementById("step3");
-  var doneN = fromReview ? 3 : 2;
+  /* ---- Progress, saved in this browser so a client can close and come back ---- */
+  var ORDER = ["agree","mon","docs","final"];
+  var KEY = "cr8-onb-v3" + (q.get("email") ? ":" + q.get("email").toLowerCase() : "");
+  var state = {};
+  try{ state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ state = {}; }
+  if(fromReview) state.mon = true;
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 
-  function applyStateStrings(lang){
-    var d = T[lang];
-    // step 3 title/body swap depending on state
-    var h = step3.querySelector("h3"), p = step3.querySelector("p");
-    if(fromReview){ h.textContent = d.s3_done_title; p.textContent = d.s3_done_body; }
-    else { h.textContent = d.s3_title; p.textContent = d.s3_body; }
-    // hero subtext: two vs three
-    var sub = document.querySelector("[data-i18n='sub'], [data-sub-two]");
+  var open = null;           // the step currently expanded
+  var resume = q.get("step");
+  function firstOpen(){
+    for(var i=0;i<ORDER.length;i++){ if(!state[ORDER[i]]) return ORDER[i]; }
+    return "final";
+  }
+  open = (resume && ORDER.indexOf(resume) > -1) ? resume : firstOpen();
+
+  /* ---- Embedded GHL forms (loaded only when their step opens) ---- */
+  var embedJs = false;
+  function mountForm(box, id, title){
+    if(box.querySelector("iframe")) return;
+    var f = document.createElement("iframe");
+    f.src = "https://api.leadconnectorhq.com/widget/form/" + id + prefill;
+    f.id = "inline-" + id;
+    f.title = title || "Form";
+    f.loading = "lazy";
+    box.appendChild(f);
+    if(!embedJs){
+      var s = document.createElement("script");
+      s.src = "https://link.msgsndr.com/js/form_embed.js"; s.async = true;
+      document.body.appendChild(s); embedJs = true;
+    }
+  }
+  function mountStep(step){
+    if(step === "agree"){
+      var box = document.getElementById("agree-embed"), fb = document.getElementById("agree-fallback");
+      if(AGREEMENT_FORM_ID){ box.hidden = false; fb.hidden = true; mountForm(box, AGREEMENT_FORM_ID, "Service agreement"); }
+      else { box.hidden = true; fb.hidden = false; }
+    }
+    if(step === "docs"){
+      document.querySelectorAll("#card-docs .formbox[data-form]").forEach(function(b){
+        mountForm(b, b.getAttribute("data-form"), b.getAttribute("data-title"));
+      });
+    }
   }
 
-  /* Convert step 3 to the "done" look when the client came from review */
-  if(fromReview){
-    step3.classList.remove("todo"); step3.classList.add("done");
-    var badge = step3.querySelector(".badge");
-    var num = badge.querySelector(".num"); if(num) num.hidden = true;
-    var chk = badge.querySelector(".chk"); if(chk) chk.removeAttribute("hidden");
-    var act = document.getElementById("s3-action"); if(act) act.hidden = true;
-    var iq = document.getElementById("s3-iq"); if(iq) iq.hidden = true;
-    var iqn = document.getElementById("s3-iq-note"); if(iqn) iqn.hidden = true;
-    var sec = document.getElementById("s3-secure"); if(sec) sec.hidden = true;
+  var lang = "en";
+  function render(){
+    var d = T[lang] || T.en;
+    var doneCount = 1; // payment
+    ORDER.forEach(function(step){
+      var card = document.getElementById("card-" + step);
+      var isDone = !!state[step] || (step === "final" && open === "final");
+      if(step !== "final" && state[step]) doneCount++;
+      card.classList.toggle("done", step !== "final" && !!state[step] && open !== step);
+      card.classList.toggle("active", open === step);
+      var reachable = ORDER.indexOf(step) <= ORDER.indexOf(firstOpen()) || !!state[step];
+      card.classList.toggle("locked", !reachable && open !== step);
+    });
+    if(open === "final") doneCount = 5;
+    // Step 3 wording for review clients
+    var mh = document.querySelector("#card-mon h3"), mp = document.querySelector("#card-mon > .c-body > p");
+    if(fromReview){ mh.textContent = d.mon_done_title; mp.textContent = d.mon_done_body; }
+    else { mh.textContent = d.mon_title; mp.textContent = d.mon_body; }
+    if(fromReview){ var ro = document.querySelector("#card-mon .reopen"); if(ro) ro.hidden = true; }
+    // Hero switches to "You're all set" on the last step
+    var fin = open === "final";
+    document.getElementById("hero-k").textContent = fin ? d.done_kicker : d.kicker;
+    document.getElementById("hero-h").textContent = fin ? d.done_title : d.title;
+    document.getElementById("hero-p").textContent = fin ? d.done_sub : d.sub;
+    document.getElementById("done-n").textContent = doneCount;
+    document.getElementById("bar").style.width = (doneCount/5*100) + "%";
+    mountStep(open);
   }
 
-  /* Step 1: if agreement is NOT signed before payment, show the action */
-  if(!AGREEMENT_SIGNED_FIRST){
-    var s1 = document.getElementById("step1");
-    s1.classList.remove("done"); s1.classList.add("todo");
-    var b1 = s1.querySelector(".badge"); b1.innerHTML = '<span class="num">1</span>';
-    var a1 = document.getElementById("s1-action"); a1.hidden = false; a1.href = AGREEMENT_LINK;
+  function goTo(step, scroll){
+    open = step; render();
+    if(scroll){
+      var c = document.getElementById("card-" + step);
+      if(c && c.scrollIntoView) c.scrollIntoView({behavior:"smooth", block:"start"});
+    }
   }
 
-  /* SmartCredit link + trial wording */
-  var s3a = document.getElementById("s3-action");
-  if(TRIAL_ENABLED && SMARTCREDIT_TRIAL){ s3a.href = SMARTCREDIT_TRIAL; }
-  else { s3a.href = SMARTCREDIT_SIGNUP; }
+  document.querySelectorAll("[data-done]").forEach(function(b){
+    b.addEventListener("click", function(){
+      state[b.getAttribute("data-done")] = true; save();
+      goTo(firstOpen(), true);
+    });
+  });
+  document.querySelectorAll("[data-open]").forEach(function(b){
+    b.addEventListener("click", function(){ goTo(b.getAttribute("data-open"), true); });
+  });
+  // Show the "come back to this tab" note once a provider link is tapped
+  ["sc-btn","iq-btn"].forEach(function(id){
+    var a = document.getElementById(id);
+    a.addEventListener("click", function(){ document.getElementById("mon-wait").hidden = false; });
+  });
+  var sc = document.getElementById("sc-btn");
+  sc.href = (TRIAL_ENABLED && SMARTCREDIT_TRIAL) ? SMARTCREDIT_TRIAL : SMARTCREDIT_SIGNUP;
 
-  /* Progress bar + count */
-  document.getElementById("done-n").textContent = doneN;
-  document.getElementById("bar").style.width = (doneN/5*100) + "%";
+  /* ---- Results strip (same list as gateway.html; keep the two in sync) ---- */
+  var RESULTS = [
+    {img:"megan-a.png",   name:"Megan A.",   gain:"+190 / +249 / +250"},
+    {img:"markita-r.png", name:"Markita R.", gain:"+167 / +171 / +162"},
+    {img:"jose-r.png",    name:"Jose R.",    gain:"+154 / +121 / +116"},
+    {img:"brian-a.png",   name:"Brian A.",   gain:"+150 / +131 / +146"},
+    {img:"regina-r.png",  name:"Regina R.",  gain:"+133 / +133 / +83"},
+    {img:"john-f.png",    name:"John F.",    gain:"+109 / +110 / +110"}
+  ];
+  var strip = document.getElementById("results-strip");
+  if(strip) strip.innerHTML = RESULTS.map(function(r){
+    return '<div class="rcard"><img class="rimg" src="assets/results/' + r.img +
+      '" alt="Three-bureau credit score progress report" loading="lazy">' +
+      '<div class="cap">' + r.name + ' <span>' + r.gain + '</span></div></div>';
+  }).join("");
 
   /* ---- i18n apply ---- */
   var nodes = document.querySelectorAll("[data-i18n]");
-  function apply(lang){
-    var d = T[lang] || T.en;
+  function apply(l){
+    lang = T[l] ? l : "en";
+    var d = T[lang];
     nodes.forEach(function(n){
       var k = n.getAttribute("data-i18n");
-      if(k === "sub"){ n.textContent = fromReview ? d.sub_two : d.sub_three; return; }
       if(d[k] != null) n.textContent = d[k];
     });
-    // step 3 state strings win over the default data-i18n text
-    applyStateStrings(lang);
     document.documentElement.lang = lang;
     document.querySelectorAll(".lang button").forEach(function(b){
       b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang);
     });
     try{ localStorage.setItem("cr8-lang", lang); }catch(e){}
+    render();
   }
   document.querySelectorAll(".lang button").forEach(function(b){
     b.addEventListener("click", function(){ apply(b.getAttribute("data-lang")); });
