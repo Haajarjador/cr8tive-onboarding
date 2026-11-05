@@ -599,10 +599,11 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
       opts.style.gridTemplateColumns = "1fr";
       opts.appendChild(mkOpt("monthly", "Monthly", money(selPkg.price) + " today, then " + money(selPkg.monthly) + "/month after."));
     } else {
-      opts.style.gridTemplateColumns = "1fr 1fr";
       var half = Math.round((selPkg.price/2)*100)/100;
+      // Split pay is for Jador's clients only; Terrence's version is Pay in Full.
+      opts.style.gridTemplateColumns = IS_TERRENCE ? "1fr" : "1fr 1fr";
       opts.appendChild(mkOpt("full", "Pay in Full", "One payment, " + money(selPkg.price) + "."));
-      opts.appendChild(mkOpt("split", "Split Pay", money(half) + " today, " + money(selPkg.price - half) + " in 30 days. Total " + money(selPkg.price) + "."));
+      if(!IS_TERRENCE) opts.appendChild(mkOpt("split", "Split Pay", money(half) + " today, " + money(selPkg.price - half) + " in 30 days. Total " + money(selPkg.price) + "."));
     }
     wrap.hidden = false;
     updateSummary();
