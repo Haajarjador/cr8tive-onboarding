@@ -109,6 +109,19 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 .next dt{font-weight:700;color:var(--white);font-size:14px}
 .next dd{margin:0;font-size:14.5px;color:var(--on-navy)}
 
+/* Results strip (same as gateway.html) */
+.results{margin-bottom:26px}
+.results-hd{display:flex;justify-content:space-between;align-items:baseline}
+.results-hd h2{font-size:22px}
+.results-hd span{font-size:12px;color:var(--ink-2)}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:14px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.rcard{flex:0 0 auto;scroll-snap-align:start;width:240px}
+.rimg{width:240px;height:170px;border-radius:14px;object-fit:cover;object-position:top;display:block;background:var(--navy);border:1px solid var(--border)}
+.rcard .cap{margin-top:8px;font-size:13px;font-weight:700}
+.rcard .cap span{display:block;font-weight:500;color:var(--ink-2);font-size:12px;margin-top:2px}
+.rlink{display:inline-block;margin-top:12px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.disclaim{margin-top:10px;font-size:12px;color:var(--ink-2)}
+
 /* Footer */
 .foot{background:var(--page);border-top:1px solid var(--border)}
 .foot .wrap{padding-block:30px 40px;text-align:center}
@@ -246,6 +259,14 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
         </dl>
       </div>
 
+      <!-- Real client results (same strip and link as gateway.html) -->
+      <div class="results">
+        <div class="results-hd"><h2 data-i18n="res_h">Real Client Results</h2><span data-i18n="res_swipe">Swipe →</span></div>
+        <div class="strip" id="results-strip"></div>
+        <a class="rlink" href="https://credit.cr8tivebusiness.com" target="_blank" rel="noopener" data-i18n="res_link">See all results on our website</a>
+        <p class="disclaim" data-i18n="res_disc">Individual results vary. No results guaranteed. Score changes shown are each client's 3-bureau increase (Equifax / Experian / TransUnion).</p>
+      </div>
+
     </div>
   </section>
 </main>
@@ -321,6 +342,9 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       next1_when:"Day 1", next1_what:"We build your dispute strategy and send out disputes.",
       next2_when:"Every 30 days", next2_what:"You get a credit update in your client portal.",
       next3_when:"Anytime", next3_what:"Text us with questions. A real person answers.",
+      res_h:"Real Client Results", res_swipe:"Swipe →",
+      res_link:"See all results on our website",
+      res_disc:"Individual results vary. No results guaranteed. Score changes shown are each client's 3-bureau increase (Equifax / Experian / TransUnion).",
       help:"Questions? Text or call us.",
       legal:"Not a law firm. Credit repair results vary. No specific outcome is guaranteed."
     },
@@ -370,6 +394,9 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       next1_when:"Día 1", next1_what:"Creamos tu estrategia de disputa y enviamos tus disputas.",
       next2_when:"Cada 30 días", next2_what:"Recibes una actualización en tu portal.",
       next3_when:"Siempre", next3_what:"Envíanos un mensaje. Te responde una persona real.",
+      res_h:"Resultados reales de clientes", res_swipe:"Desliza →",
+      res_link:"Ver todos los resultados en nuestro sitio",
+      res_disc:"Los resultados individuales varían. No se garantizan resultados. Los cambios mostrados son el aumento de cada cliente en los 3 burós (Equifax / Experian / TransUnion).",
       help:"¿Preguntas? Escríbenos o llámanos.",
       legal:"No somos un bufete de abogados. Los resultados de la reparación de crédito varían. No se garantiza ningún resultado específico."
     }
@@ -485,6 +512,22 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
   });
   var sc = document.getElementById("sc-btn");
   sc.href = (TRIAL_ENABLED && SMARTCREDIT_TRIAL) ? SMARTCREDIT_TRIAL : SMARTCREDIT_SIGNUP;
+
+  /* ---- Results strip (same list as gateway.html; keep the two in sync) ---- */
+  var RESULTS = [
+    {img:"megan-a.png",   name:"Megan A.",   gain:"+190 / +249 / +250"},
+    {img:"markita-r.png", name:"Markita R.", gain:"+167 / +171 / +162"},
+    {img:"jose-r.png",    name:"Jose R.",    gain:"+154 / +121 / +116"},
+    {img:"brian-a.png",   name:"Brian A.",   gain:"+150 / +131 / +146"},
+    {img:"regina-r.png",  name:"Regina R.",  gain:"+133 / +133 / +83"},
+    {img:"john-f.png",    name:"John F.",    gain:"+109 / +110 / +110"}
+  ];
+  var strip = document.getElementById("results-strip");
+  if(strip) strip.innerHTML = RESULTS.map(function(r){
+    return '<div class="rcard"><img class="rimg" src="assets/results/' + r.img +
+      '" alt="Three-bureau credit score progress report" loading="lazy">' +
+      '<div class="cap">' + r.name + ' <span>' + r.gain + '</span></div></div>';
+  }).join("");
 
   /* ---- i18n apply ---- */
   var nodes = document.querySelectorAll("[data-i18n]");
