@@ -670,7 +670,8 @@ h1.big em{font-style:normal;color:var(--orange-accent)}
       btn.setAttribute("aria-disabled","false");
       // from=gateway tells enroll.html to skip its Program/upsell step and
       // open on Step 2 (Your Info), since the program + plan are chosen here.
-      btn.href = CHECKOUT_BASE + path.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway";
+      btn.href = CHECKOUT_BASE + path.replace("/enroll", "/" + ENROLL_PATH) + "&from=gateway" + (IS_TERRENCE ? "&agent=terrence" : "");
+      // agent=terrence: checkout shows Terrence's Zelle / Apple Pay number.
       btn.target = "_blank"; btn.rel = "noopener";
     } else {
       sum.hidden = true;
