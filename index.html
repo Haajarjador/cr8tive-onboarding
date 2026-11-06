@@ -157,7 +157,7 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       <div class="progress">
         <div class="progress-top">
           <span data-i18n="progress">Setup progress</span>
-          <span class="count"><span id="done-n">1</span> / 5</span>
+          <span class="count"><span id="done-n">1</span> / 6</span>
         </div>
         <div class="track"><i id="bar"></i></div>
       </div>
@@ -210,27 +210,40 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
         </div>
       </article>
 
-      <!-- 4. Monitoring login + documents, one screen -->
-      <article class="card" id="card-docs" data-step="docs">
+      <!-- 4. Monitoring login (its own screen) -->
+      <article class="card" id="card-login" data-step="login">
         <div class="badge" aria-hidden="true"><span class="num">4</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
-          <h3 data-i18n="docs_title">Share your login and upload your documents</h3>
-          <p data-i18n="docs_body">Two short forms on this screen. About 5 minutes total.</p>
-          <button type="button" class="reopen" data-open="docs" data-i18n="reopen">Open again</button>
+          <h3 data-i18n="login_title">Share your monitoring login</h3>
+          <p data-i18n="login_body">The email and password you just created for credit monitoring. About 2 minutes.</p>
+          <button type="button" class="reopen" data-open="login" data-i18n="reopen">Open again</button>
           <div class="step-detail">
-            <p class="sub-h" data-i18n="docs_login_h">A. Your monitoring login</p>
             <div class="formbox" data-form="25Sd8GOFIqxR898uDLJk" data-title="Share your monitoring login"></div>
-            <p class="note" data-i18n="docs_login_note">Share your password only here, never by text.</p>
-            <p class="sub-h" data-i18n="docs_form_h">B. Your Client Credentials Form and documents</p>
-            <div class="formbox" data-form="yRCQRUWgoA2BjXyyXpcd" data-title="Client Credentials Form"></div>
-            <button type="button" class="btn btn-next" data-done="docs" data-i18n="docs_next">I submitted both forms, finish</button>
+            <p class="note" data-i18n="login_note">Share your password only here, never by text.</p>
+            <div class="waiting" data-i18n="submit_first">Tap Submit in the form above and wait for the confirmation message, then tap the button below.</div>
+            <button type="button" class="btn btn-next" data-done="login" data-i18n="login_next">I submitted my login, continue</button>
           </div>
         </div>
       </article>
 
-      <!-- 5. You're all set: number, portal, what's next -->
-      <article class="card" id="card-final" data-step="final">
+      <!-- 5. Upload documents (its own screen) -->
+      <article class="card" id="card-docs" data-step="docs">
         <div class="badge" aria-hidden="true"><span class="num">5</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
+        <div class="c-body">
+          <h3 data-i18n="docs_title">Upload your documents</h3>
+          <p data-i18n="docs_body">Your Client Credentials Form and documents. Needed to start your disputes. About 3 minutes.</p>
+          <button type="button" class="reopen" data-open="docs" data-i18n="reopen">Open again</button>
+          <div class="step-detail">
+            <div class="formbox" data-form="yRCQRUWgoA2BjXyyXpcd" data-title="Client Credentials Form and documents"></div>
+            <div class="waiting" data-i18n="submit_first">Tap Submit in the form above and wait for the confirmation message, then tap the button below.</div>
+            <button type="button" class="btn btn-next" data-done="docs" data-i18n="docs_next">I uploaded my documents, finish</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. You're all set: number, portal, what's next -->
+      <article class="card" id="card-final" data-step="final">
+        <div class="badge" aria-hidden="true"><span class="num">6</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5l4 4 8-9"/></svg></div>
         <div class="c-body">
           <h3 data-i18n="final_title">Save our number and your portal login</h3>
           <p data-i18n="final_body">This is everything you need. We'll also text and email you a copy.</p>
@@ -321,12 +334,14 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       mon_iq_note:"IdentityIQ is a backup option. Use it only if SmartCredit is unavailable.",
       mon_wait:"When you finish signing up, come back to this tab and tap the button below. Write down the email and password you created. You will need them in the next step.",
       mon_next:"I set up my monitoring, continue",
-      docs_title:"Share your login and upload your documents",
-      docs_body:"Two short forms on this screen. About 5 minutes total.",
-      docs_login_h:"A. Your monitoring login",
-      docs_login_note:"Share your password only here, never by text.",
-      docs_form_h:"B. Your Client Credentials Form and documents",
-      docs_next:"I submitted both forms, finish",
+      login_title:"Share your monitoring login",
+      login_body:"The email and password you just created for credit monitoring. About 2 minutes.",
+      login_note:"Share your password only here, never by text.",
+      login_next:"I submitted my login, continue",
+      submit_first:"Tap Submit in the form above and wait for the confirmation message, then tap the button below.",
+      docs_title:"Upload your documents",
+      docs_body:"Your Client Credentials Form and documents. Needed to start your disputes. About 3 minutes.",
+      docs_next:"I uploaded my documents, finish",
       final_title:"Save our number and your portal login",
       final_body:"This is everything you need. We'll also text and email you a copy.",
       final_num_k:"Our number",
@@ -373,12 +388,14 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       mon_iq_note:"IdentityIQ es una opción alternativa. Úsala solo si SmartCredit no está disponible.",
       mon_wait:"Cuando termines de registrarte, regresa a esta pestaña y toca el botón de abajo. Anota el correo y la contraseña que creaste. Los necesitarás en el siguiente paso.",
       mon_next:"Ya activé mi monitoreo, continuar",
-      docs_title:"Comparte tu acceso y sube tus documentos",
-      docs_body:"Dos formularios cortos en esta pantalla. Unos 5 minutos en total.",
-      docs_login_h:"A. Tu acceso al monitoreo",
-      docs_login_note:"Comparte tu contraseña solo aquí, nunca por texto.",
-      docs_form_h:"B. Tu formulario de credenciales y documentos",
-      docs_next:"Ya envié ambos formularios, terminar",
+      login_title:"Comparte tu acceso al monitoreo",
+      login_body:"El correo y la contraseña que creaste para tu monitoreo de crédito. Unos 2 minutos.",
+      login_note:"Comparte tu contraseña solo aquí, nunca por texto.",
+      login_next:"Ya envié mi acceso, continuar",
+      submit_first:"Toca Enviar en el formulario de arriba y espera el mensaje de confirmación, luego toca el botón de abajo.",
+      docs_title:"Sube tus documentos",
+      docs_body:"Tu formulario de credenciales y tus documentos. Es necesario para iniciar tus disputas. Unos 3 minutos.",
+      docs_next:"Ya subí mis documentos, terminar",
       final_title:"Guarda nuestro número y tu acceso al portal",
       final_body:"Esto es todo lo que necesitas. También te enviaremos una copia por texto y correo.",
       final_num_k:"Nuestro número",
@@ -404,7 +421,7 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
 
   /* ---- URL params ----
      ?from=review   client came through the Credit Review path, monitoring is done
-     ?step=agree|mon|docs   resume link (used by the GHL "still not finished" text)
+     ?step=agree|mon|login|docs   resume link (used by the GHL "still not finished" text)
      first_name, last_name, email, phone   passed into the embedded GHL forms so
        they prefill and attach to the same contact. GHL adds these to the link. */
   var q; try{ q = new URLSearchParams(location.search); }catch(e){ q = { get:function(){ return null; } }; }
@@ -415,11 +432,12 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
   });
 
   /* ---- Progress, saved in this browser so a client can close and come back ---- */
-  var ORDER = ["agree","mon","docs","final"];
+  var ORDER = ["agree","mon","login","docs","final"];
   var KEY = "cr8-onb-v3" + (q.get("email") ? ":" + q.get("email").toLowerCase() : "");
   var state = {};
   try{ state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ state = {}; }
-  if(fromReview) state.mon = true;
+  // Review clients already set up monitoring and shared their login at the review.
+  if(fromReview){ state.mon = true; state.login = true; }
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 
   var open = null;           // the step currently expanded
@@ -452,8 +470,8 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       if(AGREEMENT_FORM_ID){ box.hidden = false; fb.hidden = true; mountForm(box, AGREEMENT_FORM_ID, "Service agreement"); }
       else { box.hidden = true; fb.hidden = false; }
     }
-    if(step === "docs"){
-      document.querySelectorAll("#card-docs .formbox[data-form]").forEach(function(b){
+    if(step === "login" || step === "docs"){
+      document.querySelectorAll("#card-" + step + " .formbox[data-form]").forEach(function(b){
         mountForm(b, b.getAttribute("data-form"), b.getAttribute("data-title"));
       });
     }
@@ -472,7 +490,7 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
       var reachable = ORDER.indexOf(step) <= ORDER.indexOf(firstOpen()) || !!state[step];
       card.classList.toggle("locked", !reachable && open !== step);
     });
-    if(open === "final") doneCount = 5;
+    if(open === "final") doneCount = 6;
     // Step 3 wording for review clients
     var mh = document.querySelector("#card-mon h3"), mp = document.querySelector("#card-mon > .c-body > p");
     if(fromReview){ mh.textContent = d.mon_done_title; mp.textContent = d.mon_done_body; }
@@ -484,7 +502,7 @@ h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.1}
     document.getElementById("hero-h").textContent = fin ? d.done_title : d.title;
     document.getElementById("hero-p").textContent = fin ? d.done_sub : d.sub;
     document.getElementById("done-n").textContent = doneCount;
-    document.getElementById("bar").style.width = (doneCount/5*100) + "%";
+    document.getElementById("bar").style.width = (doneCount/6*100) + "%";
     mountStep(open);
   }
 
